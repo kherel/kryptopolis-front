@@ -16,7 +16,7 @@ class SE_Layout extends Component {
 
  //   const {} = this.props
  //   const {} = this.state
-    console.log(this.context)
+ //    console.log(this.context.pathname)
     return (
       <div>
         layout: SE_Layout

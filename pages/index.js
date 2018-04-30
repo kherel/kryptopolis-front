@@ -3,7 +3,7 @@ import "./index.scss";
 import { bindActionCreators } from "redux";
 import { initStore } from "redux-store/store";
 import withRedux from "redux-store/withRedux";
-import { addGoal } from "redux-store/ducks/goals";
+import { setStatus } from "redux-store/ducks/appStatus";
 import * as T from "prop-types";
 import Layout from 'HOC/Layout.js'
 
@@ -14,23 +14,32 @@ class Index extends Component {
   }
 
   static async getInitialProps({ store, isServer }){
-    await store.dispatch(addGoal({id: 0, data: 100}))
+    await store.dispatch(setStatus('cool'))
   }
   render() {
+    console.log(this.props.status)
     return (
-        <div onClick={() => this.props.addGoal({ id: 1, data: "aa" })}>
-          path: {this.context.pathname}
+        <div >
+          <p>path: {this.context.pathname}</p>
           <br/>
-          hello: {this.props.hello}
-
+          <p>status: {this.props.status}</p>
+          <button onClick={() => this.props.setStatus('button push')}>push me</button>
         </div>
     );
   }
 }
 
+function mapStateToProps(state) {
+
+  const {status} = state.appStatus
+
+  return {status}
+
+}
+
 function mapDispatchToProps(dispatch) {
-  const actions = bindActionCreators({ addGoal }, dispatch);
+  const actions = bindActionCreators({ setStatus }, dispatch);
   return { ...actions };
 }
 
-export default Layout(withRedux(initStore, null, mapDispatchToProps)(Index));
+export default Layout(withRedux(initStore, mapStateToProps, mapDispatchToProps)(Index));

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import goals from './ducks/goals'
+import appStatus from './ducks/appStatus'
 
 export default combineReducers({
-  goals
+  appStatus
 })

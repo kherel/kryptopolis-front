@@ -16,7 +16,6 @@ export default Page =>
 
     render() {
       const {pathname, ...props} = this.props
-      console.log(props)
       return (
         <Layout>
           <Page {...props} />
