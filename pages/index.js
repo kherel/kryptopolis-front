@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import "./index.scss";
-import { bindActionCreators } from "redux";
-import { initStore } from "redux-store/store";
+import React, { Component } from "react"
+import { bindActionCreators } from "redux"
+import { initStore } from "redux-store/store"
 import withRedux from "redux-store/withRedux";
-import { setStatus } from "redux-store/ducks/appStatus";
-import * as T from "prop-types";
-import Layout from 'HOC/Layout.js'
+import { setStatus } from "redux-store/ducks/appStatus"
+import O_Layout from 'O_Layout'
+import T_Main from 'T_Main'
+import * as T from "prop-types"
 
 class Index extends Component {
 
@@ -16,15 +16,15 @@ class Index extends Component {
   static async getInitialProps({ store, isServer }){
     await store.dispatch(setStatus('cool'))
   }
+
   render() {
-    console.log(this.props.status)
     return (
-        <div >
-          <p>path: {this.context.pathname}</p>
-          <br/>
-          <p>status: {this.props.status}</p>
-          <button onClick={() => this.props.setStatus('button push')}>push me</button>
-        </div>
+      <O_Layout heroBanner>
+        <T_Main
+          {...this.props}
+          {...this.context}
+        />
+      </O_Layout>
     );
   }
 }
@@ -42,4 +42,4 @@ function mapDispatchToProps(dispatch) {
   return { ...actions };
 }
 
-export default Layout(withRedux(initStore, mapStateToProps, mapDispatchToProps)(Index));
+export default (withRedux(initStore, mapStateToProps, mapDispatchToProps)(Index));
