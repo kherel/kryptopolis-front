@@ -1,0 +1,38 @@
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  @media screen and (min-width: 1280px) {
+    font-size: 0.781vw;
+  }
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-size: 14px;
+  font-family: OpenSans, sans-serif;
+  line-height: 1;
+  overflow: auto;
+}
+
+fieldset {
+  padding: 0;
+  margin: 0;
+}
+
+input {
+  outline: none;
+  border: none;
+}
+
+hr {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

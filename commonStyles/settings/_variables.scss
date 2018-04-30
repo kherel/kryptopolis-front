@@ -1,0 +1,40 @@
+//ELEMENTS DIMENSIONS
+$header-height: 50px;
+$menu-width: 180px;
+
+//SCREEN DIMENSIONS
+$w-desktop: 1600px;
+$w-desktop-sm: 1280px;
+$w-tablet: 1024px;
+$w-mobile: 780px;
+$w-mobile-sm: 600px;
+
+// MEDIA QUERIES
+$desktop: "max-width: #{$w-desktop}";
+$desktop-sm: "max-width: #{$w-desktop-sm}";
+$tablet: "max-width: #{$w-tablet}";
+$mobile: "max-width: #{$w-mobile}";
+$mobile-sm: "max-width: #{$w-mobile-sm}";
+
+//COLORS
+$color-white: #ffffff;
+$color-black: #000000;
+
+$color-green: #3eb63e;
+$color-orange: #f5a623;
+
+$color-blue-deep: #2978be;
+$color-blue-light: #67a7f1;
+$color-blue-text: #4990e2;
+
+$color-red-error: #f26d7d;
+
+$color-gray-text: #757575;
+$color-gray-inactive: #b3b3b3;
+
+$shadow-main: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+
+//NEW FONT STACKS
+$font-Sans-Bold: OpenSans-Bold, sans-serif;
+$font-Sans-SemiBold: OpenSans-SemiBold, sans-serif;
+$font-Sans-Light: OpenSans-Light, sans-serif;

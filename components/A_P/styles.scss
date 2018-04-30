@@ -1,0 +1,12 @@
+@import "common/settings/variables";
+@import "common/utils";
+
+.a-p {
+  margin: 1em 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  b {
+    font-weight: 700;
+  }
+}
