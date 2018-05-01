@@ -1,0 +1,44 @@
+.t-main {
+  display: grid;
+  grid-template-areas:
+  "art art art art vid vid nws nws nws sig sig"
+  "art art art art ico ico nws nws nws twt twt";
+  &__articles {
+    grid-area: art;
+  }
+  &__video {
+    grid-area: vid;
+  }
+  &__hot-ico {
+    grid-area: ico;
+  }
+  &__news {
+    grid-area: nws;
+  }
+  &__signals {
+    grid-area: sig;
+  }
+  &__tweets {
+    grid-area: twt;
+  }
+  &__column {
+    margin-right: 1rem;
+    &:nth-child(1) {
+      width: 46rem;
+      background-color: transparentize(green, .5);
+    }
+    &:nth-child(2) {
+      width: 22.5rem;
+      background-color: transparentize(red, .5);
+    }
+    &:nth-child(3) {
+      width: 30rem;
+      background-color: transparentize(orange, .5);
+    }
+    &:nth-child(4) {
+      margin-right: 0;
+      width: 22.5rem;
+      background-color: transparentize(blue, .5);
+    }
+  }
+}

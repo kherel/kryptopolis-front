@@ -1,4 +1,11 @@
 import React, { Component } from 'react'
+import A_Container from 'A_Container'
+import O_Articles from './O_Articles'
+import O_Video from './O_Video'
+import O_HotIco from './O_HotIco'
+import O_News from './O_News'
+import O_Signals from './O_Signals'
+import O_Tweets from './O_Tweets'
 import {cssClassName} from 'utils'
 import './styles.scss'
 
@@ -10,12 +17,14 @@ class T_Main extends Component {
     const { status, setStatus, pathname} = this.props
 
     return (
-      <div className={cn()}>
-        <p>path: {pathname}</p>
-        <br/>
-        <p>status: {status}</p>
-        <button onClick={() => setStatus('button push')}>push me</button>
-      </div>
+      <A_Container mix={cn()}>
+        <O_Articles mix={cn('articles')} />
+        <O_Video mix={cn('video')} />
+        <O_HotIco mix={cn('hot-ico')} />
+        <O_News mix={cn('news')} />
+        <O_Signals mix={cn('signals')} />
+        <O_Tweets mix={cn('tweets')} />
+      </A_Container>
     );
   }
 }

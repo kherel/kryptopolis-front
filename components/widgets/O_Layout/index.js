@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import * as T from 'prop-types'
+import M_HeroBanner from 'M_HeroBanner'
 import O_Header from 'O_Header'
+import O_Menu from 'O_Menu'
 import O_Footer from 'O_Footer'
 import {cssClassName} from 'utils/index'
 import './styles.scss'
@@ -19,7 +21,8 @@ class O_Layout extends Component {
     return (
       <main className={cn()}>
         <O_Header mix={cn('header')} />
-        {heroBanner && <div>BANNER</div>}
+        {heroBanner && <M_HeroBanner />}
+        <O_Menu mix={cn('menu')}/>
         <div className={cn('content')}>
           {children}
         </div>

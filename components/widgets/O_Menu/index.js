@@ -4,22 +4,22 @@ import A_Container from 'A_Container'
 import {cssClassName} from 'utils/index'
 import './styles.scss'
 
-const cn = cssClassName('O_Header')
+const cn = cssClassName('O_Menu')
 
-class O_Header extends Component {
+class O_Menu extends Component {
 
   render() {
     const { mix } = this.props
     return (
-      <header className={cn([mix])}>
-        <A_Container mix={'content'}>Header</A_Container>
-      </header>
+      <nav className={cn([mix])}>
+        <A_Container mix={'content'}>Menu</A_Container>
+      </nav>
     );
   }
 }
 
-O_Header.propTypes = {
+O_Menu.propTypes = {
   mix: T.string
 }
 
-export default O_Header
+export default O_Menu

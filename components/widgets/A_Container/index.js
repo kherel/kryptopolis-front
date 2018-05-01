@@ -10,7 +10,7 @@ const A_Container = ({children, mix}) =>(
 
 A_Container.propTypes = {
   mix: T.string,
-  children: T.element.isRequired
+  children: T.node.isRequired
 };
 
 export default A_Container
