@@ -8,8 +8,8 @@ const cn = cssClassName('O_News')
 
 class O_News extends Component {
 
-  _renderNewsItems = (news) => (
-    news.map(text => <div className={cn('item')}>{text}</div>)
+  _renderNewsItems = (news, type) => (
+    news.map((text, index) => <div key={`${type}-${index}`} className={cn('item')}>{text}</div>)
   )
 
   render() {
@@ -18,9 +18,9 @@ class O_News extends Component {
       <div className={cn([mix])}>
         <A_H mix={cn('title')} type='section'>WIADOMOŚCI</A_H>
         <div className={cn('label')}>DZISIAJ</div>
-        {this._renderNewsItems(news.today)}
+        {this._renderNewsItems(news.today, 'today')}
         <div className={cn('label')}>WCZORAJ</div>
-        {this._renderNewsItems(news.old)}
+        {this._renderNewsItems(news.old, 'old')}
       </div>
     );
   }

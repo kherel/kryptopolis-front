@@ -1,12 +1,13 @@
 .t-main {
+  margin-bottom: 1rem;
   display: grid;
   grid-template-areas:
   "art vid nws sig"
   "art ico nws twt";
-  grid-template-columns: 46rem 22.5rem 30rem 22.5rem;
-  &__articles, &__video, &__hot-ico, &__news {
-    margin-right: 1rem;
-  }
+  grid-template-columns: 3fr 1fr 2fr 1fr;
+  grid-column-gap: 1em;
+  grid-row-gap: 1em;
+
   &__articles {
     grid-area: art;
     background-color: transparentize(blue,.5);
