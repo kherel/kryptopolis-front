@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import * as T from 'prop-types'
-import A_H from 'A_H/A_H'
+import A_H from 'widgets/A_H/A_H'
 import {cssClassName} from 'utils/index'
 import './O_Video.scss'
 

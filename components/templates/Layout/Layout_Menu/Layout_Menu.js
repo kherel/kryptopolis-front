@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import * as T from 'prop-types'
-import A_Container from 'A_Container/A_Container'
+import A_Container from 'widgets/A_Container/A_Container'
 import {cssClassName} from 'utils/index'
 import './Layout_Menu.scss'
 

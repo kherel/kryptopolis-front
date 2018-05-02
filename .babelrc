@@ -4,7 +4,7 @@
   ],
   "plugins": [
     ["module-resolver", {
-      "root": ["./", "./components/widgets", "./components/templates"]
+      "root": ["./", "./components"]
     }]
   ]
 }

@@ -3,8 +3,8 @@ import { bindActionCreators } from "redux"
 import { initStore } from "redux-store/store"
 import withRedux from "redux-store/withRedux"
 import { setStatus } from "redux-store/ducks/appStatus"
-import Layout from 'Layout/Layout'
-import Home from 'Home/Home'
+import Layout from 'templates/Layout/Layout'
+import Home from 'templates/Home/Home'
 import * as T from "prop-types"
 
 class Index extends Component {
