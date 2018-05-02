@@ -1,0 +1,20 @@
+.o-hot {
+  position: relative;
+  border-bottom: solid 0.5px #f2e205;
+  padding-bottom: 62px;
+  &__image {
+    height: 25rem;
+    width: 100%;
+    object-fit: cover;
+  }
+  &__label {
+    position: absolute;
+    bottom: 40px;
+    right: 34px;
+    width: 360px;
+    background-color: $color-white;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+    padding: 15px;
+  }
+}

@@ -2,14 +2,16 @@
   margin-bottom: 1rem;
   display: grid;
   grid-template-areas:
-          "art vid nws sig"
+          "hot vid nws sig"
           "art ico nws twt";
   grid-template-columns: 3fr 1fr 2fr 1fr;
+  grid-template-rows: auto 1fr;
   grid-column-gap: 1em;
   grid-row-gap: 1em;
   @include media ($desktop-sm) {
     grid-template-areas:
-            "vid nws sig"
+            "hot nws sig"
+            "vid nws twt"
             "art ico twt";
     grid-template-columns: 3fr 2fr 1fr;
   }
@@ -18,6 +20,10 @@
   }
 
 
+  &__hot {
+    grid-area: hot;
+    align-self: start;
+  }
 
   &__articles {
     grid-area: art;

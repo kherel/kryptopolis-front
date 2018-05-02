@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import A_Container from 'widgets/A_Container/A_Container'
+import O_Hot from 'widgets/O_Hot/O_Hot'
 import O_Articles from 'widgets/O_Articles/O_Articles'
 import O_Video from 'widgets/O_Video/O_Video'
 import O_HotIco from 'widgets/O_HotIco/O_HotIco'
@@ -18,6 +19,7 @@ class Home extends Component {
 
     return (
       <A_Container mix={cn()}>
+        <O_Hot mix={cn('hot')} />
         <O_Articles mix={cn('articles')} />
         <O_Video mix={cn('video')} />
         <O_HotIco mix={cn('hot-ico')} />
