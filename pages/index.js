@@ -1,10 +1,10 @@
 import React, { Component } from "react"
 import { bindActionCreators } from "redux"
 import { initStore } from "redux-store/store"
-import withRedux from "redux-store/withRedux";
+import withRedux from "redux-store/withRedux"
 import { setStatus } from "redux-store/ducks/appStatus"
-import O_Layout from 'O_Layout'
-import T_Main from 'T_Main'
+import Layout from 'Layout/Layout'
+import Home from 'Home/Home'
 import * as T from "prop-types"
 
 class Index extends Component {
@@ -19,12 +19,12 @@ class Index extends Component {
 
   render() {
     return (
-      <O_Layout heroBanner>
-        <T_Main
+      <Layout heroBanner>
+        <Home
           {...this.props}
           {...this.context}
         />
-      </O_Layout>
+      </Layout>
     );
   }
 }
@@ -38,8 +38,8 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  const actions = bindActionCreators({ setStatus }, dispatch);
-  return { ...actions };
+  const actions = bindActionCreators({ setStatus }, dispatch)
+  return { ...actions }
 }
 
-export default (withRedux(initStore, mapStateToProps, mapDispatchToProps)(Index));
+export default (withRedux(initStore, mapStateToProps, mapDispatchToProps)(Index))
