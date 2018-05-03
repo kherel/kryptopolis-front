@@ -12,9 +12,9 @@ class O_Hot extends Component {
     return (
       <div className={cn([mix])}>
         <img className={cn('image')} src='/static/img/hot.jpg' />
-        <div className={cn('label')}>
-          label
-        </div>
+        <p className={cn('label')}>
+          ZACHOWAJ SPOKÓJ I HODL? CNBC GUEST MÓWI KRYTYKOWI BITCOINOWI O «PISS OFF»
+        </p>
       </div>
     );
   }

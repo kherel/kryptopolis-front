@@ -4,10 +4,10 @@
   grid-template-areas:
           "hot vid nws sig"
           "art ico nws twt";
-  grid-template-columns: 3fr 1fr 2fr 1fr;
+  grid-template-columns: 46rem 22.5rem 30rem 22.5rem;
   grid-template-rows: auto 1fr;
-  grid-column-gap: 1em;
-  grid-row-gap: 1em;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
   @include media ($desktop-sm) {
     grid-template-areas:
             "hot nws sig"
@@ -21,32 +21,38 @@
 
 
   &__hot {
+    height: 31.5rem;
     grid-area: hot;
     align-self: start;
   }
 
   &__articles {
     grid-area: art;
-    background-color: transparentize(blue,.5);
+    //background-color: transparentize(blue,.5);
   }
+
   &__video {
+    height: 31.5rem;
+    overflow: hidden;
     grid-area: vid;
-    background-color: transparentize(red,.5);
+    //background-color: transparentize(red,.5);
   }
+
   &__hot-ico {
     grid-area: ico;
-    background-color: transparentize(green,.5);
+    //background-color: transparentize(green,.5);
   }
   &__news {
     grid-area: nws;
-    background-color: transparentize(orange,.5);
+    //background-color: transparentize(orange,.5);
   }
   &__signals {
+    height: 31.5rem;
     grid-area: sig;
-    background-color: transparentize(violet,.5);
+    //background-color: transparentize(violet,.5);
   }
   &__tweets {
     grid-area: twt;
-    background-color: transparentize(maroon,.5);
+    //background-color: transparentize(maroon,.5);
   }
 }

@@ -1,0 +1,40 @@
+.o-video {
+  &__content {
+    height: inherit;
+    overflow-y: auto;
+  }
+  &__item {
+    border-bottom: solid 0.5px #f2e205;
+    margin-bottom: 2rem;
+    &:not(:nth-last-child(1)) {
+      margin-bottom: 1rem;
+    }
+    &-img {
+      position: relative;
+      margin-bottom: 1rem;
+      min-height: 1.2rem;
+      width: 100%;
+      img {
+        width: inherit;
+        height: inherit;
+        object-fit: cover;
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        width: 4rem;
+        height: 4rem;
+        top: 50%;
+        left: 50%;
+        margin-top: -2rem;
+        margin-left: -2rem;
+        border-radius: 50%;
+        background-color: transparentize($color-yellow, .5);
+      }
+    }
+    &-content {
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
