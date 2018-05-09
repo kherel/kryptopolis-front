@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect, Provider } from 'react-redux'
-
+import {PathContext} from 'utils/context'
 const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__'
 
 // https://github.com/iliakan/detect-node
@@ -24,23 +24,30 @@ export default (...args) => (Component) => {
   const [initStore, ...connectArgs] = args
 
   const ComponentWithRedux = (props = {}) => {
-    const { store, initialProps, initialState } = props
+    const { store, initialProps, initialState, pathName} = props
 
     // Connect page to redux with connect arguments
     const ConnectedComponent = connect.apply(null, connectArgs)(Component)
 
     // Wrap with redux Provider with store
     // Create connected page with initialProps
-    return React.createElement(
-      Provider,
-      { store: store && store.dispatch ? store : getOrCreateStore(initStore, initialState) },
-      React.createElement(ConnectedComponent, initialProps)
+    return (
+      <PathContext.Provider value={{pathName}}>
+        {
+          React.createElement(
+            Provider,
+            { store: store && store.dispatch ? store : getOrCreateStore(initStore, initialState) },
+            React.createElement(ConnectedComponent, initialProps)
+          )
+        }
+      </PathContext.Provider>
     )
   }
 
   ComponentWithRedux.getInitialProps = async (props = {}) => {
     const isServer = checkServer()
     const store = getOrCreateStore(initStore)
+    const pathName = props.pathname
 
     // Run page getInitialProps with store and isServer
     const initialProps = Component.getInitialProps
@@ -50,7 +57,8 @@ export default (...args) => (Component) => {
     return {
       store,
       initialState: store.getState(),
-      initialProps
+      initialProps,
+      pathName
     }
   }
 
