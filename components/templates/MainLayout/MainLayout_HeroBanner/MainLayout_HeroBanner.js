@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import * as T from 'prop-types'
 import {cssClassName} from 'utils/index'
-import './Layout_HeroBanner.scss'
+import './MainLayout_HeroBanner.scss'
 
-const cn = cssClassName('Layout_HeroBanner')
+const cn = cssClassName('MainLayout_HeroBanner')
 
-class Layout_HeroBanner extends Component {
+class MainLayout_HeroBanner extends Component {
 
   render() {
     const { mix } = this.props
@@ -17,8 +17,8 @@ class Layout_HeroBanner extends Component {
   }
 }
 
-Layout_HeroBanner.propTypes = {
+MainLayout_HeroBanner.propTypes = {
   mix: T.string
 }
 
-export default Layout_HeroBanner
+export default MainLayout_HeroBanner

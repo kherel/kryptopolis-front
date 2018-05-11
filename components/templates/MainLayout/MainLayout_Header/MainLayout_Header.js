@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import * as T from 'prop-types'
 import A_Container from 'widgets/A_Container/A_Container'
 import {cssClassName} from 'utils/index'
-import './Layout_Header.scss'
+import './MainLayout_Header.scss'
 
-const cn = cssClassName('Layout_Header')
+const cn = cssClassName('MainLayout_Header')
 
-class Layout_Header extends Component {
+class MainLayout_Header extends Component {
 
   render() {
     const { mix } = this.props
@@ -18,8 +18,8 @@ class Layout_Header extends Component {
   }
 }
 
-Layout_Header.propTypes = {
+MainLayout_Header.propTypes = {
   mix: T.string
 }
 
-export default Layout_Header
+export default MainLayout_Header

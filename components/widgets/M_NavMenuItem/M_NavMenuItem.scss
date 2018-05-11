@@ -1,0 +1,23 @@
+.m-nav-menu-item{
+  background-color: $color-yellow-dark;
+  color: $color-blue-dark;
+  height: 100%;
+  padding: 1.7rem 1rem;
+  display: inline-block;
+  text-transform: uppercase;
+
+  @include media ($tablet) {
+    padding: 22px 9px;
+  }
+
+  &:hover {
+    background-color: $color-yellow-light;
+  }
+  &:active {
+    background-color: $color-yellow-extralight;
+  }
+
+  &_active_true {
+    background-color: $color-yellow-light;
+  }
+}

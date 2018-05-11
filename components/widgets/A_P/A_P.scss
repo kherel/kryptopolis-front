@@ -1,0 +1,29 @@
+.a-p {
+  //letter-spacing: 0.25px;
+
+  &_type {
+    &_small {
+      font-size: 11px;
+      line-height: 1.27;
+      color: $color-blue-dark;
+      letter-spacing: 0.25px;
+    }
+    &_slogan {
+      color: $color-blue-dark;
+      font-weight: 300;
+      text-align: left;
+      line-height: 1.27;
+      text-transform: uppercase;
+      font-size: 32px;
+      letter-spacing: -0.1px;
+
+      @include media ($tablet) {
+        font-size: 22px;
+      }
+      @include media ($mobile) {
+        font-size: 14px;
+
+      }
+    }
+  }
+}

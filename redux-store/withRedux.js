@@ -47,6 +47,8 @@ export default (...args) => (Component) => {
   ComponentWithRedux.getInitialProps = async (props = {}) => {
     const isServer = checkServer()
     const store = getOrCreateStore(initStore)
+
+    // add pathName to context
     const pathName = props.pathname
 
     // Run page getInitialProps with store and isServer

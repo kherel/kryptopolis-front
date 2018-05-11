@@ -1,0 +1,17 @@
+.a-logo{
+  &__link{
+    display: inline-block;
+    margin-top:-4px;
+    vertical-align:top;
+
+  }
+  &__logo-svg{
+    display: block;
+    width:333px;
+    height:137px;
+    @include media ($tablet) {
+      width:244px;
+      height:95px;
+    }
+  }
+}

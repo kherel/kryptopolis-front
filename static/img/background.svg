@@ -1,0 +1,11 @@
+<svg width="auto" height="265px" viewBox="0 0 1658 265" preserveAspectRatio='none' version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#F2C601" offset="0%"/>
+            <stop stop-color="#FEED00" offset="100%"/>
+        </linearGradient>
+    </defs>
+    <rect id="Rectangle" fill="url(#linearGradient-1)" x="0" y="0" width="100%" height="100%"/>
+    <path d="M1658,0 L1658,265 L381.50159,265 C381.80859,109.194 535.32359,69.34 653.53159,0 L1658,0 Z" fill="#F2E205"/>
+</svg>

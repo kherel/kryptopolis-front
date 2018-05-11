@@ -1,0 +1,38 @@
+.main-layout-footer {
+  background-image: $background-gradient;
+  padding: 20px 0;
+  @include media($mobile) {
+    padding: 10px 0;
+  }
+
+  &__inner{
+    &-desktop{
+      justify-content: space-between;
+      align-items: center;
+      display: flex;
+      @include media($mobile) {
+        display: none;
+
+      }
+    }
+    &-mobile{
+      justify-content: center;
+      align-items: center;
+      display: none;
+      text-align: center;
+      @include media($mobile) {
+        display: flex;
+      }
+    }
+  }
+
+  &__text{
+    max-width: 438px;
+  }
+
+  &__address{
+    max-width: 259px;
+    font-size: 11px;
+
+  }
+}
