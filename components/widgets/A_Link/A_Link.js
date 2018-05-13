@@ -1,10 +1,10 @@
-// import * as T from "prop-types";
+import * as T from 'prop-types'
 import './A_Link.scss';
 import {cssClassName} from 'utils'
+import Link from 'next/link'
 const cn = cssClassName('A_Link')
-import Link from "next/link";
 
-const A_Link = ({children, type, href}) =>{
+const A_Link = ({mix, children, type, href}) =>{
 
   switch (type){
     case 'email':
@@ -14,13 +14,17 @@ const A_Link = ({children, type, href}) =>{
   }
   return(
     <Link href={href}>
-      <a className={cn()}>{children}</a>
+      <a className={cn([mix])}>{children}</a>
     </Link>
   )
 }
 
 A_Link.propTypes = {
-};
+  href: T.string.isRequired,
+  children: T.node.isRequired,
+  mix: T.string,
+  type: T.oneOf(['email', 'external']),
+}
 
 A_Link.defaultProps = {
 }
