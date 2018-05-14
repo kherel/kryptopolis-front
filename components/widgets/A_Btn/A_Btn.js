@@ -1,10 +1,11 @@
 import React from 'react'
 import * as T from "prop-types"
 import './A_Btn.scss'
+import Link from 'next/link'
 import {cssClassName} from 'utils'
 const cn = cssClassName('A_Btn');
 
-const A_Btn = ({mix, children, type, onClick, theme}) => {
+const A_Btn = ({mix, children, type, onClick, theme, href}) => {
 
   const className = cn([mix],{theme})
 
@@ -18,6 +19,13 @@ const A_Btn = ({mix, children, type, onClick, theme}) => {
         >
           {children}
         </button>
+      )
+
+    case 'link':
+      return(
+        <Link href={href}>
+          <a className={className}>{children}</a>
+        </Link>
       )
 
     default:
@@ -43,6 +51,7 @@ A_Btn.propTypes = {
   ]),
   type: T.oneOf([
     'submit',
+    'link'
   ]),
   onClick: T.func,
 }

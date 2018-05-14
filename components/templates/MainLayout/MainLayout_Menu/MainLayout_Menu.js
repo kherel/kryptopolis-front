@@ -29,6 +29,8 @@ class MainLayout_Menu extends Component {
           <A_Btn
             mix={cn('register-btn')}
             theme='rounded'
+            type='link'
+            href='/register'
             onClick={this.toggleRegisterModal}
           >
             Rejestracja
