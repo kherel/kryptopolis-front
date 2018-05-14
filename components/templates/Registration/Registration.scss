@@ -1,0 +1,34 @@
+.registration {
+  padding: 5rem 0;
+  text-align: center;
+
+  &__title {
+    margin-bottom: 4rem;
+  }
+
+  &__form, &__input, &__forgot-password {
+    margin-bottom: 3rem;
+  }
+
+  &__form {
+    max-width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__forgot-password {
+    font-size: 1.2rem;
+  }
+
+  &__submit-btn {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__register-link {
+    font-size: 1.4rem;
+  }
+}
