@@ -37,6 +37,10 @@ export default A_Btn
 
 A_Btn.propTypes = {
   mix: T.string,
+  theme: T.oneOf([
+    'filled',
+    'rounded'
+  ]),
   type: T.oneOf([
     'submit',
   ]),
