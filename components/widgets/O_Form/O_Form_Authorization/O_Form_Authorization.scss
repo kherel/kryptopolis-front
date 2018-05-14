@@ -1,0 +1,26 @@
+.o-form-authorization {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    margin-bottom: 4rem;
+  }
+
+  &__input, &__forgot-password, &__submit-btn {
+    margin-bottom: 3rem;
+  }
+
+  &__forgot-password {
+    font-size: 1.2rem;
+  }
+
+  &__submit-btn {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__register-link {
+    font-size: 1.4rem;
+  }
+}

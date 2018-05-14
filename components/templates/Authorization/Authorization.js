@@ -1,13 +1,11 @@
 import { Component } from 'react'
 // import * as T from "prop-types"
-import A_InputText from 'widgets/A_InputText/A_InputText'
-import A_H from 'widgets/A_H/A_H'
-import A_Link from 'widgets/A_Link/A_Link'
-import './Authorization.scss'
+import O_Form from 'widgets/O_Form/O_Form'
 import {cssClassName} from 'utils'
+import './Authorization.scss'
 const cn = cssClassName('Authorization')
 
-class T_Authorization extends Component {
+class Authorization extends Component {
 
   state = {}
 
@@ -17,39 +15,17 @@ class T_Authorization extends Component {
  //   const {} = this.state
 
     return (
-      <div className={cn()}>
-        <A_H mix={cn('title')} type='section'>LOGOWANIE</A_H>
-
-        <form className={cn('form')}>
-          <A_InputText
-            mix={cn('input')}
-            placeholder='USER NAME OR E-MAIL'
-            handleChange={value => console.log(value)}
-          />
-          <A_InputText
-            mix={cn('input')}
-            type='password'
-            placeholder='PASSWORD'
-            handleChange={value => console.log(value)}
-          />
-          <A_Link mix={cn('forgot-password')} href='/forgot-password'>
-            ZAPOMNIJ SWOJE HASŁO?
-          </A_Link>
-          <button className={cn('auth-submit-btn')}>ZAPISZ SIĘ</button>
-        </form>
-
-          <A_Link mix={cn('register-link')} href='register'>
-            REJESTRACJA
-          </A_Link>
-      </div>
+      <O_Form formType='authorization' mix={cn()} />
     )
   }
 }
 
-T_Authorization.propTypes = {
+/*
+Authorization.propTypes = {
 }
 
-T_Authorization.defaultProps = {
+Authorization.defaultProps = {
 }
+*/
 
-export default T_Authorization
+export default Authorization
