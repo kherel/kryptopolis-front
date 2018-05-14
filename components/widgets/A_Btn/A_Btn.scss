@@ -1,20 +1,31 @@
 .a-btn {
   position: relative;
   display: inline-block;
-  padding: .7rem;
-  width: 15rem;
-  border-radius: .5rem;
-  background-color: $color-yellow-dark;
-  color: $color-blue-dark;
-  text-align: center;
-  font-size: 1.6rem;
-  font-weight: bold;
   line-height: 1;
   text-transform: uppercase;
   cursor: pointer;
   user-select: none;
-  transition: box-shadow .3s linear;
-  &:hover {
-    box-shadow: 0 6px 10px 0 rgba(242, 226, 5, 0.64);
+  color: $color-blue-dark;
+  &_theme {
+    &_filled {
+      padding: .7rem;
+      width: 15rem;
+      border-radius: .5rem;
+      background-color: $color-yellow-dark;
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: bold;
+      transition: box-shadow .3s linear;
+      &:hover {
+        box-shadow: 0 6px 10px 0 rgba(242, 226, 5, 0.64);
+      }
+    }
+    &_rounded {
+      padding: .6rem 1.2rem;
+      border-radius: 1.5rem;
+      border: solid .1rem $color-blue-dark;
+      font-size: 1.5rem;
+      font-weight: normal;
+    }
   }
 }
