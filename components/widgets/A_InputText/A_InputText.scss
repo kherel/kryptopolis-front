@@ -1,0 +1,36 @@
+.a-input-text {
+  $this: &;
+  padding: 0;
+  &_has-error {
+    &_true {
+      #{$this}__input {
+        border-color: #f25810;
+      }
+    }
+  }
+  &__input {
+	box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding: .5rem 1rem;
+    text-align: center;
+    border-bottom: 2px solid #cdcdcd;
+    //font-family: $font-ProximaNova;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: $color-blue-dark;
+    transition: color, border, .3s linear;
+    &:focus {
+      outline: none;
+      &::placeholder {
+        color: transparent;
+      }
+    }
+    &::placeholder {
+      color: #9b9b9b;
+      text-transform: uppercase;
+      font-weight: normal;
+      transition: color .3s linear;
+    }
+  }
+}

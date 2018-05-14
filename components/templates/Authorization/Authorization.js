@@ -1,8 +1,9 @@
-import { Component } from 'react';
-// import * as T from "prop-types";
-// import './Authorization.scss';
-// import {cssClassName} from 'utils'
-// const cn = cssClassName('Authorization')
+import { Component } from 'react'
+// import * as T from "prop-types"
+import O_Form from 'widgets/O_Form/O_Form'
+import {cssClassName} from 'utils'
+import './Authorization.scss'
+const cn = cssClassName('Authorization')
 
 class Authorization extends Component {
 
@@ -14,17 +15,17 @@ class Authorization extends Component {
  //   const {} = this.state
 
     return (
-      <div>
-
-      </div>
+      <O_Form formType='authorization' mix={cn()} />
     )
   }
 }
 
+/*
 Authorization.propTypes = {
-};
+}
 
 Authorization.defaultProps = {
 }
+*/
 
 export default Authorization

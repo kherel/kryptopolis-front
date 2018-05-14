@@ -27,7 +27,7 @@ A_H.propTypes = {
   mix: T.string,
   type: T.oneOf([
     'section',
-  ]),
+  ]).isRequired,
   children: T.node.isRequired
 };
 
