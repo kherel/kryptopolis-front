@@ -1,0 +1,43 @@
+.a-label-title {
+  $this: &;
+  position: relative;
+  &_size {
+    &_lg {
+      #{$this}__text {
+        padding: .3rem 1.2rem;
+        font-size: 1.6rem;
+      }
+    }
+    &_md {
+      #{$this}__text {
+        padding: .2rem 0.8rem;
+        font-size: 1.4rem;
+      }
+    }
+    &_sm {
+      #{$this}__text {
+        padding: .1rem 0.4rem;
+        font-size: 1.2rem;
+      }
+    }
+  }
+  &_has-border_true {
+    &::after {
+      content: '';
+      position: absolute;
+      height: .2rem;
+      width: 100%;
+      display: block;
+      bottom: 0;
+      left: 0;
+      background-color: $color-yellow-dark;
+    }
+  }
+
+  &__text {
+    display: inline-block;
+    background-color: $color-yellow-dark;
+    font-weight: bold;
+    color: $color-blue-dark;
+  }
+}

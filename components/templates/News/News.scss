@@ -1,0 +1,16 @@
+.news {
+  display: flex;
+  &__content {
+    margin-right: 4rem;
+    flex: 1 1 auto;
+  }
+
+  &__sidebar {
+    flex: 0 0 28rem;
+    background-color: transparentize(red, .5);
+  }
+
+  &__label {
+    margin-bottom: 2.5rem;
+  }
+}

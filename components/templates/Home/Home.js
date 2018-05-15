@@ -18,7 +18,7 @@ class Home extends Component {
   render() {
     const { status, setStatus, pathname} = this.props
     return (
-      <A_Container mix={cn()}>
+      <A_Container mix={cn()} padding='thin'>
         <O_Hot mix={cn('hot')} />
         <O_Articles mix={cn('articles')} />
         <O_Video mix={cn('video')} />
