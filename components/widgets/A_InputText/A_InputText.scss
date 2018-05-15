@@ -19,6 +19,7 @@
     font-weight: 700;
     font-size: 1.6rem;
     color: $color-blue-dark;
+
     transition: color, border, .3s linear;
     &:focus {
       outline: none;
@@ -31,6 +32,9 @@
       text-transform: uppercase;
       font-weight: normal;
       transition: color .3s linear;
+    }
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 30px white inset;
     }
   }
 }
