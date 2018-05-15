@@ -3,12 +3,11 @@ import { Component } from 'react'
 import A_InputText from 'widgets/A_InputText/A_InputText'
 import A_H from 'widgets/A_H/A_H'
 import A_Btn from 'widgets/A_Btn/A_Btn'
-import A_Link from 'widgets/A_Link/A_Link'
-import './Authorization.scss'
+import './Registration.scss'
 import {cssClassName} from 'utils'
-const cn = cssClassName('Authorization')
+const cn = cssClassName('Registration')
 
-class Authorization extends Component {
+class Registration extends Component {
 
   state = {}
 
@@ -19,12 +18,12 @@ class Authorization extends Component {
 
     return (
       <div className={cn()}>
-        <A_H mix={cn('title')} type='section'>LOGOWANIE</A_H>
+        <A_H mix={cn('title')} type='section'>REJESTRACJA</A_H>
 
         <form className={cn('form')}>
           <A_InputText
             mix={cn('input')}
-            placeholder='USER NAME OR E-MAIL'
+            placeholder='E-MAIL'
             handleChange={value => console.log(value)}
           />
           <A_InputText
@@ -33,24 +32,23 @@ class Authorization extends Component {
             placeholder='PASSWORD'
             handleChange={value => console.log(value)}
           />
-          <A_Link mix={cn('forgot-password')} href='/forgot-password'>
-            ZAPOMNIJ SWOJE HASŁO?
-          </A_Link>
-          <A_Btn mix={cn('submit-btn')} type='submit' theme='filled'>ZAPISZ SIĘ</A_Btn>
+          <A_InputText
+            mix={cn('input')}
+            type='password'
+            placeholder='RE-ENTER PASSWORD'
+            handleChange={value => console.log(value)}
+          />
+          <A_Btn mix={cn('submit-btn')} type='submit' theme='filled'>REJESTRACJA</A_Btn>
         </form>
-
-        <A_Link mix={cn('register-link')} href='register'>
-          REJESTRACJA
-        </A_Link>
       </div>
     )
   }
 }
 
-Authorization.propTypes = {
+Registration.propTypes = {
 }
 
-Authorization.defaultProps = {
+Registration.defaultProps = {
 }
 
-export default Authorization
+export default Registration

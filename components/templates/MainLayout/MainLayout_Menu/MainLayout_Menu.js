@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import * as T from 'prop-types'
-import A_Container from 'widgets/A_Container/A_Container'
+//import A_Container from 'widgets/A_Container/A_Container'
+import A_Btn from 'widgets/A_Btn/A_Btn'
 import {cssClassName} from 'utils/index'
 import './MainLayout_Menu.scss'
 import {mainNavigation} from "data/data";
@@ -22,9 +23,24 @@ class MainLayout_Menu extends Component {
     const renderedNavigation = this.getNavigation();
     const {mix} = this.props
     return (
-      <nav className={cn([mix])}>
-        {renderedNavigation}
-      </nav>
+      <Fragment>
+        <nav className={cn([mix])}>
+          {renderedNavigation}
+          <A_Btn
+            mix={cn('register-btn')}
+            theme='rounded'
+            type='link'
+            href='/register'
+          >
+            Rejestracja
+          </A_Btn>
+        </nav>
+{/*        <M_Modal
+          handleClose={this.toggleRegisterModal}
+        >
+          <O_Form formType='authorization'/>
+        </M_Modal>*/}
+      </Fragment>
     );
   }
 }

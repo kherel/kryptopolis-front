@@ -1,14 +1,22 @@
-.o-form-authorization {
+.registration {
+  padding: 5rem 0;
   text-align: center;
-  display: flex;
-  flex-direction: column;
 
   &__title {
     margin-bottom: 4rem;
   }
 
-  &__input, &__forgot-password, &__submit-btn {
+  &__form, &__input, &__forgot-password {
     margin-bottom: 3rem;
+  }
+
+  &__form {
+    max-width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   &__forgot-password {
