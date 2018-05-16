@@ -1,34 +1,35 @@
-import React, { Component } from "react"
-import { bindActionCreators } from "redux"
-import { initStore } from "redux-store/store"
-import withRedux from "redux-store/withRedux"
-import { setStatus } from "redux-store/ducks/appStatus"
-import Layout from 'templates/MainLayout/MainLayout'
-import Authorization from 'templates/Authorization/Authorization'
-import * as T from "prop-types"
+import React, { Component } from "react";
+import { bindActionCreators } from "redux";
+import { initStore } from "redux-store/store";
+import withRedux from "redux-store/withRedux";
+import { setStatus } from "redux-store/ducks/appStatus";
+import Layout from "templates/MainLayout/MainLayout";
+import Authorization from "templates/Authorization/Authorization";
+import * as T from "prop-types";
+import {handleUserLogin, userErrorClear} from "redux-store/ducks/auth";
 
 class Auth extends Component {
   render() {
     return (
       <Layout>
-        <Authorization />
+        <Authorization {...this.props} />
       </Layout>
     );
   }
 }
 
-export default Auth
-/*function mapStateToProps(state) {
+function mapStateToProps(state) {
+  const { loggedIn, loginError, redirect } = state.auth;
 
-  const {status} = state.appStatus
-
-  return {status}
-
+  return { loggedIn, loginError, redirect };
 }
 
 function mapDispatchToProps(dispatch) {
-  const actions = bindActionCreators({ setStatus }, dispatch)
-  return { ...actions }
+  const actions = bindActionCreators(
+    { handleUserLogin, userErrorClear },
+    dispatch
+  );
+  return { ...actions };
 }
 
-export default (withRedux(initStore, mapStateToProps, mapDispatchToProps)(Authorization))*/
+export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Auth);

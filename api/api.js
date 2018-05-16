@@ -1,0 +1,30 @@
+import axios from "axios";
+import {safeDA} from "utils";
+
+const DOMAIN = "http://46.101.229.239:4000";
+const AUTH_API = `${DOMAIN}/v1/auth/token`;
+
+const sendData = res => res.data.attributes || res.data;
+
+const logServerError = err => {
+  if (err.response.status === 500) {
+    const dataError = safeDA(err, ["response", "data"], {})
+    console.log(dataError.error || dataError.message) //eslint-disable-line
+    throw err;
+  } else {
+    throw err;
+  }
+};
+
+// Basic api call function
+const apiCall = (method, path, data) =>
+  axios[method](path, data)
+    .then(sendData)
+    .catch(logServerError);
+
+export default {
+  auth: {
+    getToken: (email, password) =>
+      apiCall("put", AUTH_API, { data: { attributes: { email, password } } })
+  }
+};

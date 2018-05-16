@@ -6,24 +6,25 @@ import A_Btn from 'widgets/A_Btn/A_Btn'
 import A_Link from 'widgets/A_Link/A_Link'
 import './Authorization.scss'
 import {cssClassName} from 'utils'
+import {userErrorClear} from "redux-store/ducks/auth";
 const cn = cssClassName('Authorization')
 
 class Authorization extends Component {
 
   state = {
-    user: '',
+    email: '',
     password: ''
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const {user, password} = this.state
-    console.log('submit', user, password)
+    const {email, password} = this.state
+    this.props.handleUserLogin({email, password})
   }
 
   render() {
 
-     const {user, password} = this.state
+    const {email, password} = this.state
 
     return (
       <div className={cn()}>
@@ -32,9 +33,9 @@ class Authorization extends Component {
         <form className={cn('form')} onSubmit={this.handleSubmit}>
           <A_InputText
             mix={cn('input')}
-            value={user}
+            value={email}
             placeholder='USER NAME OR E-MAIL'
-            handleChange={user => this.setState({user})}
+            handleChange={email => this.setState({email})}
           />
           <A_InputText
             mix={cn('input')}
