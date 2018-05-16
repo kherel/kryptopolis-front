@@ -60,4 +60,4 @@ export const handleUserLogin =  ({ email, password }) => async dispatch =>{
 // pure actions
 
 export const userLogin = (token) => ({type: LOGIN_SUCCESS, data: {token}})
-export const userErrorClear = (token) => ({type: CLEAN_LOGIN_ERROR})
+export const cleanLoginError = (token) => ({type: CLEAN_LOGIN_ERROR})

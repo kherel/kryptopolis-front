@@ -6,7 +6,7 @@ import { setStatus } from "redux-store/ducks/appStatus";
 import Layout from "templates/MainLayout/MainLayout";
 import Authorization from "templates/Authorization/Authorization";
 import * as T from "prop-types";
-import {handleUserLogin, userErrorClear} from "redux-store/ducks/auth";
+import {handleUserLogin, cleanLoginError} from "redux-store/ducks/auth";
 
 class Auth extends Component {
   render() {
@@ -26,7 +26,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   const actions = bindActionCreators(
-    { handleUserLogin, userErrorClear },
+    { handleUserLogin, cleanLoginError },
     dispatch
   );
   return { ...actions };
