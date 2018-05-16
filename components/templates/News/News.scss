@@ -3,14 +3,22 @@
   &__content {
     margin-right: 4rem;
     flex: 1 1 auto;
+    @include media ($desktop-sm) {
+      margin-right: 1.5rem;
+    }
+    @include media ($tablet) {
+      margin-right: 0;
+    }
   }
 
   &__sidebar {
     flex: 0 0 28rem;
     background-color: transparentize(red, .5);
-  }
-
-  &__label {
-    margin-bottom: 2.5rem;
+    @include media ($desktop-sm) {
+      flex: 0 0 26rem;
+    }
+    @include media ($tablet) {
+      display: none;
+    }
   }
 }

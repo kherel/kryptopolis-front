@@ -1,4 +1,5 @@
 .a-btn {
+  $this: &;
   position: relative;
   display: inline-block;
   line-height: 1;
@@ -6,20 +7,43 @@
   cursor: pointer;
   user-select: none;
   color: $color-blue-dark;
+
   &_theme {
     &_filled {
-      padding: .7rem;
-      width: 15rem;
       border-radius: .5rem;
-      background-color: $color-yellow-dark;
       text-align: center;
-      font-size: 1.6rem;
       font-weight: bold;
-      transition: box-shadow .3s linear;
+      transition: box-shadow .3s, background-color .3s linear;
       &:hover {
         box-shadow: 0 6px 10px 0 rgba(242, 226, 5, 0.64);
       }
     }
+    &_filled#{$this}_color {
+      &_yellow {
+        background-color: $color-yellow-dark;
+      }
+      &_gray {
+        background-color: $color-grey-middle;
+        &:hover {
+          background-color: $color-yellow-dark;
+        }
+      }
+    }
+    &_filled#{$this}_size {
+      &_sm {
+        padding: .5rem 15rem;
+        font-size: 1.2rem;
+      }
+      &_md {
+        padding: .5rem 2rem;
+        font-size: 1.4rem;
+      }
+      &_lg {
+        padding: .7rem 2.5rem;
+        font-size: 1.6rem;
+      }
+    }
+
     &_rounded {
       padding: .6rem 1.2rem;
       border-radius: 1.5rem;

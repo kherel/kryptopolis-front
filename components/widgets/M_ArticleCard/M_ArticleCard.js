@@ -12,7 +12,7 @@ const M_ArticleCard = ({mix}) =>(
     <div className={cn('content')}>
       <A_H mix={cn('title')} type='widget'>BOSCH INWESTUJE W IOTA</A_H>
       <p className={cn('text')}>Bosch, globalny koncern produkujący m.in. części samochodowe i elektronarzędzia, zainwestował w kryptowalutę IOTA, dostrzegając potencjał w tworzącym się rynku handlu danymi. "This investment represents Bosch’s transition from a hardware company…</p>
-      <A_Btn mix={cn('show-all-btn')} theme='filled'>PRZECZYTAJ WIĘCEJ</A_Btn>
+      <A_Btn mix={cn('show-all')} theme='filled' size='md' color='gray'>PRZECZYTAJ WIĘCEJ</A_Btn>
       <span className={cn('credentials')}>13 godz. ago | Krzysztof Gonciarz</span>
     </div>
   </div>

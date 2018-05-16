@@ -14,7 +14,9 @@ class News extends Component {
     return (
       <A_Container mix={cn()} padding='wide'>
         <section className={cn('content')}>
-          <A_LabelTitle mix={cn('label')} size='lg' hasBorder>WIADOMOŚCI DZISIAJ</A_LabelTitle>
+          <A_LabelTitle size='lg' hasBorder>WIADOMOŚCI DZISIAJ</A_LabelTitle>
+          <M_ArticleCard />
+          <M_ArticleCard />
           <M_ArticleCard />
         </section>
         <aside className={cn('sidebar')}>

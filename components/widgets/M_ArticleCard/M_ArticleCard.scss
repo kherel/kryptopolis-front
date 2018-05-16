@@ -2,21 +2,45 @@
   padding: 2.5rem 0;
   display: flex;
   align-items: center;
+  @include media ($desktop-sm) {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 1.3rem 0;
+  }
+
   &__image {
     flex: 0 0 35rem;
     margin-right: 3rem;
     height: 20rem;
     object-fit: cover;
+    @include media ($desktop-sm) {
+      flex: 0 0 25rem;
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
   }
+
   &__content {
     flex: 1 1 auto;
   }
+
   &__title {
     margin-bottom: 1rem;
   }
+
   &__text {
     margin-bottom: 2.5rem;
     font-size: 1.6rem;
     color: $color-gray-text;
   }
+
+  &__show-all {
+    margin-right: 2rem;
+  }
+
+  &__credentials {
+    font-size: 1.2rem;
+    color: $color-grey-dark;
+  }
+
 }
