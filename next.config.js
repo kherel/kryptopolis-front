@@ -1,4 +1,4 @@
 // next.config.js
-const withSass = require('./config/withSass.js')
+const withSass = require('./config/withSass_new.js')
 
 module.exports = withSass()

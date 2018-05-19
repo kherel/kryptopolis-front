@@ -2,6 +2,10 @@ const adminPath = '/admin'
 
 export const adminNavigation = [
   {
+    text: 'main',
+    href: `${adminPath}`
+  },
+  {
     text: 'wiadomości',
     href: `${adminPath}/news`
   },

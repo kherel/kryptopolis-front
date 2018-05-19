@@ -7,6 +7,8 @@ const cn = cssClassName("AdminLayout");
 import { adminNavigation } from "data/data";
 import A_Link from "widgets/A_Link/A_Link";
 import A_Container from "widgets/A_Container/A_Container";
+import withRedux from "redux-store/withRedux";
+import {initStore} from "redux-store/store";
 
 class AdminLayout extends Component {
   state = {};
@@ -42,8 +44,12 @@ class AdminLayout extends Component {
   }
 }
 
-AdminLayout.propTypes = {};
+function mapStateToProps(state) {
 
-AdminLayout.defaultProps = {};
+  const {loggedIn} = state.auth
 
-export default AdminLayout;
+  return {loggedIn}
+
+}
+
+export default withRedux(initStore, mapStateToProps)(AdminLayout)

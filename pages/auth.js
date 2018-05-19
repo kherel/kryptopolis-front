@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
-import { initStore } from "redux-store/store";
-import withRedux from "redux-store/withRedux";
-import { setStatus } from "redux-store/ducks/appStatus";
 import Layout from "templates/MainLayout/MainLayout";
 import Authorization from "templates/Authorization/Authorization";
 import * as T from "prop-types";
-import {handleUserLogin, cleanLoginError} from "redux-store/ducks/auth";
+import { handleUserLogin, cleanLoginError } from "redux-store/ducks/auth";
+import { connect } from 'react-redux'
 
 class Auth extends Component {
   render() {
@@ -19,9 +17,9 @@ class Auth extends Component {
 }
 
 function mapStateToProps(state) {
-  const { loggedIn, loginError, redirect } = state.auth;
+  const { loggedIn, loginError, redirectUrl } = state.auth;
 
-  return { loggedIn, loginError, redirect };
+  return { loggedIn, loginError, redirectUrl };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -32,4 +30,4 @@ function mapDispatchToProps(dispatch) {
   return { ...actions };
 }
 
-export default withRedux(initStore, mapStateToProps, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

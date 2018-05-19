@@ -1,68 +1,48 @@
-import React from 'react'
-import { connect, Provider } from 'react-redux'
-import {PathContext} from 'utils/context'
+import App, {Container} from 'next/app'
+import {initializeStore} from './store'
+
+const isServer = typeof window === 'undefined'
 const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__'
 
-// https://github.com/iliakan/detect-node
-const checkServer = () => Object.prototype.toString.call(global.process) === '[object process]'
-
-const getOrCreateStore = (initStore, initialState) => {
-  // Always make a new store if server
-  if (checkServer() || typeof window === 'undefined') {
-    return initStore(initialState)
+function getOrCreateStore(initialState) {
+  // Always make a new store if server, otherwise state is shared between requests
+  if (isServer) {
+    return initializeStore(initialState)
   }
 
   // Store in global variable if client
   if (!window[__NEXT_REDUX_STORE__]) {
-    window[__NEXT_REDUX_STORE__] = initStore(initialState)
+    window[__NEXT_REDUX_STORE__] = initializeStore(initialState)
   }
   return window[__NEXT_REDUX_STORE__]
 }
 
-export default (...args) => (Component) => {
-  // First argument is initStore, the rest are redux connect arguments and get passed
-  const [initStore, ...connectArgs] = args
+export default (App) => {
+  return class Redux extends React.Component {
+    static async getInitialProps(appContext) {
+      const reduxStore = getOrCreateStore()
 
-  const ComponentWithRedux = (props = {}) => {
-    const { store, initialProps, initialState, pathName} = props
+      // Provide the store to getInitialProps of pages
+      appContext.ctx.reduxStore = reduxStore
 
-    // Connect page to redux with connect arguments
-    const ConnectedComponent = connect.apply(null, connectArgs)(Component)
+      let appProps = {}
+      if (App.getInitialProps) {
+        appProps = await App.getInitialProps(appContext)
+      }
 
-    // Wrap with redux Provider with store
-    // Create connected page with initialProps
-    return (
-      <PathContext.Provider value={{pathName}}>
-        {
-          React.createElement(
-            Provider,
-            { store: store && store.dispatch ? store : getOrCreateStore(initStore, initialState) },
-            React.createElement(ConnectedComponent, initialProps)
-          )
-        }
-      </PathContext.Provider>
-    )
-  }
+      return {
+        ...appProps,
+        initialReduxState: reduxStore.getState()
+      }
+    }
 
-  ComponentWithRedux.getInitialProps = async (props = {}) => {
-    const isServer = checkServer()
-    const store = getOrCreateStore(initStore)
+    constructor(props) {
+      super(props)
+      this.reduxStore = getOrCreateStore(props.initialReduxState)
+    }
 
-    // add pathName to context
-    const pathName = props.pathname
-
-    // Run page getInitialProps with store and isServer
-    const initialProps = Component.getInitialProps
-      ? await Component.getInitialProps({ ...props, isServer, store })
-      : {}
-
-    return {
-      store,
-      initialState: store.getState(),
-      initialProps,
-      pathName
+    render() {
+      return <App {...this.props} reduxStore={this.reduxStore}/>
     }
   }
-
-  return ComponentWithRedux
 }

@@ -1,33 +1,25 @@
 import { Component } from "react"
-import { bindActionCreators } from "redux"
-import { initStore } from "redux-store/store"
-import withRedux from "redux-store/withRedux"
 import AdminLayout from 'templates/AdminLayout/AdminLayout'
 import AdminHome from 'templates/AdminHome/AdminHome'
 import * as T from "prop-types"
 // import { setStatus } from "redux-store/ducks/appStatus"
+import Link from "next/link";
+import authorizationHOC from "HOC/authorizationHOC";
 
 class AdminIndex extends Component {
   render() {
+    const href2 = '/admin/test'
+
     return (
       <AdminLayout >
+        <Link href={href2}>
+          <a >test</a>
+        </Link>
         <AdminHome />
       </AdminLayout>
     );
   }
 }
 
-// function mapStateToProps(state) {
-//
-//   const {} = state
-//
-//   return {}
-//
-// }
-//
-// function mapDispatchToProps(dispatch) {
-//   const actions = bindActionCreators({ }, dispatch)
-//   return { ...actions }
-// }
 
-export default (withRedux(initStore)(AdminIndex))
+export default withRedux(initStore)(AdminIndex)

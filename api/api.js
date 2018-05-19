@@ -1,6 +1,9 @@
 import axios from "axios";
 import {safeDA} from "utils";
 
+
+// axios.defaults.headers.common['Content-Type'] = 'application/json';
+
 const DOMAIN = "http://46.101.229.239:4000";
 const AUTH_API = `${DOMAIN}/v1/auth/token`;
 

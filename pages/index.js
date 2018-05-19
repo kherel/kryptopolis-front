@@ -1,11 +1,10 @@
 import React, { Component } from "react"
 import { bindActionCreators } from "redux"
-import { initStore } from "redux-store/store"
-import withRedux from "redux-store/withRedux"
 import { setStatus } from "redux-store/ducks/appStatus"
 import Layout from 'templates/MainLayout/MainLayout'
 import Home from 'templates/Home/Home'
 import * as T from "prop-types"
+import { connect } from 'react-redux'
 
 class Index extends Component {
   render() {
@@ -32,4 +31,4 @@ function mapDispatchToProps(dispatch) {
   return { ...actions }
 }
 
-export default (withRedux(initStore, mapStateToProps, mapDispatchToProps)(Index))
+export default connect(mapStateToProps, mapDispatchToProps)(Index)

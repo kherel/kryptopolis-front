@@ -8,6 +8,7 @@ import './Authorization.scss'
 import {cssClassName} from 'utils'
 import {userErrorClear} from "redux-store/ducks/auth";
 const cn = cssClassName('Authorization')
+import Router from 'next/router'
 
 class Authorization extends Component {
 
@@ -21,6 +22,13 @@ class Authorization extends Component {
     const {email, password} = this.state
     this.props.handleUserLogin({email, password})
   }
+
+  componentDidUpdate(prevProps){
+    if(!prevProps.loggedIn && this.props.loggedIn){
+      Router.push(this.props.redirectUrl)
+    }
+  }
+
 
   render() {
 
