@@ -5,6 +5,9 @@
   &_padding {
     &_wide {
       padding: 2rem 4rem;
+      @include media ($desktop-sm) {
+        padding: 2rem 1.5rem;
+      }
     }
     &_thin {
       padding: 1rem 2rem;

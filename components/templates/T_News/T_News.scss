@@ -1,5 +1,9 @@
 .t-news {
   display: flex;
+  @include media ($mobile) {
+    padding-left: 0;
+    padding-right: 0;
+  }
   &__content {
     margin-right: 4rem;
     flex: 1 1 auto;
@@ -13,7 +17,7 @@
 
   &__sidebar {
     flex: 0 0 28rem;
-    background-color: transparentize(red, .5);
+    //background-color: transparentize(red, .5);
     @include media ($desktop-sm) {
       flex: 0 0 26rem;
     }
