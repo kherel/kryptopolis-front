@@ -2,6 +2,9 @@
   text-transform: uppercase;
   color: #02328c;
   &_type {
+    &_article {
+      font-size: 3.2rem;
+    }
     &_section {
       margin-bottom: .8rem;
       font-size: 2.4rem;

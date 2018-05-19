@@ -11,7 +11,10 @@ const A_P = ({ mix, children, type }) => (
 
 A_P.propTypes = {
   mix: T.string,
-  //type: T.oneOf([]).isRequired,
+  type: T.oneOf([
+    'article',
+    'small'
+  ]).isRequired,
   children: T.node
 };
 

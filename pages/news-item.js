@@ -4,20 +4,20 @@ import { initStore } from "redux-store/store"
 import withRedux from "redux-store/withRedux"
 import { setStatus } from "redux-store/ducks/appStatus"
 import Layout from 'templates/MainLayout/MainLayout'
-import News from 'templates/News/News'
+import NewsItem from 'templates/NewsItem/NewsItem'
 import * as T from "prop-types"
 
-class News extends Component {
+class Register extends Component {
   render() {
     return (
       <Layout>
-        <News />
+        <NewsItem />
       </Layout>
     );
   }
 }
 
-export default News
+export default Register
 /*function mapStateToProps(state) {
 
   const {status} = state.appStatus
