@@ -59,6 +59,8 @@ class Authorization extends Component {
             mix={cn('submit-btn')}
             type='submit'
             theme='filled'
+            size='lg'
+            color='yellow'
           >
             ZAPISZ SIĘ
           </A_Btn>

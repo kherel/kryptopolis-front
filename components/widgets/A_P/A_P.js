@@ -10,10 +10,12 @@ const A_P = ({ mix, children, type }) => (
 )
 
 A_P.propTypes = {
+  mix: T.string,
   type: T.oneOf([
-    'small', // blue 11px, 1.27
-    'slogan', // blue Upper 300 32/22/14
+    'article',
+    'small'
   ]).isRequired,
+  children: T.node
 };
 
 A_P.defaultProps = {

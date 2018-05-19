@@ -5,9 +5,9 @@ import Link from 'next/link'
 import {cssClassName} from 'utils'
 const cn = cssClassName('A_Btn');
 
-const A_Btn = ({mix, children, type, onClick, theme, href}) => {
+const A_Btn = ({mix, children, type, onClick, href, theme, size, color}) => {
 
-  const className = cn([mix],{theme})
+  const className = cn([mix],{theme, size, color})
 
   switch(type) {
 
@@ -49,9 +49,12 @@ A_Btn.propTypes = {
     'filled',
     'rounded'
   ]),
+  size: T.oneOf(['lg', 'md', 'sm']),
+  color: T.oneOf(['gray', 'yellow']),
   type: T.oneOf([
     'submit',
     'link'
   ]),
   onClick: T.func,
+  href: T.string
 }

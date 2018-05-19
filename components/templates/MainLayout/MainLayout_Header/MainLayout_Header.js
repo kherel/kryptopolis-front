@@ -12,7 +12,7 @@ class MainLayout_Header extends Component {
     const { mix } = this.props
     return (
       <header className={cn([mix])}>
-        <A_Container mix={'content'}>Header</A_Container>
+        <A_Container mix={'content'} padding='thin'>Header</A_Container>
       </header>
     );
   }

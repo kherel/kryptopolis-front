@@ -48,7 +48,15 @@ class Registration extends Component {
             placeholder='RE-ENTER PASSWORD'
             handleChange={passwordConfirm => this.setState({passwordConfirm})}
           />
-          <A_Btn mix={cn('submit-btn')} type='submit' theme='filled'>REJESTRACJA</A_Btn>
+          <A_Btn
+            mix={cn('submit-btn')}
+            type='submit'
+            theme='filled'
+            size='lg'
+            color='yellow'
+          >
+            REJESTRACJA
+          </A_Btn>
         </form>
       </div>
     )

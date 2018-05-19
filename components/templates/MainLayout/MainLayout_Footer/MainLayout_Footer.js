@@ -13,7 +13,7 @@ class MainLayout_Footer extends Component {
     const { mix } = this.props
     return (
       <div className={cn()}>
-        <A_Container mix={cn('inner-desktop')}>
+        <A_Container mix={cn('inner-desktop')} padding='thin'>
           <div className={cn('text')}>
             <A_P type='small'>
               Kryptopolis obejmuje Fintech, Blockchain i Bitcoin dostarczając najnowsze wiadomości i
@@ -27,7 +27,7 @@ class MainLayout_Footer extends Component {
             </A_P>
           </div>
         </A_Container>
-        <A_Container mix={cn('inner-mobile')}>
+        <A_Container mix={cn('inner-mobile')} padding='thin'>
           <div className={cn('text')}>
             <A_P type='small'>
               Polska, Warszawa, rynek Starego Miasta 9 <br />

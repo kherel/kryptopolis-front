@@ -1,11 +1,19 @@
 .a-container {
   width: 100%;
   max-width: 128rem;
-  padding-right: 2rem;
-  padding-left: 2rem;
   margin: 0 auto;
-  @include media ($tablet) {
-    padding-right: 1rem;
-    padding-left: 1rem;
+  &_padding {
+    &_wide {
+      padding: 2rem 4rem;
+      @include media ($desktop-sm) {
+        padding: 2rem 1.5rem;
+      }
+    }
+    &_thin {
+      padding: 1rem 2rem;
+      @include media ($tablet) {
+        padding: 1rem;
+      }
+    }
   }
 }
