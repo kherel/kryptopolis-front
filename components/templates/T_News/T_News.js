@@ -3,11 +3,11 @@ import { Component } from 'react'
 import A_LabelTitle from 'widgets/A_LabelTitle/A_LabelTitle'
 import A_Container from 'widgets/A_Container/A_Container'
 import M_ArticleCard from 'widgets/M_ArticleCard/M_ArticleCard'
-import './News.scss'
+import './T_News.scss'
 import {cssClassName} from 'utils'
-const cn = cssClassName('News')
+const cn = cssClassName('T_News')
 
-class News extends Component {
+class T_News extends Component {
 
   render() {
 
@@ -27,10 +27,10 @@ class News extends Component {
   }
 }
 
-News.propTypes = {
+T_News.propTypes = {
 }
 
-News.defaultProps = {
+T_News.defaultProps = {
 }
 
-export default News
+export default T_News

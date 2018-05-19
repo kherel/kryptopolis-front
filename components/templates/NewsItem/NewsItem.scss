@@ -60,5 +60,11 @@
     object-fit: cover;
   }
 
+  &__share {
+    text-transform: uppercase;
+    color: $color-blue-dark;
+    font-weight: bold;
+  }
+
 
 }

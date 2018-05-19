@@ -4,14 +4,14 @@ import { initStore } from "redux-store/store"
 import withRedux from "redux-store/withRedux"
 import { setStatus } from "redux-store/ducks/appStatus"
 import Layout from 'templates/MainLayout/MainLayout'
-import News from 'templates/News/News'
+import T_News from 'templates/T_News/T_News'
 import * as T from "prop-types"
 
 class News extends Component {
   render() {
     return (
       <Layout>
-        <News />
+        <T_News />
       </Layout>
     );
   }

@@ -56,4 +56,5 @@ A_Btn.propTypes = {
     'link'
   ]),
   onClick: T.func,
+  href: T.string
 }
