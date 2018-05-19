@@ -6,8 +6,8 @@ import {cssClassName} from 'utils'
 import './M_ArticleCard.scss'
 const cn = cssClassName('M_ArticleCard')
 
-const M_ArticleCard = ({mix}) =>(
-  <div className={cn([mix])}>
+const M_ArticleCard = ({mix, hasBorder}) =>(
+  <div className={cn({hasBorder}, [mix])}>
     <img className={cn('image')} src="/static/img/hot.jpg" />
     <div className={cn('content')}>
       <A_H mix={cn('title')} type='widget'>BOSCH INWESTUJE W IOTA</A_H>
@@ -29,6 +29,7 @@ const M_ArticleCard = ({mix}) =>(
 
 M_ArticleCard.propTypes = {
   mix: T.string,
+  hasBorder: T.bool
 };
 
 export default M_ArticleCard

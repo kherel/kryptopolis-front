@@ -2,6 +2,9 @@
   padding: 2.5rem 0;
   display: flex;
   align-items: center;
+  &_has-border_true {
+    border-bottom: .1rem solid $color-yellow-dark;
+  }
   @include media ($desktop-sm) {
     align-items: stretch;
     flex-direction: column;
