@@ -69,11 +69,21 @@ class Authorization extends Component {
     })
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.loginError) {
+      return {
+        errors:{...prevState.errors, email: 'User not found'}
+      }
+    }
+    return null;
+  }
+
   componentDidUpdate(prevProps){
     if(!prevProps.loggedIn && this.props.loggedIn){
       Router.push(this.props.redirectUrl)
     }
   }
+
 
 
   render() {
