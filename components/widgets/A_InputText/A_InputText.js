@@ -20,6 +20,7 @@ class A_InputText extends Component {
           onFocus={onFocus}
           onChange={e => handleChange(e.target.value)}
         />
+        <span className={cn('error')}>{error}</span>
       </fieldset>
     )
   }

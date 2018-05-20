@@ -4,7 +4,7 @@
   &_has-error {
     &_true {
       #{$this}__input {
-        border-color: #f25810;
+        border-color: $color-red;
       }
     }
   }
@@ -36,5 +36,12 @@
     &:-webkit-autofill {
       -webkit-box-shadow: 0 0 0 30px white inset;
     }
+  }
+
+  &__error {
+    display: inline-block;
+    margin-top: .5rem;
+    font-size: 1.2rem;
+    color: $color-red;
   }
 }

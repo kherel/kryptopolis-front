@@ -6,21 +6,78 @@ import A_Btn from 'widgets/A_Btn/A_Btn'
 import A_Link from 'widgets/A_Link/A_Link'
 import './Authorization.scss'
 import {cssClassName} from 'utils'
-import {userErrorClear} from "redux-store/ducks/auth";
+import {required, isEmail} from 'utils/validateHelpers'
+//import {userErrorClear} from "redux-store/ducks/auth";
 const cn = cssClassName('Authorization')
 import Router from 'next/router'
 
 class Authorization extends Component {
 
   state = {
-    email: '',
-    password: ''
+    form: {
+      email: '',
+      password: ''
+    },
+    validations: {
+      email: [required, isEmail],
+      password: [required]
+    },
+    formValid: false,
+    errors: {}
+  }
+
+
+  validateFields = (formValues, onFinish) => {
+    const {validations} = this.state
+    let errors = {}
+
+    Object.keys(formValues).forEach(fieldName => {
+      if(validations[fieldName]) {
+        validations[fieldName].forEach(validation => {
+          if(errors[fieldName]) return
+          errors[fieldName] = validation(formValues[fieldName])
+        })
+      }
+    })
+
+    const hasErrors = Object.values(errors).filter(x => !!x).length > 0
+
+    this.setState({errors, formValid: !hasErrors}, () => onFinish())
+  }
+
+  handleChange = (fieldValue, fieldName) => {
+    const { form, errors } = this.state
+
+    this.setState({
+      form: {
+        ...form,
+        [fieldName]: fieldValue
+      },
+      errors: {
+        ...errors,
+        [fieldName]: undefined
+      }
+    })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const {email, password} = this.state
-    this.props.handleUserLogin({email, password})
+    const {form} = this.state
+
+    this.props.cleanLoginError()
+
+    this.validateFields(form, () => {
+      this.state.formValid && this.props.handleUserLogin(form.email, form.password)
+    })
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.loginError) {
+      return {
+        errors:{...prevState.errors, email: 'User not found'}
+      }
+    }
+    return null;
   }
 
   componentDidUpdate(prevProps){
@@ -30,9 +87,10 @@ class Authorization extends Component {
   }
 
 
+
   render() {
 
-    const {email, password} = this.state
+    const {email, password, errors} = this.state
 
     return (
       <div className={cn()}>
@@ -43,14 +101,16 @@ class Authorization extends Component {
             mix={cn('input')}
             value={email}
             placeholder='USER NAME OR E-MAIL'
-            handleChange={email => this.setState({email})}
+            handleChange={value => this.handleChange(value, 'email')}
+            error = {errors.email}
           />
           <A_InputText
             mix={cn('input')}
             type='password'
             value={password}
             placeholder='PASSWORD'
-            handleChange={password => this.setState({password})}
+            handleChange={value => this.handleChange(value, 'password')}
+            error = {errors.password}
           />
           <A_Link mix={cn('forgot-password')} href='/forgot-password'>
             ZAPOMNIJ SWOJE HASŁO?
