@@ -7,7 +7,7 @@ import A_Link from 'widgets/A_Link/A_Link'
 import './Authorization.scss'
 import {cssClassName} from 'utils'
 import {required, isEmail} from 'utils/validateHelpers'
-import {userErrorClear} from "redux-store/ducks/auth";
+//import {userErrorClear} from "redux-store/ducks/auth";
 const cn = cssClassName('Authorization')
 import Router from 'next/router'
 
@@ -63,6 +63,8 @@ class Authorization extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const {form} = this.state
+
+    this.props.cleanLoginError()
 
     this.validateFields(form, () => {
       this.state.formValid && this.props.handleUserLogin(form.email, form.password)
