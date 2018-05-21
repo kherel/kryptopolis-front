@@ -16,7 +16,7 @@ class AdminHome extends Component {
 
     return (
       <A_Container>
-        AdminHome
+        AdminHome1
       </A_Container>
     )
   }

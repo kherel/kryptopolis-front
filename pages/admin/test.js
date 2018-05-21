@@ -1,6 +1,4 @@
-import { PathContext } from "utils/context";
 import Link from "next/link";
-import withRedux from "redux-store/withRedux";
 import { initStore } from "redux-store/store"
 import {cssClassName} from "utils/index";
 const cn = cssClassName('test')

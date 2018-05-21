@@ -44,12 +44,4 @@ class AdminLayout extends Component {
   }
 }
 
-function mapStateToProps(state) {
-
-  const {loggedIn} = state.auth
-
-  return {loggedIn}
-
-}
-
-export default withRedux(initStore, mapStateToProps)(AdminLayout)
+export default AdminLayout

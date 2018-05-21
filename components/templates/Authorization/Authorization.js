@@ -10,6 +10,7 @@ import {required, isEmail} from 'utils/validateHelpers'
 //import {userErrorClear} from "redux-store/ducks/auth";
 const cn = cssClassName('Authorization')
 import Router from 'next/router'
+import { withRouter } from 'next/router'
 
 class Authorization extends Component {
 
@@ -64,8 +65,6 @@ class Authorization extends Component {
     e.preventDefault()
     const {form} = this.state
 
-    this.props.cleanLoginError()
-
     this.validateFields(form, () => {
       this.state.formValid && this.props.handleUserLogin(form.email, form.password)
     })
@@ -82,14 +81,14 @@ class Authorization extends Component {
 
   componentDidUpdate(prevProps){
     if(!prevProps.loggedIn && this.props.loggedIn){
-      Router.push(this.props.redirectUrl)
+      const redirectTo = this.props.redirectFrom || '/'
+      Router.push(redirectTo)
     }
   }
 
 
 
   render() {
-
     const {email, password, errors} = this.state
 
     return (

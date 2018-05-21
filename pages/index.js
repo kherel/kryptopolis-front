@@ -5,14 +5,21 @@ import Layout from 'templates/MainLayout/MainLayout'
 import Home from 'templates/Home/Home'
 import * as T from "prop-types"
 import { connect } from 'react-redux'
+import Link from "next/link";
 
 class Index extends Component {
   render() {
     return (
       <Layout heroBanner>
-        <Home
-          {...this.props}
-        />
+        <div>
+          <Link href={"/admin"}>
+            <a
+            >index</a>
+          </Link>
+          <Home
+            {...this.props}
+          />
+        </div>
       </Layout>
     );
   }

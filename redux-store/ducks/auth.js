@@ -1,66 +1,75 @@
 import api from "api/api";
-import {safeDA} from "utils";
+import jsCookie from 'js-cookie';
+import {setToken} from 'api/init'
 
-const LOGIN_SUCCESS = "LOGIN_SUCCESS"
-const LOGIN_FAIL = "LOGIN_FAIL"
-const CLEAN_LOGIN_ERROR = "CLEAN_LOGIN_ERROR"
-const USER_LOGOUT = "USER_LOGOUT"
-const CLEAN_LOGIN_REDIRECT = "CLEAN_LOGIN_REDIRECT"
+import { safeDA } from "utils";
+import * as axios from "axios";
+const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+const LOGIN_FAIL = "LOGIN_FAIL";
+const CLEAN_LOGIN_ERROR = "CLEAN_LOGIN_ERROR";
+const USER_LOGOUT = "USER_LOGOUT";
+const COOKIE_NAME = 'kryptopolis'
 
 const initialState = {
   loggedIn: false,
   loginError: false,
   token: undefined,
+  textError: '',
   role: '',
-  redirectUrl: '/'
-}
+  email: ''
+};
 
-export default (user = initialState, {type, data}) => {
-
+export default (user = initialState, { type, data }) => {
   switch (type) {
     case LOGIN_SUCCESS:
-      return {...user, loggedIn: true, loginError: false, ...data, role: 'admin'}
+      return {
+        ...user,
+        loggedIn: true,
+        loginError: false,
+        ...data,
+        role: "admin"
+      };
     case LOGIN_FAIL:
-      return {...user, loggedIn: false, loginError: true, textError: data, token: undefined}
+      return {
+        ...user,
+        loggedIn: false,
+        loginError: true,
+        textError: data,
+        token: undefined
+      };
     case CLEAN_LOGIN_ERROR:
-      return {...user, loggedIn: false, loginError: false, token: undefined}
-    case CLEAN_LOGIN_REDIRECT:
-      return {...user, redirectUrl: '/'}
+      return { ...user, loggedIn: false, loginError: false, token: undefined };
     case USER_LOGOUT:
-      return {...initialState}
+      return { ...initialState };
   }
 
   return user;
 };
 
-
 export const handleUserLogout = () => dispatch => {
-  // storage.removeToken()
-  dispatch({type: USER_LOGOUT})
-}
+  //todo: remove data from cookies, din't check how it works
+  // jsCookie.remove(COOKIE_NAME)
+  dispatch({ type: USER_LOGOUT });
+};
 
-export function clearLoginFailError() {
-  return ({
-    type: CLEAN_LOGIN_ERROR
-  })
-}
-
-export const handleUserLogin =  ({ email, password }) => async dispatch =>{
-  try{
-    const res = await api.auth.getToken(email, password)
-    const {value} = res.data.attributes
-
-    dispatch(userLogin({token: value, email}))
-
+export const handleUserLogin = (email, password) => async dispatch => {
+  try {
+    const res = await api.auth.getToken(email, password);
+    const { value: token } = res.data.attributes;
+    jsCookie.set(COOKIE_NAME, {token, email});
+    setToken(token)
+    dispatch(userLogin({email, token}));
   } catch (error) {
-    const dataError = safeDA(error, ["response", "data"], {})
-    dispatch({type: LOGIN_FAIL, data: dataError.error || dataError.message})
+    const dataError = safeDA(error, ["response", "data"], {});
+    dispatch({ type: LOGIN_FAIL, data: dataError.error || dataError.message });
   }
+};
 
-}
+export const cookiesLogin = data => async dispatch => dispatch({ type: LOGIN_SUCCESS, data });
+
 
 
 // pure actions
 
-export const userLogin = (data) => ({type: LOGIN_SUCCESS, data})
-export const cleanLoginError = (token) => ({type: CLEAN_LOGIN_ERROR})
+export const userLogin = data => ({ type: LOGIN_SUCCESS, data });
+export const cleanLoginError = token => ({ type: CLEAN_LOGIN_ERROR });

@@ -5,8 +5,16 @@ import Authorization from "templates/Authorization/Authorization";
 import * as T from "prop-types";
 import { handleUserLogin, cleanLoginError } from "redux-store/ducks/auth";
 import { connect } from 'react-redux'
+import {path} from 'ramda'
 
 class Auth extends Component {
+
+  static getInitialProps (ctx) {
+    const { query } = ctx
+    const redirectFrom = path(['query', 'redirectFrom'], ctx)
+    return {redirectFrom}
+  }
+
   render() {
     return (
       <Layout>
@@ -17,9 +25,9 @@ class Auth extends Component {
 }
 
 function mapStateToProps(state) {
-  const { loggedIn, loginError, redirectUrl } = state.auth;
+  const { loggedIn, loginError } = state.auth;
 
-  return { loggedIn, loginError, redirectUrl };
+  return { loggedIn, loginError };
 }
 
 function mapDispatchToProps(dispatch) {
