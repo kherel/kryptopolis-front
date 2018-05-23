@@ -1,0 +1,19 @@
+.a-nav-btn{
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  color: $color-blue-dark;
+  font-size: 1.5rem;
+  font-weight: normal;
+  padding: .6rem 1.2rem;
+
+  &_theme{
+    &_rounded {
+      border-radius: 1.5rem;
+      border: solid .1rem $color-blue-dark;
+    }
+  }
+}

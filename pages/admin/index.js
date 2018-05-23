@@ -1,21 +1,13 @@
-import { Component } from "react"
-import AdminLayout from 'templates/AdminLayout/AdminLayout'
-import AdminHome from 'templates/AdminHome/AdminHome'
-import * as T from "prop-types"
+import { Component } from "react";
+import AdminHome from "templates/AdminHome/AdminHome";
+import * as T from "prop-types";
 import Link from "next/link";
 import authorizationHOC from "HOC/authorizationHOC";
 
 class AdminIndex extends Component {
-
-
   render() {
-    return (
-      <AdminLayout >
-        <AdminHome />
-      </AdminLayout>
-    );
+    return <AdminHome />;
   }
 }
 
-
-export default authorizationHOC(AdminIndex)
+export default authorizationHOC(AdminIndex);

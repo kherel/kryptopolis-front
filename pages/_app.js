@@ -2,6 +2,7 @@ import App, {Container} from 'next/app'
 import React from 'react'
 import withReduxStore from 'redux-store/withRedux'
 import { Provider } from 'react-redux'
+import MainLayout from "layout/MainLayout/MainLayout";
 
 class MyApp extends App {
   render () {
@@ -9,7 +10,9 @@ class MyApp extends App {
     return (
       <Container>
         <Provider store={reduxStore}>
-          <Component {...pageProps} />
+          <MainLayout>
+            <Component {...pageProps} />
+          </MainLayout>
         </Provider>
       </Container>
     )

@@ -1,23 +1,31 @@
-.m-nav-menu-item{
-  background-color: $color-yellow-dark;
+
+
+.m-nav-menu-item {
+  $this: &;
+
   color: $color-blue-dark;
   height: 100%;
-  padding: 1.7rem 1rem;
   display: inline-block;
   text-transform: uppercase;
+  user-select: none;
 
   @include media ($tablet) {
     padding: 22px 9px;
   }
 
-  &:hover {
-    background-color: $color-yellow-light;
-  }
-  &:active {
-    background-color: $color-yellow-extralight;
-  }
+  &_type{
+    &_admin {
+      @include background-color-mix($color-green-light);
 
-  &_active_true {
-    background-color: $color-yellow-light;
+      padding: 1rem 1rem;
+    }
+
+    &_normal {
+      @include background-color-mix($color-yellow-dark);
+      &#{$this}_active_true {
+        background-color: lighten($color-yellow-dark, 10%);
+      }
+      padding: 1.7rem 1rem;
+    }
   }
 }

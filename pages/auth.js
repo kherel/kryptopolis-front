@@ -1,26 +1,20 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
-import Layout from "templates/MainLayout/MainLayout";
 import Authorization from "templates/Authorization/Authorization";
 import * as T from "prop-types";
 import { handleUserLogin, cleanLoginError } from "redux-store/ducks/auth";
-import { connect } from 'react-redux'
-import {path} from 'ramda'
+import { connect } from "react-redux";
+import { path } from "ramda";
 
 class Auth extends Component {
-
-  static getInitialProps (ctx) {
-    const { query } = ctx
-    const redirectFrom = path(['query', 'redirectFrom'], ctx)
-    return {redirectFrom}
+  static getInitialProps(ctx) {
+    const { query } = ctx;
+    const redirectFrom = path(["query", "redirectFrom"], ctx);
+    return { redirectFrom };
   }
 
   render() {
-    return (
-      <Layout>
-        <Authorization {...this.props} />
-      </Layout>
-    );
+    return <Authorization {...this.props} />;
   }
 }
 

@@ -48,7 +48,7 @@ export default (user = initialState, { type, data }) => {
 
 export const handleUserLogout = () => dispatch => {
   //todo: remove data from cookies, din't check how it works
-  // jsCookie.remove(COOKIE_NAME)
+  jsCookie.remove(COOKIE_NAME)
   dispatch({ type: USER_LOGOUT });
 };
 

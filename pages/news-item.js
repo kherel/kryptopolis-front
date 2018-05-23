@@ -1,23 +1,18 @@
-import React, { Component } from "react"
-import { bindActionCreators } from "redux"
-import { initStore } from "redux-store/store"
-import withRedux from "redux-store/withRedux"
-import { setStatus } from "redux-store/ducks/appStatus"
-import Layout from 'templates/MainLayout/MainLayout'
-import NewsItem from 'templates/NewsItem/NewsItem'
-import * as T from "prop-types"
+import React, { Component } from "react";
+import { bindActionCreators } from "redux";
+import { initStore } from "redux-store/store";
+import withRedux from "redux-store/withRedux";
+import { setStatus } from "redux-store/ducks/appStatus";
+import NewsItem from "templates/NewsItem/NewsItem";
+import * as T from "prop-types";
 
 class Register extends Component {
   render() {
-    return (
-      <Layout>
-        <NewsItem />
-      </Layout>
-    );
+    return <NewsItem />;
   }
 }
 
-export default Register
+export default Register;
 /*function mapStateToProps(state) {
 
   const {status} = state.appStatus

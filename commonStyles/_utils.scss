@@ -13,3 +13,13 @@
     src: url("#{$file-path}.woff") format("woff")
   }
 }
+
+@mixin background-color-mix($color) {
+  background-color: $color;
+  &:hover {
+    background-color: lighten($color, 10%);
+  }
+  &:active {
+    background-color: lighten($color, 15%);
+  }
+}

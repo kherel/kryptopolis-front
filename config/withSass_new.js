@@ -64,6 +64,10 @@ module.exports = (nextConfig = {}) => {
         {
           test: /\.sass$/,
           use: options.defaultLoaders.sass
+        },
+        {
+          test: /\.svg$/,
+          loader: 'svg-sprite-loader'
         }
       )
 

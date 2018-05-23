@@ -1,0 +1,58 @@
+.main-layout-menu {
+  &__nav{
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    &_theme{
+      &_main{
+        background-color: $color-yellow-dark;
+      }
+      &_admin{
+        background-color: $color-green-light;
+      }
+    }
+  }
+
+  &__register-btn {
+    margin-right: 0.2rem;
+  }
+
+  &__login{
+    display: flex;
+    justify-content: center;
+
+    &-profile{
+      width: 19rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-logout{
+      &-btn{
+        width: 2.8rem;
+        height: 2.8rem;
+        border-radius: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:hover{
+          background-color: $color-yellow-light;
+        }
+        &:active{
+          background-color: lighten($color-yellow-light, 10%)
+        }
+      }
+      &-icon{
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+    }
+    &_logged-in{
+      &_true{
+        border-left: 2px solid #fff131;
+      }
+
+    }
+  }
+}
