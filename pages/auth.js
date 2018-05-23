@@ -19,9 +19,9 @@ class Auth extends Component {
 }
 
 function mapStateToProps(state) {
-  const { loggedIn, loginError } = state.auth;
+  const { loggedIn, loginError, textError } = state.auth;
 
-  return { loggedIn, loginError };
+  return { loggedIn, loginError, textError };
 }
 
 function mapDispatchToProps(dispatch) {

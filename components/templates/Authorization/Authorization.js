@@ -24,6 +24,7 @@ class Authorization extends Component {
       password: [required]
     },
     formValid: false,
+
     errors: {}
   }
 
@@ -70,15 +71,6 @@ class Authorization extends Component {
     })
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.loginError) {
-      return {
-        errors:{...prevState.errors, email: 'User not found'}
-      }
-    }
-    return null;
-  }
-
   componentDidUpdate(prevProps){
     if(!prevProps.loggedIn && this.props.loggedIn){
       const redirectTo = this.props.redirectFrom || '/'
@@ -87,13 +79,16 @@ class Authorization extends Component {
   }
 
 
-
   render() {
-    const {email, password, errors} = this.state
+    const
+      { email, password, errors } = this.state,
+      { loginError, textError } = this.props
 
     return (
       <div className={cn()}>
         <A_H mix={cn('title')} type='section'>LOGOWANIE</A_H>
+
+        {loginError && <p className={cn('error')}>{textError}</p>}
 
         <form className={cn('form')} onSubmit={this.handleSubmit}>
           <A_InputText

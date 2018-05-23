@@ -6,8 +6,12 @@
     margin-bottom: 4rem;
   }
 
-  &__form, &__input, &__forgot-password {
+  &__form, &__input, &__forgot-password, &__error {
     margin-bottom: 3rem;
+  }
+
+  &__error {
+    color: $color-red;
   }
 
   &__form {
