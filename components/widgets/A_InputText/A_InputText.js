@@ -20,13 +20,14 @@ class A_InputText extends Component {
           onFocus={onFocus}
           onChange={e => handleChange(e.target.value)}
         />
-        <span className={cn('error')}>{error}</span>
+        {hasError && <span className={cn('error')}>{error}</span>}
       </fieldset>
     )
   }
 }
 
 A_InputText.propTypes = {
+  mix: T.string,
   type: T.oneOf(['text', 'password']),
   handleChange: T.func.isRequired,
   value: T.string,

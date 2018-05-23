@@ -1,12 +1,11 @@
 import { Component } from "react";
-import AdminHome from "templates/AdminHome/AdminHome";
-import * as T from "prop-types";
+import T_AdminNews from "templates/T_AdminNews/T_AdminNews";
 import Link from "next/link";
 import authorizationHOC from "HOC/authorizationHOC";
 
 class AdminIndex extends Component {
   render() {
-    return <AdminHome />;
+    return <T_AdminNews />;
   }
 }
 
