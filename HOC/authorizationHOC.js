@@ -8,7 +8,11 @@ import { equals } from "ramda";
 //This HOC is watching for last mounted component in order to provide specific 'back' links urls
 
 function checkRedirect(loggedIn, role, roleNeeded) {
-  let redirect, redirectUrl, needFutureRedirect;
+  let
+    redirect = false,
+    redirectUrl,
+    needFutureRedirect;
+
   if (!loggedIn) {
     redirect = true;
     redirectUrl = "/auth";
@@ -23,9 +27,7 @@ function checkRedirect(loggedIn, role, roleNeeded) {
     redirectUrl = "/";
   }
 
-  return(
-    {redirect, redirectUrl, needFutureRedirect}
-  )
+  return { redirect, redirectUrl, needFutureRedirect };
 }
 
 export default (WrappedComponent, roleNeeded) => {
@@ -36,7 +38,11 @@ export default (WrappedComponent, roleNeeded) => {
       const store = ctx.reduxStore.getState();
       const { loggedIn, role } = store.auth;
 
-      const {redirect, redirectUrl, needFutureRedirect} = checkRedirect(loggedIn, role, roleNeeded)
+      const { redirect, redirectUrl, needFutureRedirect } = checkRedirect(
+        loggedIn,
+        role,
+        roleNeeded
+      );
 
       if (redirect) {
         if (ctx.req) {
@@ -69,10 +75,14 @@ export default (WrappedComponent, roleNeeded) => {
     }
 
     componentWillUpdate({ auth }) {
-      if(!equals(auth, this.props.auth)){
-        const {role, loggedIn} = auth
-        const {redirect, redirectUrl, needFutureRedirect} = checkRedirect(loggedIn, role, roleNeeded)
-        if(redirect){
+      if (!equals(auth, this.props.auth)) {
+        const { role, loggedIn } = auth;
+        const { redirect, redirectUrl, needFutureRedirect } = checkRedirect(
+          loggedIn,
+          role,
+          roleNeeded
+        );
+        if (redirect) {
           const redirectObject = { pathname: redirectUrl };
 
           if (needFutureRedirect) {
@@ -90,8 +100,8 @@ export default (WrappedComponent, roleNeeded) => {
   }
 
   function mapStateToStore(store) {
-    const {role, loggedIn} = store.auth
-    return ({role, loggedIn})
+    const { role, loggedIn } = store.auth;
+    return { role, loggedIn };
   }
   return connect(store => ({ auth: store.auth }))(AuthHOC);
 };

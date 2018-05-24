@@ -31,6 +31,8 @@ export default {
       apiCall("put", AUTH_API, { data: { attributes: { email, password } } })
   },
   news:{
-    get: () => apiCall(get, NEWS_API)
+    get: () => apiCall('get', NEWS_API),
+    delete: (id) => apiCall('delete', `${NEWS_API}/${id}`)
+
   }
 };
