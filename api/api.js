@@ -5,6 +5,7 @@ import {safeDA} from "utils";
 // axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 const AUTH_API = `/v1/auth/token`;
+const NEWS_API = `/v1/news`;
 
 const sendData = res => res.data.attributes || res.data;
 
@@ -28,5 +29,8 @@ export default {
   auth: {
     getToken: (email, password) =>
       apiCall("put", AUTH_API, { data: { attributes: { email, password } } })
+  },
+  news:{
+    get: () => apiCall(get, NEWS_API)
   }
 };

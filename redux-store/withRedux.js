@@ -34,9 +34,9 @@ export default (App) => {
         if (typeof cookies === 'string') {
           const cookiesJSON = jsHttpCookie.parse(cookies);
           if(cookiesJSON.kryptopolis){
-            const {token, email} = JSON.parse(cookiesJSON.kryptopolis)
+            const {token, email, role} = JSON.parse(cookiesJSON.kryptopolis)
             if(token){
-              await reduxStore.dispatch(cookiesLogin({token, email}))
+              await reduxStore.dispatch(cookiesLogin({token, email, role}))
             }
           }
         }
