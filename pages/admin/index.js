@@ -10,4 +10,4 @@ class AdminIndex extends Component {
   }
 }
 
-export default authorizationHOC(AdminIndex);
+export default authorizationHOC(AdminIndex, ['admin', 'superAdmin']);

@@ -27,7 +27,6 @@ export default (user = initialState, { type, data }) => {
         loggedIn: true,
         loginError: false,
         ...data,
-        role: "admin"
       };
     case LOGIN_FAIL:
       return {
@@ -55,10 +54,10 @@ export const handleUserLogout = () => dispatch => {
 export const handleUserLogin = (email, password) => async dispatch => {
   try {
     const res = await api.auth.getToken(email, password);
-    const { value: token } = res.data.attributes;
-    jsCookie.set(COOKIE_NAME, {token, email});
+    const { value: token, role } = res.data.attributes;
+    jsCookie.set(COOKIE_NAME, {token, email, role});
     setToken(token)
-    dispatch(userLogin({email, token}));
+    dispatch(userLogin({email, token, role}));
   } catch (error) {
     const dataError = safeDA(error, ["response", "data"], {});
     dispatch({ type: LOGIN_FAIL, data: dataError.error || dataError.message });
