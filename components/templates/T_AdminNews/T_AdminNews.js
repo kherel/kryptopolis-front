@@ -25,7 +25,7 @@ class T_Admin_News extends Component {
         </A_H>
 
         <div className={cn("controls")}>
-          <A_Btn size="md" theme="filled" color="yellow">
+          <A_Btn size="md" theme="filled" color="yellow" type='link' href={'/admin/news-item'}>
             CREAT NEW
           </A_Btn>
           <div className={cn("search")}>

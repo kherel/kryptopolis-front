@@ -45,8 +45,7 @@ export default A_Btn
 A_Btn.propTypes = {
   mix: T.string,
   theme: T.oneOf([
-    'filled',
-    'rounded'
+    'filled'
   ]),
   size: T.oneOf(['lg', 'md', 'sm']),
   color: T.oneOf(['gray', 'yellow', 'red']),

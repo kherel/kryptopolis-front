@@ -1,14 +1,14 @@
 import { Component } from "react";
 import T_AdminNews from "templates/T_AdminNews/T_AdminNews";
 import authorizationHOC from "HOC/authorizationHOC";
-import {fetchNews, removeNews} from "redux-store/ducks/news";
+import {loadNews, removeNews} from "redux-store/ducks/news";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 
 class AdminIndex extends Component {
 
   static async getInitialProps({reduxStore}) {
-    await reduxStore.dispatch(fetchNews())
+    await loadNews(reduxStore)
     return {};
   }
 

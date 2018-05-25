@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import * as T from "prop-types";
+import * as T from "prop-types";
 import "./O_TextEditor.scss";
 import { cssClassName, isServer } from "utils";
 const cn = cssClassName("TextEditor");
@@ -16,10 +16,8 @@ class TextEditor extends Component {
 
   onChange = value => {
     this.setState({ value });
+    this.props.onChange(value.toString('raw'));
 
-    if (this.props.onChange) {
-      this.props.onChange(value.toString('raw'));
-    }
   };
 
   componentDidMount() {
@@ -70,7 +68,11 @@ class TextEditor extends Component {
   }
 }
 
-TextEditor.propTypes = {};
+TextEditor.propTypes = {
+  onChange: T.func.isRequired,
+  initValue: T.string,
+  placeholder: T.string
+};
 
 TextEditor.defaultProps = {};
 
