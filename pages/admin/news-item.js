@@ -19,10 +19,11 @@ class AdminNewsItem extends Component {
 
 function mapToState(state, { router }) {
   const { id } = router.query;
-  if (!id) return {};
+  let type
+  if (!id) return {type: "create"};
   const { entities } = state.news;
   const entity = entities.find(el => el.id === id);
-  const type = entity ? "update" : "create";
+  type = "update";
   return { ...entity, type };
 }
 
