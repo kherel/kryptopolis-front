@@ -1,6 +1,33 @@
 .a-input-text {
   $this: &;
   padding: 0;
+  &_theme {
+    &_user {
+      #{$this}__input {
+        padding: .5rem 1rem;
+        text-align: center;
+        border-bottom: 2px solid #cdcdcd;
+        font-weight: 700;
+        font-size: 1.6rem;
+        &::placeholder {
+          color: $color-grey-dark;
+          text-transform: uppercase;
+          font-weight: normal;
+        }
+      }
+    }
+    &_admin {
+      #{$this}__input {
+        padding: .5rem 1.5rem;
+        border: .1rem solid $color-grey-middle;
+        border-radius: .5rem;
+        font-size: 2rem;
+        &::placeholder {
+          color: inherit;
+        }
+      }
+    }
+  }
   &_has-error {
     &_true {
       #{$this}__input {
@@ -8,17 +35,12 @@
       }
     }
   }
+
   &__input {
 	box-sizing: border-box;
     display: block;
     width: 100%;
-    padding: .5rem 1rem;
-    text-align: center;
-    border-bottom: 2px solid #cdcdcd;
-    font-weight: 700;
-    font-size: 1.6rem;
     color: $color-blue-dark;
-
     transition: color, border, .3s linear;
     &:focus {
       outline: none;
@@ -27,9 +49,7 @@
       }
     }
     &::placeholder {
-      color: #9b9b9b;
-      text-transform: uppercase;
-      font-weight: normal;
+      font-size: inherit;
       transition: color .3s linear;
     }
     &:-webkit-autofill {

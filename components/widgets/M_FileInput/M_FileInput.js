@@ -3,7 +3,7 @@ import T from 'prop-types'
 
 import {cssClassName} from 'utils'
 import './M_FileInput.scss'
-import A_Svg from "widgets/A_Svg/Svg";
+import A_Btn from "widgets/A_Btn/A_Btn";
 const cn = cssClassName('M_FileInput')
 
 class FileInput extends Component {
@@ -34,30 +34,32 @@ class FileInput extends Component {
   }
 
   render() {
-    const { input, url, children } = this.props
+    const { input, url, mix, error } = this.props
     const { preview } = this.state
 
     return (
-      <label className={cn()}>
-        {url ? (
-          preview ? (
-            <img src={preview} className={cn('preview')}/>
-          ) : (
-            <div>
-              <img src={url} className={cn('preview')} />
-            </div>
-          )
-        ) : (preview ? (
-          <img src={preview} className={cn('preview')} />
-          ) : (
-            <span className={cn('button')}>Upload</span>
-          )
-        )}
-        <input className={cn('input')} type="file" onChange={this.onChange} />
-        <span className={cn('text')}>
-          {children}
-        </span>
-      </label>
+      <div className={cn([mix])}>
+        <label className={cn('input')}>
+          {url ? (
+            preview ? ([
+              <img key='img' src={preview} className={cn('preview')} />,
+              <A_Btn key='btn' theme='filled' color={"gray"} size='sm'>Change photo</A_Btn>
+            ]) : ([
+              <img key='img' src={url} className={cn('preview')} />,
+              <A_Btn key='btn' theme='filled' color={"gray"} size='sm'>Change photo</A_Btn>
+            ])
+          ) : (preview ? ([
+              <img key='img' src={preview} className={cn('preview')} />,
+              <A_Btn key='btn' theme='filled' color={"gray"} size='sm'>Change photo</A_Btn>
+            ]) : (
+              <A_Btn theme='filled' color={"gray"} size='md'>Add photo</A_Btn>
+            )
+          )}
+          <input className={cn('native-input')} type="file" onChange={this.onChange} />
+        </label>
+
+        {!!error && <span className={cn('error')}>{error}</span>}
+      </div>
     )
   }
 }

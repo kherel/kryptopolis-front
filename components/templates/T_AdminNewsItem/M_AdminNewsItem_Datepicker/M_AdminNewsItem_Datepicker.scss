@@ -1,0 +1,9 @@
+.m-admin-news-item-datepicker {
+  display: flex;
+  align-items: center;
+  &__value {
+    margin-right: 1.5rem;
+    font-size: 1.6rem;
+    color: $color-blue-dark;
+  }
+}

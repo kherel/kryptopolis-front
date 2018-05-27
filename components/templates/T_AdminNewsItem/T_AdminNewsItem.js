@@ -1,103 +1,162 @@
 import { Component } from "react";
+import Router from "next/router";
+import * as T from "prop-types";
+import DatePicker from "react-datepicker";
+import moment from "moment";
+import "./react-datepicker.scss";
+
+import M_AdminNewsItem_Datepicker from './M_AdminNewsItem_Datepicker/M_AdminNewsItem_Datepicker'
+
 import A_Container from "widgets/A_Container/A_Container";
 import A_H from "widgets/A_H/A_H";
 import A_Btn from "widgets/A_Btn/A_Btn";
 import A_InputText from "widgets/A_InputText/A_InputText";
-// import * as T from "prop-types";
-import "./T_AdminNewsItem.scss";
-import { cssClassName } from "utils";
-import * as T from "prop-types";
-import DatePicker from "react-datepicker";
-const cn = cssClassName("T_AdminNewsItem");
-import moment from "moment";
-import "./react-datepicker.scss";
-import TextEditor from "widgets/O_TextEditor/O_TextEditor";
+import A_Switch from "widgets/A_Switch/A_Switch";
 import M_FileInput from "widgets/M_FileInput/M_FileInput";
-import Router from "next/router";
+import O_TextEditor from "widgets/O_TextEditor/O_TextEditor";
+
+import { cssClassName } from "utils";
+import "./T_AdminNewsItem.scss";
+import {required} from "../../../utils/validateHelpers";
+const cn = cssClassName("T_AdminNewsItem");
+
 
 class T_AdminNewsItem extends Component {
   state = {
+    form: {
+      title: this.props.title || "",
+      file: undefined
+    },
     publishAt: this.props.publishAt ? moment(this.props.publishAt) : undefined,
-    title: this.props.title || "",
     publish: this.props.publish || true,
-    file: undefined
+    validations: {
+      title: [required],
+      file: [required]
+    },
+    formValid: false,
+    errors: {}
   };
 
   // draftState = this.props.draft || undefined; // это стейт тексткового редактора, так выложил чтобы перередера не было.
+  validateFields = (formValues, onFinish) => {
+    const {form, validations} = this.state
+    let errors = {}
+
+    Object.keys(formValues).forEach(fieldName => {
+      if(validations[fieldName]) {
+        validations[fieldName].forEach(validation => {
+          if(errors[fieldName]) return
+          errors[fieldName] = validation(formValues[fieldName], form)
+        })
+      }
+    })
+
+    const hasErrors = Object.values(errors).filter(x => !!x).length > 0
+
+    this.setState({errors, formValid: !hasErrors}, () => onFinish())
+  }
+
+  handleChange = (fieldValue, fieldName) => {
+    const { form, errors } = this.state
+
+    this.setState({
+      form: {
+        ...form,
+        [fieldName]: fieldValue
+      },
+      errors: {
+        ...errors,
+        [fieldName]: undefined
+      }
+    })
+  }
 
   onSubmit = () => {
-    const { publish, title, file } = this.state;
+    const { publish, form } = this.state;
     let { publishAt } = this.state;
     const draft = this.textEditorNode.getStringRaw()
     const text = this.textEditorNode.getStringHtml()
 
-
-    if (publishAt ) {
-      if(publishAt.isValid()){  // надо в форме провалидирвоать строку дата пикера.
-        publishAt = publishAt.utc().format();
-      } else {
-        console.log('date is not valid')
+    this.validateFields(form, () => {
+      if (this.state.formValid) {
+        this.props
+          .handleSubmit(publish, publishAt, form.title, form.file, draft, text)
+          .then(Router.push("/admin"));
       }
-    }
+    })
 
-    this.props
-      .handleSubmit(publish, publishAt, title, file, draft, text)
-      .then(Router.push("/admin"));
   };
 
   render() {
-    const { type } = this.props;
+    const
+      { publish, form:{title}, errors } = this.state,
+      { type } = this.props;
+
     return (
       <A_Container mix={cn()} padding="wide">
-        {type === "create" ? "create" : "update"}
-        <DatePicker
-          selected={this.state.publishAt}
-          onChange={publishAt => this.setState({ publishAt })}
-          showTimeSelect
-          timeFormat="HH:mm"
-          timeIntervals={15}
-          dateFormat="LLL"
-          timeCaption="time"
-          placeholderText={"time in UTC time zone"}
-          minDate={moment()}
-        />
+        <A_H mix={cn('title')} type='section'>WIADOMOŚCI</A_H>
+        <p className={cn('subtitle')}>
+          {type === "create" ? "create" : "update"}
+        </p>
 
-        <div>
-          publish checkbox:{" "}
-          <span
-            onClick={() => this.setState(prev => ({ publish: !prev.publish }))}
-          >
-            {this.state.publish ? "publish" : "hide"}
-          </span>
-        </div>
-        <div>
-          title:{" "}
-          <A_InputText
-            value={this.state.title}
-            handleChange={title => this.setState({ title })}
-            placeholder={"title" + " here"}
+        <div className={cn('row')}>
+          <p className={cn('row-label')}>Publish:</p>
+          <A_Switch
+            mix={cn('publish-switch')}
+            handleSwitch={() => this.setState(prev => ({ publish: !prev.publish }))}
+            switched={publish}
+            labelSwitched='Publish'
+            labelUnswitched='Hide'
           />
         </div>
 
-        <TextEditor
+        <div className={cn('row')}>
+          <p className={cn('row-label')}>Date:</p>
+          <DatePicker
+            customInput={<M_AdminNewsItem_Datepicker />}
+            selected={this.state.publishAt}
+            onChange={publishAt => this.setState({ publishAt })}
+            showTimeSelect
+            timeFormat="HH:mm"
+            timeIntervals={15}
+            dateFormat="LLL"
+            timeCaption="time"
+            minDate={moment()}
+          />
+        </div>
+
+        <A_InputText
+          mix={cn('title-input')}
+          theme='admin'
+          value={title}
+          handleChange={value => this.handleChange(value, 'title')}
+          placeholder='Enter title here'
+          error = {errors.title}
+        />
+
+        <O_TextEditor
+          mix={cn('text-editor')}
           initValue={this.props.draft}
           ref={node => this.textEditorNode = node}
         />
 
         <M_FileInput
-          handleChange={file => this.setState({ file })}
+          mix={cn('photo-input')}
+          handleChange={value => this.handleChange(value, 'file')}
           url={this.props.image}
-        >
-          News Image
-        </M_FileInput>
+          error = {errors.file}
+        />
+
         <A_Btn
           onClick={this.onSubmit}
+          mix={cn('save-btn')}
           theme={"filled"}
           color={"gray"}
           size={"md"}
         >
           Save
         </A_Btn>
+
         <A_Btn
           theme={"filled"}
           color={"red"}
@@ -108,9 +167,8 @@ class T_AdminNewsItem extends Component {
           Cancel
         </A_Btn>
       </A_Container>
-    );
+    )
   }
-  q;
 }
 
 T_AdminNewsItem.propTypes = {

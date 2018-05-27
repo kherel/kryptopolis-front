@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import * as T from "prop-types";
 import "./O_TextEditor.scss";
 import { cssClassName, isServer } from "utils";
-const cn = cssClassName("TextEditor");
+const cn = cssClassName("O_TextEditor");
 import {convertFromRaw, convertToRaw} from 'draft-js';
 
 let RichTextEditor = {}
 if (typeof window !== 'undefined') { RichTextEditor = require('react-rte').default };
 
-class TextEditor extends Component {
+class O_TextEditor extends Component {
   state = {
     value: undefined,
     client: false
@@ -49,7 +49,7 @@ class TextEditor extends Component {
     if(this.state.client){
       RichTextEditor = require('react-rte').default
       return (
-        <div>
+        <div className={this.props.mix}>
           {this.state.client && (
             <RichTextEditor
               value={this.state.value}
@@ -62,18 +62,18 @@ class TextEditor extends Component {
         </div>
       );
     } else {
-      return <div>loading...</div>
+      return <div className={this.props.mix}>loading...</div>
     }
 
 
   }
 }
 
-TextEditor.propTypes = {
+O_TextEditor.propTypes = {
   initValue: T.string,
   placeholder: T.string
 };
 
-TextEditor.defaultProps = {};
+O_TextEditor.defaultProps = {};
 
-export default TextEditor;
+export default O_TextEditor;
