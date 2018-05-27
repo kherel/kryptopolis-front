@@ -67,6 +67,11 @@
   &__article {
     padding: 2.5rem 11rem;
     border-bottom: solid .1rem $color-yellow-dark;
+
+    &:nth-last-child(1) {
+      border-bottom: none;
+    }
+
     @include media ($desktop-sm) {
       padding: 2.5rem 2rem;
     }

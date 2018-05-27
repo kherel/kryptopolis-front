@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as T from "prop-types";
 import { cssClassName } from "utils/index";
-import { adminNavigation, mainNavigation } from "data/data";
+import { adminNavigation, mainNavigation } from "data/navigation";
 import M_NavMenuItem from "widgets/M_NavMenuItem/M_NavMenuItem";
 import A_NavBtn from "widgets/A_NavBtn/A_NavBtn";
 import A_Svg from "widgets/A_Svg/Svg";
