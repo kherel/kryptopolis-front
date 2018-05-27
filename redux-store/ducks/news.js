@@ -102,7 +102,6 @@ export const createNews = (publish, publishAt, title, file, draft, text) => asyn
 
 export const updateNews = (id, publish, publishAt, title, file, draft, text) => async dispatch => {
 
-  console.log({draft, text})
   try{
     let image;
     const attributes = {publish, publishAt, title, file, draft, text}

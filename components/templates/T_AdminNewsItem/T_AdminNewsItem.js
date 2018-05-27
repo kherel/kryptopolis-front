@@ -32,9 +32,12 @@ class T_AdminNewsItem extends Component {
     const text = this.textEditorNode.getStringHtml()
 
 
-    if (publishAt) {
-      // не забудь перевести дату в строку
-      publishAt = publishAt.utc().format();
+    if (publishAt ) {
+      if(publishAt.isValid()){  // надо в форме провалидирвоать строку дата пикера.
+        publishAt = publishAt.utc().format();
+      } else {
+        console.log('date is not valid')
+      }
     }
 
     this.props
