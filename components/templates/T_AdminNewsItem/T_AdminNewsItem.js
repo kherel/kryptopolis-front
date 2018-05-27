@@ -78,7 +78,6 @@ class T_AdminNewsItem extends Component {
 
         <TextEditor
           initValue={this.props.draft}
-          onChange={draftState => (this.draftState = draftState)}
           ref={node => this.textEditorNode = node}
         />
 

@@ -70,7 +70,6 @@ class TextEditor extends Component {
 }
 
 TextEditor.propTypes = {
-  onChange: T.func.isRequired,
   initValue: T.string,
   placeholder: T.string
 };
