@@ -16,9 +16,10 @@ class TextEditor extends Component {
 
   onChange = value => {
     this.setState({ value });
-    this.props.onChange(value.toString('raw'));
-
   };
+
+  getStringRaw = () => this.state.value ?  this.state.value.toString('raw') : undefined
+  getStringHtml = () => this.state.value ?  this.state.value.toString('html') : undefined
 
   componentDidMount() {
     this.setState({

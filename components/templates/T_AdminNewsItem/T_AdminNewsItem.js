@@ -23,19 +23,22 @@ class T_AdminNewsItem extends Component {
     file: undefined
   };
 
-  textState = this.props.text || undefined; // это стейт тексткового редактора, так выложил чтобы перередера не было.
+  // draftState = this.props.draft || undefined; // это стейт тексткового редактора, так выложил чтобы перередера не было.
 
   onSubmit = () => {
     const { publish, title, file } = this.state;
-    const text = this.textState;
     let { publishAt } = this.state;
+    const draft = this.textEditorNode.getStringRaw()
+    const text = this.textEditorNode.getStringHtml()
+
 
     if (publishAt) {
       // не забудь перевести дату в строку
       publishAt = publishAt.utc().format();
     }
+
     this.props
-      .handleSubmit(publish, publishAt, title, file, text)
+      .handleSubmit(publish, publishAt, title, file, draft, text)
       .then(Router.push("/admin"));
   };
 
@@ -74,8 +77,9 @@ class T_AdminNewsItem extends Component {
         </div>
 
         <TextEditor
-          initValue={this.textState}
-          onChange={textContent => (this.textState = textContent)}
+          initValue={this.props.draft}
+          onChange={draftState => (this.draftState = draftState)}
+          ref={node => this.textEditorNode = node}
         />
 
         <M_FileInput

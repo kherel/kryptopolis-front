@@ -84,10 +84,10 @@ export const removeNews = (id) => async dispatch => {
   }
 }
 
-export const createNews = (publish, publishAt, title, file, text) => async dispatch => {
+export const createNews = (publish, publishAt, title, file, draft, text) => async dispatch => {
   try{
     let image;
-    const attributes = {publish, publishAt, title, file, text}
+    const attributes = {publish, publishAt, title, file, draft, text}
     if (file) {
       image = await api.cloudinary.upload(file)
       attributes.image = image
@@ -100,10 +100,12 @@ export const createNews = (publish, publishAt, title, file, text) => async dispa
   }
 }
 
-export const updateNews = (id, publish, publishAt, title, file, text) => async dispatch => {
+export const updateNews = (id, publish, publishAt, title, file, draft, text) => async dispatch => {
+
+  console.log({draft, text})
   try{
     let image;
-    const attributes = {publish, publishAt, title, file, text}
+    const attributes = {publish, publishAt, title, file, draft, text}
     if (file) {
       image = await api.cloudinary.upload(file)
       attributes.image = image
