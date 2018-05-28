@@ -26,7 +26,8 @@ class Registration extends Component {
   }
 
   validateFields = (formValues, onFinish) => {
-    const {form, validations} = this.state
+    const
+      {form, validations} = this.state
     let errors = {}
 
     Object.keys(formValues).forEach(fieldName => {

@@ -20,6 +20,13 @@ import "./T_AdminNewsItem.scss";
 import {required} from "../../../utils/validateHelpers";
 const cn = cssClassName("T_AdminNewsItem");
 
+const customFileValidation = (file, props) => {
+  if(file || props.image) {
+    return null
+  } else if(!file && !props.image) {
+    return 'Photo required'
+  }
+}
 
 class T_AdminNewsItem extends Component {
   state = {
@@ -31,7 +38,7 @@ class T_AdminNewsItem extends Component {
     publish: this.props.publish || true,
     validations: {
       title: [required],
-      file: [required]
+      file: [customFileValidation]
     },
     formValid: false,
     errors: {}
@@ -39,14 +46,16 @@ class T_AdminNewsItem extends Component {
 
   // draftState = this.props.draft || undefined; // это стейт тексткового редактора, так выложил чтобы перередера не было.
   validateFields = (formValues, onFinish) => {
-    const {form, validations} = this.state
+
+    const {validations} = this.state
+
     let errors = {}
 
     Object.keys(formValues).forEach(fieldName => {
       if(validations[fieldName]) {
         validations[fieldName].forEach(validation => {
           if(errors[fieldName]) return
-          errors[fieldName] = validation(formValues[fieldName], form)
+          errors[fieldName] = validation(formValues[fieldName], this.props)
         })
       }
     })

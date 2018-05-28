@@ -3,6 +3,7 @@ import React from 'react'
 import withReduxStore from 'redux-store/withRedux'
 import { Provider } from 'react-redux'
 import MainLayout from "layout/MainLayout/MainLayout";
+import 'commonStyles/root.scss'
 
 class MyApp extends App {
   render () {
