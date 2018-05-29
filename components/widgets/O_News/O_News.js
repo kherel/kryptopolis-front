@@ -10,19 +10,19 @@ const cn = cssClassName('O_News')
 
 class O_News extends Component {
 
-  _renderNewsItems = (news, type) => (
-    news.map((text, index) => <A_Link key={`${type}-${index}`} mix={cn('item')} href='/news'>{text}</A_Link>)
+  _renderNewsItems = (news) => (
+    news.map(({text, id}) => <A_Link key={id} mix={cn('item')} href='/news' type='markup'>{text}</A_Link>)
   )
 
   render() {
-    const { mix } = this.props
+    const { mix, news:{todayNews, yesterdayNews} } = this.props
     return (
       <div className={cn([mix])}>
         <A_H mix={cn('title')} type='section'>WIADOMOŚCI</A_H>
         <A_LabelTitle mix={cn('label')} size='sm'>DZISIAJ</A_LabelTitle>
-        {this._renderNewsItems(news.today, 'today')}
+        {this._renderNewsItems(todayNews)}
         <A_LabelTitle mix={cn('label')} size='sm'>WCZORAJ</A_LabelTitle>
-        {this._renderNewsItems(news.old, 'old')}
+        {this._renderNewsItems(yesterdayNews)}
       </div>
     );
   }
