@@ -1,4 +1,4 @@
-.news-item {
+.t-news-item {
   display: flex;
   @include media ($mobile) {
     padding-left: 0;
@@ -55,11 +55,11 @@
     color: $color-grey-dark;
   }
 
-  &__image, &__text, &__share {
+  &__image, &__article, &__share {
     margin-bottom: 3rem;
   }
 
-  &__text, &__share {
+  &__article, &__share {
     padding: 0 2rem;
   }
 
@@ -75,9 +75,10 @@
     }
   }
 
-  &__text {
+  &__article {
     color: $color-gray-text;
     font-size: 1.8rem;
+    line-height: 1.2;
     @include media ($desktop-sm) {
       font-size: 14px;
     }

@@ -9,8 +9,6 @@
     position: relative;
     font-size: 1.4rem;
     color: $color-blue-dark;
-    max-height: 4.7rem;
-    overflow: hidden;
     transition: box-shadow .3s linear;
     &::before {
       content: '';

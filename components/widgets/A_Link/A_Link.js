@@ -11,12 +11,6 @@ const A_Link = ({mix, children, type, href}) =>{
       return <a href={`mailto:${href}?subject=kriptopolis.com`} target="_blank" className={cn()}>{children}</a>
     case 'external':
       return <a href={`mailto:${href}?subject=kriptopolis.com`} target="_blank" className={cn()}>{children}</a>
-    case 'markup':
-      return (
-        <Link href={href}>
-          <a className={cn([mix])} dangerouslySetInnerHTML={{__html: children}} />
-        </Link>
-      )
   }
   return(
     <Link href={href}>
@@ -29,7 +23,7 @@ A_Link.propTypes = {
   href: T.string.isRequired,
   children: T.node.isRequired,
   mix: T.string,
-  type: T.oneOf(['email', 'external', 'markup']),
+  type: T.oneOf(['email', 'external']),
 }
 
 A_Link.defaultProps = {

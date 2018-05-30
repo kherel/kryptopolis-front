@@ -11,7 +11,13 @@ const cn = cssClassName('O_News')
 class O_News extends Component {
 
   _renderNewsItems = (news) => (
-    news.map(({text, id}) => <A_Link key={id} mix={cn('item')} href='/news' type='markup'>{text}</A_Link>)
+    news.map(({title, id}) => (
+      <A_Link
+        key={id}
+        mix={cn('item')}
+        href={`/news-item?id=${id}`}>
+        {title}
+      </A_Link>))
   )
 
   render() {
@@ -33,28 +39,3 @@ O_News.propTypes = {
 }
 
 export default O_News
-
-const news = {
-  today :
-  [
-    'Tajemniczy okręt podwodny na Bałtyku? Z powodu działań Rosji w Szwedach budzi się duch Wikingów',
-    'Niebezpieczna pogoda nad Polską. IMiGW ostrzega',
-    'Tajemniczy okręt podwodny na Bałtyku? Z powodu działań Rosji w Szwedach budzi się duch Wikingów',
-    'Niebezpieczna pogoda nad Polską. IMiGW ostrzega',
-    'Tajemniczy okręt podwodny na Bałtyku? Z powodu działań Rosji w Szwedach budzi się duch Wikingów',
-    'Niebezpieczna pogoda nad Polską. IMiGW ostrzega',
-    'Tajemniczy okręt podwodny na Bałtyku? Z powodu działań Rosji w Szwedach budzi się duch Wikingów'
-  ],
-  old:
-  [
-    'Niebezpieczna pogoda nad Polską. IMiGW ostrzega',
-    'Tajemniczy okręt podwodny na Bałtyku? Z powodu działań Rosji w Szwedach budzi się duch Wikingów',
-    'Niebezpieczna pogoda nad Polską. IMiGW ostrzega',
-    'Tajemniczy okręt podwodny na Bałtyku? Z powodu działań Rosji w Szwedach budzi się duch Wikingów',
-    'Niebezpieczna pogoda nad Polską. IMiGW ostrzega',
-    'Tajemniczy okręt podwodny na Bałtyku? Z powodu działań Rosji w Szwedach budzi się duch Wikingów',
-    'Niebezpieczna pogoda nad Polską. IMiGW ostrzega',
-    'Tajemniczy okręt podwodny na Bałtyku? Z powodu działań Rosji w Szwedach budzi się duch Wikingów',
-    'Niebezpieczna pogoda nad Polską. IMiGW ostrzega'
-  ]
-}
