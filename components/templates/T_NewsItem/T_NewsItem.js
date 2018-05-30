@@ -18,10 +18,12 @@ class T_NewsItem extends Component {
       <A_Container mix={cn()} padding='wide'>
         <section className={cn('content')}>
           <A_H type='article' mix={cn('title')}>{title}</A_H>
-          <div className={cn('credentials')}>
+          <div className={cn('head')}>
             <A_LabelTitle size='lg' mix={cn('label')}>WIADOMOŚCI</A_LabelTitle>
-            <span className={cn('author')}>Marek Marecki</span>
-            <span className={cn('date')}>13 godz. ago</span>
+            <div className={cn('credentials')}>
+              <span className={cn('author')}>Marek Marecki</span>
+              <span className={cn('date')}>13 godz. ago</span>
+            </div>
           </div>
           <img className={cn('image')} src={image} />
           <p className={cn('article')} dangerouslySetInnerHTML={{__html: text}} />

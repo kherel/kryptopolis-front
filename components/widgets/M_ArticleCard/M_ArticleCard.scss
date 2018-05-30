@@ -28,7 +28,7 @@
     flex: 1 1 auto;
   }
 
-  &__title, &__text {
+  &__title, &__text, &__credentials {
     @include media ($mobile) {
       padding-left: 2rem;
       padding-right: 2rem;
@@ -50,11 +50,20 @@
 
   &__show-all {
     margin-right: 2rem;
+    @include media ($mobile) {
+      margin-right: 0;
+      margin-bottom: 1rem;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
   }
 
   &__credentials {
     font-size: 1.2rem;
     color: $color-grey-dark;
+    @include media ($mobile) {
+      display: block;
+    }
   }
 
 }

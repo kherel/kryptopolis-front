@@ -35,14 +35,26 @@
     }
   }
 
-  &__credentials {
+  &__head {
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
+    @include media ($mobile) {
+      display: block;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
   }
 
   &__label, &__author {
     margin-right: 1.5rem;
+  }
+
+  &__label {
+    @include media ($mobile) {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
   }
 
   &__author {
