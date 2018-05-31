@@ -32,15 +32,15 @@ function mapNews(rawNews) {
     yesterdayNews: []
   }
 
-  rawNews.forEach(({id, publish, createdAt, title, text, image}) => {
+  rawNews.forEach(({id, publish, createdAt, title, text, image, summary}) => {
     if(publish) {
       const releaseDate = moment(createdAt)
 
       if(releaseDate.isSame(today, 'day')) {
-        result.todayNews.push({id, title, text, image})
+        result.todayNews.push({id, title, text, summary, image})
       }
       else if(releaseDate.isSame(yesterday, 'day')) {
-        result.yesterdayNews.push({id, title, text, image})
+        result.yesterdayNews.push({id, title, text, summary, image})
       }
     }
   })

@@ -26,7 +26,7 @@ class T_NewsItem extends Component {
             </div>
           </div>
           <img className={cn('image')} src={image} />
-          <p className={cn('article')} dangerouslySetInnerHTML={{__html: text}} />
+          <div className={cn('article')} dangerouslySetInnerHTML={{__html: text}} />
           <div className={cn('share')}>Share:</div>
           <A_LabelTitle size='md' mix={cn('label')} hasBorder>WIĘCEJ</A_LabelTitle>
         </section>

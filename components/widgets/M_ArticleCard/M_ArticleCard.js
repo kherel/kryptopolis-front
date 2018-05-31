@@ -9,7 +9,7 @@ const cn = cssClassName('M_ArticleCard')
 const M_ArticleCard = (
   {
     mix,
-    article:{title, text, image},
+    article:{title, summary, image},
     articleLink,
     hasBorder
   }) =>(
@@ -17,7 +17,7 @@ const M_ArticleCard = (
     <img className={cn('image')} src={image} />
     <div className={cn('content')}>
       <A_H mix={cn('title')} type='widget'>{title}</A_H>
-      <p className={cn('text')}>Coming soon</p>
+      <p className={cn('text')}>{summary}</p>
       <A_Btn
         mix={cn('show-all')}
         type='link'
