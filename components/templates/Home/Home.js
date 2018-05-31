@@ -8,7 +8,6 @@ import O_News from 'widgets/O_News/O_News'
 import O_Signals from 'widgets/O_Signals/O_Signals'
 import O_Tweets from 'widgets/O_Tweets/O_Tweets'
 import {cssClassName} from 'utils'
-import './customScroll.scss'
 import './Home.scss'
 
 const cn = cssClassName('Home')

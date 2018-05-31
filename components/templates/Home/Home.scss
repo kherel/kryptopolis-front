@@ -15,10 +15,21 @@
             "hot nws sig"
             "vid nws twt"
             "art ico twt";
-    grid-template-columns: 3fr 2fr 1fr;
+    grid-template-columns: 2.5fr 2fr 1.5fr;
   }
   @include media ($tablet) {
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1.5fr 2fr 1fr;
+  }
+  @include media ($mobile) {
+    grid-template-areas:
+            "hot"
+            "vid"
+            "nws"
+            "art"
+            "sig"
+            "twt"
+            "ico";
+    grid-template-columns: 1fr;
   }
 
 
@@ -34,15 +45,13 @@
   }
 
   &__video {
-    height: 31.5rem;
-    overflow: hidden;
     grid-area: vid;
     //background-color: transparentize(red,.5);
   }
 
   &__hot-ico {
     grid-area: ico;
-    //background-color: transparentize(green,.5);
+    background-color: transparentize(green,.5);
   }
   &__news {
     grid-area: nws;
@@ -51,10 +60,10 @@
   &__signals {
     height: 31.5rem;
     grid-area: sig;
-    //background-color: transparentize(violet,.5);
+    background-color: transparentize(violet,.5);
   }
   &__tweets {
     grid-area: twt;
-    //background-color: transparentize(maroon,.5);
+    background-color: transparentize(maroon,.5);
   }
 }
