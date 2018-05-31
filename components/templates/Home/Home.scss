@@ -3,22 +3,28 @@
     color: red;
   }
   display: grid;
+  grid-template-columns: 40% 20% 25% 15%;
   grid-template-areas:
           "hot vid nws sig"
+          "art vid nws sig"
+          "art ico nws sig"
           "art ico nws twt";
-  grid-template-columns: 46rem 22.5rem 30rem 22.5rem;
-  grid-template-rows: auto 1fr;
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
   @include media ($desktop-sm) {
+    grid-template-columns: 25% 50% 25%;
     grid-template-areas:
             "hot nws sig"
-            "vid nws twt"
+            "vid nws sig"
+            "art nws sig"
+            "art nws twt"
             "art ico twt";
-    grid-template-columns: 2.5fr 2fr 1.5fr;
   }
   @include media ($tablet) {
-    grid-template-columns: 1.5fr 2fr 1fr;
+    grid-template-columns: 25% 500% 25%;
+    grid-template-areas:
+            "hot nws sig"
+            "vid nws sig"
+            "art nws twt"
+            "art ico twt";
   }
   @include media ($mobile) {
     grid-template-areas:
@@ -63,6 +69,7 @@
     background-color: transparentize(violet,.5);
   }
   &__tweets {
+    height: 500px;
     grid-area: twt;
     background-color: transparentize(maroon,.5);
   }

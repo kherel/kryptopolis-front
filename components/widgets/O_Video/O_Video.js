@@ -30,14 +30,6 @@ class O_Video extends Component {
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, repellat!
               </div>
             </div>
-            <div className={cn('item')}>
-              <div className={cn('item-img')}>
-                <img src="/static/img/hot.jpg" className={cn('item-img')} />
-              </div>
-              <div className={cn('item-content')}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, repellat!
-              </div>
-            </div>
         </div>
       </div>
     );
