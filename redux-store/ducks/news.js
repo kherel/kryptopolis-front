@@ -38,8 +38,8 @@ export default (news = initialState, { type, data }) => {
         entities: prepend(newItem, news.entities)
       };
     case UPDATE_NEWS_SUCCESS:
-      itemIndex = news.entities.findIndex(item => item.id !== data.id)
       newItem = convertNews(data.data)
+      itemIndex = news.entities.findIndex(item => item.id === newItem.id)
       return {
         ...news,
         entities: update(itemIndex, newItem, news.entities)
@@ -84,10 +84,10 @@ export const removeNews = (id) => async dispatch => {
   }
 }
 
-export const createNews = (publish, publishAt, title, file, draft, text) => async dispatch => {
+export const createNews = (publish, publishAt, title, file, summary, draft, text) => async dispatch => {
   try{
     let image;
-    const attributes = {publish, publishAt, title, file, draft, text}
+    const attributes = {publish, publishAt, title, file, summary, draft, text}
     if (file) {
       image = await api.cloudinary.upload(file)
       attributes.image = image
@@ -100,11 +100,11 @@ export const createNews = (publish, publishAt, title, file, draft, text) => asyn
   }
 }
 
-export const updateNews = (id, publish, publishAt, title, file, draft, text) => async dispatch => {
+export const updateNews = (id, publish, publishAt, title, file, summary, draft, text) => async dispatch => {
 
   try{
     let image;
-    const attributes = {publish, publishAt, title, file, draft, text}
+    const attributes = {publish, publishAt, title, file, summary, draft, text}
     if (file) {
       image = await api.cloudinary.upload(file)
       attributes.image = image
