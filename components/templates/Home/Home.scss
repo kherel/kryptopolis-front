@@ -9,6 +9,7 @@
           "art vid nws sig"
           "art ico nws sig"
           "art ico nws twt";
+
   @include media ($desktop-sm) {
     grid-template-columns: 25% 50% 25%;
     grid-template-areas:
@@ -19,7 +20,7 @@
             "art ico twt";
   }
   @include media ($tablet) {
-    grid-template-columns: 25% 500% 25%;
+    grid-template-columns: 25% 50% 25%;
     grid-template-areas:
             "hot nws sig"
             "vid nws sig"
@@ -64,7 +65,7 @@
     //background-color: transparentize(orange,.5);
   }
   &__signals {
-    height: 31.5rem;
+    //height: 31.5rem;
     grid-area: sig;
     background-color: transparentize(violet,.5);
   }
