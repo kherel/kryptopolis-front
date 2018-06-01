@@ -13,24 +13,27 @@ class O_Video extends Component {
     return (
       <div className={cn([mix])}>
         <A_H mix={cn('title')} type='section'>Video</A_H>
-        <div className={cn('content')}>
-            <div className={cn('item')}>
-              <div className={cn('item-img')}>
-                <img src="/static/img/hot.jpg" className={cn('item-img')} />
-              </div>
-              <div className={cn('item-content')}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, repellat!
-              </div>
+
+        <div className={cn('items-grid')}>
+          <div className={cn('item')}>
+            <div className={cn('item-img')}>
+              <img src="/static/img/hot.jpg" />
             </div>
-            <div className={cn('item')}>
-              <div className={cn('item-img')}>
-                <img src="/static/img/hot.jpg" className={cn('item-img')} />
-              </div>
-              <div className={cn('item-content')}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, repellat!
-              </div>
+            <A_H mix={cn('item-title')} type='widget-sm'>
+              PRANIE BITCOINÓW MNIEJ NIŻ JEDEN PROCENT WSZYSTKICH TRANSAKCJI
+            </A_H>
+          </div>
+
+          <div className={cn('item')}>
+            <div className={cn('item-img')}>
+              <img src="/static/img/hot.jpg" />
             </div>
+            <A_H mix={cn('item-title')} type='widget-sm'>
+              MEDIA KONTYNUUJE SZYBKĄ BITCOINĘ, W JAKI SPOSÓB RYNEK OTWARTYCH RYNKÓW
+            </A_H>
+          </div>
         </div>
+
       </div>
     );
   }

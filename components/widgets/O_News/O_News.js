@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import * as T from 'prop-types'
 import A_H from 'widgets/A_H/A_H'
 import A_Link from 'widgets/A_Link/A_Link'

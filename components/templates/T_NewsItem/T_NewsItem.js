@@ -1,7 +1,6 @@
 import { Component } from 'react'
 // import * as T from "prop-types"
 import A_H from 'widgets/A_H/A_H'
-import A_P from 'widgets/A_P/A_P'
 import A_LabelTitle from 'widgets/A_LabelTitle/A_LabelTitle'
 import A_Container from 'widgets/A_Container/A_Container'
 import './T_NewsItem.scss'
@@ -17,7 +16,7 @@ class T_NewsItem extends Component {
     return (
       <A_Container mix={cn()} padding='wide'>
         <section className={cn('content')}>
-          <A_H type='article' mix={cn('title')}>{title}</A_H>
+          <A_H mix={cn('title')} type='article'>{title}</A_H>
           <div className={cn('head')}>
             <A_LabelTitle size='lg' mix={cn('label')}>WIADOMOŚCI</A_LabelTitle>
             <div className={cn('credentials')}>

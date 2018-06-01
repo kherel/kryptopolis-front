@@ -17,6 +17,10 @@ const A_H = ({mix, type, children}) => {
       break
     case 'widget':
       titleLevel = 'h4'
+      break
+    case 'widget-sm':
+      titleLevel = 'h5'
+      break
   }
 
   return (
@@ -33,7 +37,8 @@ A_H.propTypes = {
   type: T.oneOf([
     'article',
     'section',
-    'widget'
+    'widget',
+    'widget-sm',
   ]).isRequired,
   children: T.node.isRequired
 };
