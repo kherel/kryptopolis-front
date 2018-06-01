@@ -19,7 +19,7 @@
     }
     &_widget {
       font-size: 2rem;
-      @include media ($mobile) {
+      @include media ($tablet) {
         font-size: 1.4rem;
       }
     }

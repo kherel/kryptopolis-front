@@ -1,7 +1,7 @@
 .m-articles-item {
   position: relative;
   height: 22rem;
-  border-bottom: .2rem solid $color-yellow-dark;
+  border-bottom: $border-underline;
 
   &__image {
     width: 100%;

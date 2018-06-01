@@ -1,9 +1,7 @@
 .home {
-  &_active_true{
-    color: red;
-  }
   display: grid;
-  grid-template-columns: 40% 20% 25% 15%;
+  grid-template-columns: 37% 20% 25% 15%;
+  grid-gap: 1%;
   grid-template-areas:
           "hot vid nws sig"
           "art vid nws sig"
@@ -11,7 +9,7 @@
           "art ico nws twt";
 
   @include media ($desktop-sm) {
-    grid-template-columns: 45% 35% 20%;
+    grid-template-columns: 43% 35% 20%;
     grid-template-areas:
             "hot nws sig"
             "vid nws sig"
@@ -20,7 +18,7 @@
             "art ico twt";
   }
   @include media ($tablet) {
-    grid-template-columns: 30% 45% 25%;
+    grid-template-columns: 30% 43% 25%;
     grid-template-areas:
             "hot nws sig"
             "vid nws sig"
@@ -28,6 +26,8 @@
             "art ico twt";
   }
   @include media ($mobile) {
+    grid-template-columns: 100%;
+    grid-gap: 0;
     grid-template-areas:
             "hot"
             "vid"
@@ -36,53 +36,54 @@
             "sig"
             "twt"
             "ico";
-    grid-template-columns: 1fr;
   }
 
-  &__hot, &__articles, &__video, &__hot-ico, &__news {
-    margin-right: 1rem;
-    @include media ($mobile) {
-      margin-right: 0;
-      margin-bottom: 1rem;
-    }
-  }
 
   &__hot {
-    height: 31.5rem;
     grid-area: hot;
-    align-self: start;
     margin-bottom: 1rem;
+    //background-color: transparentize(pink,.5);
   }
 
   &__articles {
     grid-area: art;
     //background-color: transparentize(blue,.5);
+    @include media ($mobile) {
+      margin-bottom: 1rem;
+    }
   }
 
   &__video {
     grid-area: vid;
+    margin-bottom: 1rem;
     //background-color: transparentize(red,.5);
   }
 
   &__hot-ico {
     grid-area: ico;
-    background-color: transparentize(green,.5);
+    //background-color: transparentize(green,.5);
   }
 
   &__news {
     grid-area: nws;
     //background-color: transparentize(orange,.5);
+    @include media ($desktop-sm) {
+      margin-bottom: 1rem;
+    }
   }
 
   &__signals {
     grid-area: sig;
     margin-bottom: 1rem;
-    background-color: transparentize(violet,.5);
+    //background-color: transparentize(violet,.5);
   }
 
   &__tweets {
     height: 500px;
     grid-area: twt;
-    background-color: transparentize(maroon,.5);
+    //background-color: transparentize(maroon,.5);
+    @include media ($mobile) {
+      margin-bottom: 1rem;
+    }
   }
 }

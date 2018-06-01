@@ -1,6 +1,7 @@
 .o-video {
 
   &__items-grid {
+    height: 100%;
     @include media ($desktop-sm) {
       display: grid;
       grid-gap: 1rem;
@@ -12,10 +13,12 @@
   }
 
   &__item {
-    border-bottom: solid 0.5px #f2e205;
-    margin-bottom: 2rem;
+    border-bottom: $border-underline;
     &:not(:nth-last-child(1)) {
       margin-bottom: 1rem;
+      @include media ($desktop-sm) {
+        margin-bottom: 0;
+      }
     }
     &-img {
       position: relative;
