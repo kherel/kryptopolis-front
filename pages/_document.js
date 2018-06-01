@@ -8,6 +8,7 @@ export default class MyDocument extends Document {
       <html>
       <Head>
         <link rel="stylesheet" href="/_next/static/style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       </Head>
       <body >
         <span dangerouslySetInnerHTML={{__html: spriteContent}} />

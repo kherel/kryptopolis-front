@@ -1,0 +1,106 @@
+.main-layout-ticker {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 8rem auto;
+  align-items: center;
+  align-content: center;
+  max-width: 60rem;
+  @include media ($tablet) {
+    grid-template-columns: 5rem auto;
+  }
+
+  @include media ($mobile) {
+    max-width: none;
+
+    grid-template-columns: auto;
+  }
+
+  &__label {
+    color: $color-blue-dark;
+    font-size: 1.8rem;
+    text-align: right;
+    justify-self: right;
+    padding-right: 1.5rem;
+    @include media ($tablet) {
+      padding-right: 5px;
+
+      font-size: 1.2rem;
+    }
+    @include media ($mobile) {
+      display: none;
+    }
+  }
+
+  &__line-up, &__line-down {
+    overflow: hidden;
+    border-radius: 5px;
+    @include media ($mobile) {
+      border-radius: 0;
+    }
+  }
+
+  &__line-up {
+    margin-bottom: 0.6rem;
+
+    background-color: $color-green-dark;
+  }
+
+  &__line-down {
+    background-color: $color-red;
+  }
+
+  &__line-item {
+    $this: &;
+    height: 1.8rem;
+    padding: 0 1.3rem;
+    border-right: 1px solid $color-yellow-light;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &-container{
+      height: 3.2rem;
+      align-items: center;
+      color: $color-white;
+      display: inline-flex;
+      transform: translateX(-100%);
+      animation: move 20s linear infinite;
+      @keyframes move {
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      &:hover{
+        animation-play-state: paused;
+      }
+    }
+    &-currency {
+      display: block;
+      margin-right: 2.1rem;
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        right: -17px;
+        top: 45%;
+        border-style: solid;
+        border-width: 0 4px 4px 4px;
+        border-color: transparent transparent $color-white transparent;
+        @at-root #{$this}_direction_down & {
+          border-width: 4px 4px 0 4px !important;
+          border-color: $color-white transparent transparent transparent !important;
+        }
+      }
+
+      &-percentage {
+        display: block;
+
+      }
+    }
+  }
+}

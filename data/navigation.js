@@ -37,8 +37,8 @@ export const mainNavigation = [
     href: `/articles`
   },
   {
-    text: 'historia bitcoin',
-    href: `/history`
+    text: 'wiki',
+    href: `/wiki`
   },
   {
     text: 'o nas',

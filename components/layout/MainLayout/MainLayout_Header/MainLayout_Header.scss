@@ -1,10 +1,179 @@
 .main-layout-header {
-  height: 250px;
+  height: 25rem;
+  padding: 0 5rem;
+
   background-color: #f2c601;
   background-image: url('/static/img/background.svg');
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: right;
+
+  display: grid;
+  grid-template-rows: 12.1rem auto;
+  grid-template-columns: 12rem auto auto auto;
+  grid-template-areas:
+          "flg nme tkr tkr"
+          "flg slg slg crs";
+
+  justify-items: start;
+
+  @include media ($tablet) {
+    grid-template-columns: 85px auto auto auto;
+    grid-template-areas:
+            "flg nme tkr tkr"
+            "slg slg slg crs";
+  }
+
   @include media ($mobile) {
     background-image: $background-gradient;
+    padding: 0;
+
+    grid-template-columns: 91px auto auto;
+    grid-template-rows: 62px auto 70px auto;
+    grid-template-areas:
+            "flg nme btn"
+            "flg slg btn"
+            "tkr tkr tkr"
+            "crs crs crs";
+  }
+
+
+  &__flag{
+    grid-area: flg;
+    height: 12.1rem;
+    width: 8.5rem;
+    filter: drop-shadow(1px 0px 2px gray);
+
+    @include media ($tablet) {
+      height: 90px;
+      width: 62px;
+    }
+    @include media ($mobile) {
+      margin-left: 15px;
+      height: 74px;
+    }
+  }
+
+  &__name {
+    grid-area: nme;
+    width: 20.5rem;
+    height: 2.1rem;
+    margin-top: 6.5rem;
+
+
+
+    @include media ($tablet) {
+      margin-top: 47px;
+      width: 152px;
+      height: 16px;
+    }
+
+    @include media ($mobile) {
+      margin-top: 3rem;
+
+      width: 165px;
+      height: 17px;
+    }
+  }
+  &__slogan{
+    grid-area: slg;
+    font-size: 3.2rem;
+    color: $color-blue-dark;
+    font-weight: 300;
+
+    @include media ($tablet) {
+      padding-left: 31px;
+
+      font-size: 22px;
+    }
+    @include media ($mobile) {
+      padding-left: 0;
+
+      font-size: 14px;
+    }
+  }
+
+
+  &__ticker{
+    grid-area: tkr;
+    width: 100%;
+    justify-self: right;
+  }
+  &__currencies{
+    grid-area: crs;
+    background-color: rgba(green, 0.3);
+    width: 100%;
+  }
+
+  &__btn{
+    grid-area: btn;
+    display: none;
+    justify-self: right;
+    width: 22px;
+    height: 16px;
+    margin-top: 30px;
+
+    @include media ($mobile) {
+      display: block;
+      margin-right: 15px;
+    }
+  }
+
+  &__mobile-menu{
+    display: flex;
+    z-index: 99;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-image: $background-gradient;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    flex-direction: column;
+
+
+    &-link{
+      font-size: 1.6rem;
+      text-align: center;
+      text-transform: uppercase;
+      margin: 0 4.4rem 1.5rem;
+      &:hover{
+        text-decoration: none ;
+      }
+      &:nth-child(7){
+        padding-bottom: 19px;
+        border-bottom: solid 1px #fff131;
+      }
+
+      color: $color-blue-dark;
+    }
+    &-btn{
+      margin: 0 3.8rem;
+    }
+    &-icon{
+      cursor: pointer;
+      width: 2.0rem;
+      height: 2.1rem;
+      align-self: flex-end;
+      margin-bottom: 2.5rem;
+
+    }
+  }
+
+  &__login{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+  &__register-btn{
+    width: 18rem;
+    text-align: center;
+    &:first-child{
+
+      margin-bottom: 5px;
+    }
   }
 }

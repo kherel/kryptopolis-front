@@ -1,9 +1,10 @@
 import React from 'react'
 import T from 'prop-types'
 import './logout.svg'
-import './tick.svg'
-import './cross.svg'
-
+import './logo.svg'
+import './name.svg'
+import './burger.svg'
+import './close.svg'
 
 const A_Svg = ({ name, ...props }) => (
   <svg {...props}>
