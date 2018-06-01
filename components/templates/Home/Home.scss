@@ -3,7 +3,8 @@
     color: red;
   }
   display: grid;
-  grid-template-columns: 40% 20% 25% 15%;
+  grid-template-columns: 36% 20% 25% 15%;
+  grid-gap: 1%;
   grid-template-areas:
           "hot vid nws sig"
           "art vid nws sig"
@@ -11,7 +12,7 @@
           "art ico nws twt";
 
   @include media ($desktop-sm) {
-    grid-template-columns: 25% 50% 25%;
+    grid-template-columns: 25% 47% 25%;
     grid-template-areas:
             "hot nws sig"
             "vid nws sig"
@@ -20,7 +21,7 @@
             "art ico twt";
   }
   @include media ($tablet) {
-    grid-template-columns: 25% 50% 25%;
+    grid-template-columns: 25% 47% 25%;
     grid-template-areas:
             "hot nws sig"
             "vid nws sig"
