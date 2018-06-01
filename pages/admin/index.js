@@ -1,13 +1,30 @@
 import { Component } from "react";
-import AdminHome from "templates/AdminHome/AdminHome";
-import * as T from "prop-types";
-import Link from "next/link";
+import T_AdminNews from "templates/T_AdminNews/T_AdminNews";
 import authorizationHOC from "HOC/authorizationHOC";
+import {loadNews, removeNews} from "redux-store/ducks/news";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 
 class AdminIndex extends Component {
+
+  static async getInitialProps({reduxStore}) {
+    await loadNews(reduxStore)
+    return {};
+  }
+
   render() {
-    return <AdminHome />;
+    return <T_AdminNews {...this.props}/>;
   }
 }
 
-export default authorizationHOC(AdminIndex, ['admin', 'superAdmin']);
+function mapToState(state) {
+  const {loaded, entities} = state.news
+  return {loaded, entities}
+}
+
+function mapDispatchToProps(dispatch) {
+  const actions = bindActionCreators({ removeNews }, dispatch)
+  return { ...actions }
+}
+
+export default authorizationHOC(connect(mapToState, mapDispatchToProps)(AdminIndex), ['admin', 'superAdmin']);

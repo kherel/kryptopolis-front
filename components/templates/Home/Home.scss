@@ -3,22 +3,41 @@
     color: red;
   }
   display: grid;
+  grid-template-columns: 36% 20% 25% 15%;
+  grid-gap: 1%;
   grid-template-areas:
           "hot vid nws sig"
+          "art vid nws sig"
+          "art ico nws sig"
           "art ico nws twt";
-  grid-template-columns: 46rem 22.5rem 30rem 22.5rem;
-  grid-template-rows: auto 1fr;
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
+
   @include media ($desktop-sm) {
+    grid-template-columns: 25% 47% 25%;
     grid-template-areas:
             "hot nws sig"
-            "vid nws twt"
+            "vid nws sig"
+            "art nws sig"
+            "art nws twt"
             "art ico twt";
-    grid-template-columns: 3fr 2fr 1fr;
   }
   @include media ($tablet) {
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 25% 47% 25%;
+    grid-template-areas:
+            "hot nws sig"
+            "vid nws sig"
+            "art nws twt"
+            "art ico twt";
+  }
+  @include media ($mobile) {
+    grid-template-areas:
+            "hot"
+            "vid"
+            "nws"
+            "art"
+            "sig"
+            "twt"
+            "ico";
+    grid-template-columns: 1fr;
   }
 
 
@@ -34,27 +53,26 @@
   }
 
   &__video {
-    height: 31.5rem;
-    overflow: hidden;
     grid-area: vid;
     //background-color: transparentize(red,.5);
   }
 
   &__hot-ico {
     grid-area: ico;
-    //background-color: transparentize(green,.5);
+    background-color: transparentize(green,.5);
   }
   &__news {
     grid-area: nws;
     //background-color: transparentize(orange,.5);
   }
   &__signals {
-    height: 31.5rem;
+    //height: 31.5rem;
     grid-area: sig;
-    //background-color: transparentize(violet,.5);
+    background-color: transparentize(violet,.5);
   }
   &__tweets {
+    height: 500px;
     grid-area: twt;
-    //background-color: transparentize(maroon,.5);
+    background-color: transparentize(maroon,.5);
   }
 }

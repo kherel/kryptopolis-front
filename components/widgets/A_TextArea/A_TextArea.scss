@@ -1,9 +1,9 @@
-.a-input-text {
+.a-text-area {
   $this: &;
   padding: 0;
   &_theme {
     &_user {
-      #{$this}__input {
+      #{$this}__inpu {
         padding: .5rem 1rem;
         text-align: center;
         border-bottom: 2px solid #cdcdcd;
@@ -17,7 +17,7 @@
       }
     }
     &_admin {
-      #{$this}__input {
+      #{$this}__textarea {
         padding: .5rem 1.5rem;
         border: .1rem solid $color-grey-middle;
         border-radius: .5rem;
@@ -30,13 +30,13 @@
   }
   &_has-error {
     &_true {
-      #{$this}__input {
+      #{$this}__textarea {
         border-color: $color-red;
       }
     }
   }
 
-  &__input {
+  &__textarea {
 	box-sizing: border-box;
     display: block;
     width: 100%;
@@ -62,5 +62,11 @@
     margin-top: .5rem;
     font-size: 1.2rem;
     color: $color-red;
+  }
+
+  &__counter{
+    color: $color-blue-dark;
+    font-size: 1.2rem;
+    padding-left: 1.5rem;
   }
 }

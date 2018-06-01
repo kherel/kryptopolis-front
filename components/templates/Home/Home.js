@@ -8,7 +8,6 @@ import O_News from 'widgets/O_News/O_News'
 import O_Signals from 'widgets/O_Signals/O_Signals'
 import O_Tweets from 'widgets/O_Tweets/O_Tweets'
 import {cssClassName} from 'utils'
-import './customScroll.scss'
 import './Home.scss'
 
 const cn = cssClassName('Home')
@@ -16,14 +15,15 @@ const cn = cssClassName('Home')
 class Home extends Component {
 
   render() {
-    const { status, setStatus, pathname} = this.props
+    const { status, setStatus, pathname, news} = this.props
+
     return (
       <A_Container mix={cn()} padding='thin'>
         <O_Hot mix={cn('hot')} />
         <O_Articles mix={cn('articles')} />
         <O_Video mix={cn('video')} />
         <O_HotIco mix={cn('hot-ico')} />
-        <O_News mix={cn('news')} />
+        <O_News mix={cn('news')} news={news}/>
         <O_Signals mix={cn('signals')} />
         <O_Tweets mix={cn('tweets')} />
       </A_Container>

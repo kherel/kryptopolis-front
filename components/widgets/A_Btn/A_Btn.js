@@ -48,7 +48,7 @@ A_Btn.propTypes = {
     'filled'
   ]),
   size: T.oneOf(['lg', 'md', 'sm']),
-  color: T.oneOf(['gray', 'yellow']),
+  color: T.oneOf(['gray', 'yellow', 'red']),
   type: T.oneOf([
     'submit',
     'link'

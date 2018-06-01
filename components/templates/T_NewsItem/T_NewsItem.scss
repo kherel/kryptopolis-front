@@ -1,9 +1,10 @@
-.news-item {
+.t-news-item {
   display: flex;
   @include media ($mobile) {
     padding-left: 0;
     padding-right: 0;
   }
+
   &__content {
     margin-right: 4rem;
     flex: 1 1 auto;
@@ -34,14 +35,26 @@
     }
   }
 
-  &__credentials {
+  &__head {
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
+    @include media ($mobile) {
+      display: block;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
   }
 
   &__label, &__author {
     margin-right: 1.5rem;
+  }
+
+  &__label {
+    @include media ($mobile) {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
   }
 
   &__author {
@@ -54,11 +67,11 @@
     color: $color-grey-dark;
   }
 
-  &__image, &__text, &__share {
+  &__image, &__article, &__share {
     margin-bottom: 3rem;
   }
 
-  &__text, &__share {
+  &__article, &__share {
     padding: 0 2rem;
   }
 
@@ -74,9 +87,10 @@
     }
   }
 
-  &__text {
+  &__article {
     color: $color-gray-text;
     font-size: 1.8rem;
+    line-height: 1.2;
     @include media ($desktop-sm) {
       font-size: 14px;
     }

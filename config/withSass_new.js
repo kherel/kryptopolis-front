@@ -49,7 +49,7 @@ module.exports = (nextConfig = {}) => {
             loader: 'sass-resources-loader',
             options: {
               resources: [
-                resolve('./commonStyles/style.scss'),
+                resolve('./commonStyles/resources.scss'),
               ],
             },
           },

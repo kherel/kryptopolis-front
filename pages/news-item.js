@@ -1,18 +1,31 @@
 import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { initStore } from "redux-store/store";
-import withRedux from "redux-store/withRedux";
-import { setStatus } from "redux-store/ducks/appStatus";
-import NewsItem from "templates/NewsItem/NewsItem";
+import { withRouter } from "next/router";
+import {loadNews} from "../redux-store/ducks/news";
+import {connect} from "react-redux";
+import T_NewsItem from "templates/T_NewsItem/T_NewsItem";
 import * as T from "prop-types";
 
-class Register extends Component {
+class NewsItem extends Component {
+  static async getInitialProps({ reduxStore }, ...props) {
+    await loadNews(reduxStore);
+    return { props };
+  }
+
   render() {
-    return <NewsItem />;
+    return <T_NewsItem {...this.props} />;
   }
 }
 
-export default Register;
+function mapToState(state, { router }) {
+  const { id } = router.query;
+  const { entities } = state.news;
+  const entity = entities.find(el => el.id === id);
+  return { newsItem: {...entity} };
+}
+
+export default  withRouter(
+  connect(mapToState)(NewsItem)
+);
 /*function mapStateToProps(state) {
 
   const {status} = state.appStatus

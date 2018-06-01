@@ -4,19 +4,27 @@
   }
 
   &__item {
+    padding: .5rem 1.5rem;
     display: block;
     position: relative;
-    padding: 0 1.5rem;
     font-size: 1.4rem;
-    color: #02328c;
+    color: $color-blue-dark;
+    transition: box-shadow .3s linear;
     &::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 2px;
-      height: 100%;
-      background-color: #f2e205;
+      top: 50%;
+      left: .5rem;
+      width: .2rem;
+      height: 80%;
+      transform: translateY(-50%);
+      background-color: $color-yellow-dark;
+    }
+    &:hover {
+      text-decoration: none;
+      border-radius: 5px;
+      background-color: $color-white;
+      box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
     }
 
   }

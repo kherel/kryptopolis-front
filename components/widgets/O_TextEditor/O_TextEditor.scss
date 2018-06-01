@@ -1,3 +1,12 @@
-.o-text-editor{
-
+.o-text-editor {
+  font-family: OpenSans, sans-serif !important;
+  span {
+    line-height: 1.3;
+    font-size: 1.6rem;
+    color: $color-gray-text;
+  }
+  a span{
+    color: $color-blue-dark;
+    text-decoration: underline;
+  }
 }
