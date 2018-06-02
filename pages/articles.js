@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { loadArticles } from "redux-store/ducks/articles";
 import { connect } from "react-redux";
-import T_Articles from "templates/T_News/T_News";
+import T_Articles from "templates/T_Articles/T_Articles";
 
 class Articles extends Component {
   static async getInitialProps({ reduxStore }, ...props) {

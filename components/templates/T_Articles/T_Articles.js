@@ -3,7 +3,7 @@ import { Component } from 'react'
 import A_LabelTitle from 'widgets/A_LabelTitle/A_LabelTitle'
 import A_Container from 'widgets/A_Container/A_Container'
 import M_ArticleCard from 'widgets/M_ArticleCard/M_ArticleCard'
-import './T_News.scss'
+import './T_Articles.scss'
 import {cssClassName} from 'utils'
 const cn = cssClassName('T_Articles')
 
@@ -12,7 +12,7 @@ class T_Articles extends Component {
   _renderArticles = (articles) => (
     articles.map((article, index) => {
       const link = `/article?id=${article.id}`
-      if(index !== news.length - 1) {
+      if(index !== articles.length - 1) {
         return <M_ArticleCard key={article.id} article={article} articleLink={link} hasBorder/>
       } else {
         return <M_ArticleCard key={article.id} article={article} articleLink={link} />
