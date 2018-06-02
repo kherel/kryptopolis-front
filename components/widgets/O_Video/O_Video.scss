@@ -1,12 +1,24 @@
 .o-video {
-  &__content {
-    height: inherit;
+
+  &__items-grid {
+    height: 100%;
+    @include media ($desktop-sm) {
+      display: grid;
+      grid-gap: 1rem;
+      grid-template-columns: auto auto;
+    }
+    @include media ($tablet) {
+      grid-template-columns: auto;
+    }
   }
+
   &__item {
-    border-bottom: solid 0.5px #f2e205;
-    margin-bottom: 2rem;
+    border-bottom: $border-underline;
     &:not(:nth-last-child(1)) {
       margin-bottom: 1rem;
+      @include media ($desktop-sm) {
+        margin-bottom: 0;
+      }
     }
     &-img {
       position: relative;
@@ -31,9 +43,8 @@
         background-color: transparentize($color-yellow-dark, .5);
       }
     }
-    &-content {
-      padding: 1rem;
-      margin-bottom: 1rem;
+    &-title {
+      padding: 0 1rem;
     }
   }
 }

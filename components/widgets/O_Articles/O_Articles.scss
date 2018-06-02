@@ -1,0 +1,10 @@
+.o-articles {
+  &__items-grid {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: auto auto;
+    @include media ($tablet) {
+      grid-template-columns: auto;
+    }
+  }
+}

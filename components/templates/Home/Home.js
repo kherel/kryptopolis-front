@@ -16,12 +16,12 @@ const cn = cssClassName('Home')
 class Home extends Component {
 
   render() {
-    const { status, setStatus, pathname, news} = this.props
+    const { status, setStatus, pathname, news, articles} = this.props
 
     return (
       <A_Container mix={cn()} padding='thin'>
         <O_Hot mix={cn('hot')} />
-        <O_Articles mix={cn('articles')} />
+        <O_Articles mix={cn('articles')} articles={articles} />
         <O_Video mix={cn('video')} />
         <O_HotIco mix={cn('hot-ico')} />
         <div className={cn('news')}>
