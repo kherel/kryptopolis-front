@@ -26,17 +26,3 @@ function mapToState(state, { router }) {
 export default  withRouter(
   connect(mapToState)(NewsItem)
 );
-/*function mapStateToProps(state) {
-
-  const {status} = state.appStatus
-
-  return {status}
-
-}
-
-function mapDispatchToProps(dispatch) {
-  const actions = bindActionCreators({ setStatus }, dispatch)
-  return { ...actions }
-}
-
-export default (withRedux(initStore, mapStateToProps, mapDispatchToProps)(Authorization))*/

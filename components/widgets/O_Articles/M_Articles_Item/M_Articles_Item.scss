@@ -11,6 +11,8 @@
 
   &__card {
     position: absolute;
+    display: flex;
+    flex-direction: column;
     left: .5rem;
     bottom: .8rem;
     width: 20rem;
@@ -26,6 +28,7 @@
   }
 
   &__info {
+    margin-top: auto;
     color: $color-grey-dark;
     font-size: 1.2rem;
     line-height: 1.3;

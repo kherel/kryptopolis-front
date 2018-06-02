@@ -21,7 +21,7 @@ class O_News extends Component {
   )
 
   render() {
-    const { mix, news:{todayNews, yesterdayNews} } = this.props
+    const { mix, todayNews, yesterdayNews } = this.props
     return (
       <div className={cn([mix])}>
         <A_H mix={cn('title')} type='section'>WIADOMOŚCI</A_H>
