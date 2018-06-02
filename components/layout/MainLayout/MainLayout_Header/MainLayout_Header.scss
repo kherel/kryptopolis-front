@@ -37,7 +37,9 @@
             "crs crs crs";
   }
 
-
+  &__flag, &__name{
+    cursor: pointer;
+  }
   &__flag{
     grid-area: flg;
     height: 12.1rem;

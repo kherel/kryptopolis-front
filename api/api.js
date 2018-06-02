@@ -1,5 +1,6 @@
 import axios from "axios";
 import {safeDA} from "utils";
+import {paginator} from 'utils'
 
 const AUTH_API = `/v1/auth/token`;
 const NEWS_API = `/v1/news`;
@@ -52,10 +53,10 @@ export default {
       apiCall("put", AUTH_API, { data: { attributes: { email, password } } })
   },
   news:{
-    get: () => apiCall('get', NEWS_API),
-    post: (attributes) => apiCall('post', NEWS_API, { data: { attributes } }),
+    get: params => apiCall('get', NEWS_API, { params }),
+    post: attributes => apiCall('post', NEWS_API, { data: { attributes } }),
     put: (id, attributes) => apiCall('put', `${NEWS_API}/${id}`, { data: { attributes } }),
-    delete: (id) => apiCall('delete', `${NEWS_API}/${id}`)
-
+    delete: id => apiCall('delete', `${NEWS_API}/${id}`),
+    show: id => apiCall('get', `${NEWS_API}/${id}`),
   }
 };

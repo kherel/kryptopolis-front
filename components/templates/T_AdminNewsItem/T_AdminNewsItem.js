@@ -100,7 +100,6 @@ class T_AdminNewsItem extends Component {
   render() {
     const { publish, form: { title, summary }, errors } = this.state,
       { type } = this.props;
-
     return (
       <A_Container mix={cn()} padding="wide">
         <A_H mix={cn("title")} type="section">

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import moment from "moment/moment";
-import { loadNews } from "redux-store/ducks/news";
+import {loadNews, selectorNews} from "redux-store/ducks/news";
 import { connect } from "react-redux";
 import T_News from "templates/T_News/T_News";
 import * as T from "prop-types";
@@ -17,35 +16,8 @@ class News extends Component {
 }
 
 function mapStateToProps(state) {
-  const news = mapNews(state.news.entities)
+  const news = selectorNews(state)
   return { news };
-}
-
-function mapNews(rawNews) {
-
-  const
-    today = moment(),
-    yesterday = moment().subtract(1,'day')
-
-  let result = {
-    todayNews: [],
-    yesterdayNews: []
-  }
-
-  rawNews.forEach(({id, publish, createdAt, title, text, image, summary}) => {
-    if(publish) {
-      const releaseDate = moment(createdAt)
-
-      if(releaseDate.isSame(today, 'day')) {
-        result.todayNews.push({id, title, text, summary, image})
-      }
-      else if(releaseDate.isSame(yesterday, 'day')) {
-        result.yesterdayNews.push({id, title, text, summary, image})
-      }
-    }
-  })
-
-  return result
 }
 
 export default connect(mapStateToProps)(News);

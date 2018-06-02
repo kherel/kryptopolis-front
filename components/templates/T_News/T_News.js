@@ -9,7 +9,7 @@ const cn = cssClassName('T_News')
 
 class T_News extends Component {
 
-  _renderNewsItems = (news) => (
+  renderNewsItems = (news) => (
     news.map((newsItem, index) => {
       const link = `/news-item?id=${newsItem.id}`
       if(index !== news.length - 1) {
@@ -20,16 +20,41 @@ class T_News extends Component {
     })
   )
 
+  _renderNewsItems = (ids, labelTitle) => {
+    const label = (
+      <A_LabelTitle size='lg' hasBorder>{labelTitle}</A_LabelTitle>
+    );
+
+    const getItem = (id, article, key, last) => <M_ArticleCard key={id} article={article} articleLink={`/news-item?id=${id}`} hasBorder={!last}/>
+
+    return ids.map((id, i) => {
+      const article = this.props.news.entities[id]
+      if (i === 0) {
+        return (
+          <div key={id}>
+            {label}
+            {getItem(id, article)}
+          </div>
+        );
+
+      } else {
+        const last = i === ids.length - 1
+        return (
+          getItem(id, article, id, last)
+        );
+      }
+    });
+  };
+
+
   render() {
-    const { news:{todayNews, yesterdayNews} } = this.props
+    const { news: { todayIds, yesterdayIds, othersIds } } = this.props
     return (
       <A_Container mix={cn()} padding='wide'>
         <section className={cn('content')}>
-          <A_LabelTitle size='lg' hasBorder>WIADOMOŚCI DZISIAJ</A_LabelTitle>
-          {this._renderNewsItems(todayNews)}
-          <A_LabelTitle size='lg' hasBorder>WCZORAJ</A_LabelTitle>
-          {this._renderNewsItems(yesterdayNews)}
-          <A_LabelTitle size='lg' hasBorder>WCZESNE</A_LabelTitle>
+          {this._renderNewsItems(todayIds, "WIADOMOŚCI DZISIAJ")}
+          {this._renderNewsItems(yesterdayIds, "WCZORAJ")}
+          {this._renderNewsItems(othersIds, 'WCZESNE')}
         </section>
         <aside className={cn('sidebar')}>
 

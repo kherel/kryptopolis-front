@@ -95,7 +95,7 @@ export default (WrappedComponent, roleNeeded) => {
     }
 
     render() {
-      return <WrappedComponent />;
+      return <WrappedComponent {...this.props}/>;
     }
   }
 

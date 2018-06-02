@@ -3,10 +3,10 @@ import jsCookie from 'js-cookie';
 import {setToken} from 'api/init'
 
 import { safeDA } from "utils";
-import * as axios from "axios";
-const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-const LOGIN_FAIL = "LOGIN_FAIL";
-const CLEAN_LOGIN_ERROR = "CLEAN_LOGIN_ERROR";
+import {SUCCESS, FAIL, CLEAN, ERROR} from './commonConstants'
+import {errorHelper} from "./helpers";
+
+const LOGIN = "LOGIN";
 const USER_LOGOUT = "USER_LOGOUT";
 const COOKIE_NAME = 'kryptopolis'
 
@@ -21,14 +21,14 @@ const initialState = {
 
 export default (user = initialState, { type, data }) => {
   switch (type) {
-    case LOGIN_SUCCESS:
+    case LOGIN + SUCCESS:
       return {
         ...user,
         loggedIn: true,
         loginError: false,
         ...data,
       };
-    case LOGIN_FAIL:
+    case LOGIN + FAIL:
       return {
         ...user,
         loggedIn: false,
@@ -36,7 +36,7 @@ export default (user = initialState, { type, data }) => {
         textError: data,
         token: undefined
       };
-    case CLEAN_LOGIN_ERROR:
+    case CLEAN + LOGIN + ERROR:
       return { ...user, loggedIn: false, loginError: false, token: undefined };
     case USER_LOGOUT:
       return { ...initialState };
@@ -58,16 +58,15 @@ export const handleUserLogin = (email, password) => async dispatch => {
     setToken(token)
     dispatch(userLogin({email, token, role}));
   } catch (error) {
-    const dataError = safeDA(error, ["response", "data"], {});
-    dispatch({ type: LOGIN_FAIL, data: dataError.error || dataError.message });
+    errorHelper(LOGIN, error, dipatch, )
   }
 };
 
-export const cookiesLogin = data => async dispatch => dispatch({ type: LOGIN_SUCCESS, data });
+export const cookiesLogin = data => async dispatch => dispatch({ type: LOGIN + SUCCESS, data });
 
 
 
 // pure actions
 
-export const userLogin = data => ({ type: LOGIN_SUCCESS, data });
-export const cleanLoginError = token => ({ type: CLEAN_LOGIN_ERROR });
+export const userLogin = data => ({ type: LOGIN + SUCCESS, data });
+export const cleanLoginError = token => ({ type: CLEAN + LOGIN + ERROR });

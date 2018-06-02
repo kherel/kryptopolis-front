@@ -1,126 +1,246 @@
 import api from "api/api";
-import { path, prepend, update} from "ramda";
-const FETCH_NEWS_SUCCESS = "FETCH_NEWS_SUCCESS";
-const FETCH_NEWS_FAIL = "FETCH_NEWS_FAIL";
-const REMOVE_NEWS_SUCCESS = "REMOVE_NEWS_SUCCESS";
-const REMOVE_NEWS_FAIL = "REMOVE_NEWS_FAIL";
-const CREATE_NEWS_SUCCESS = "CREATE_NEWS_SUCCESS"
-const CREATE_NEWS_FAIL = "CREATE_NEWS_FAIL"
-const UPDATE_NEWS_SUCCESS = "UPDATE_NEWS_SUCCESS"
-const UPDATE_NEWS_FAIL = "UPDATE_NEWS_FAIL"
+import { path, prepend, update, dissoc } from "ramda";
+import moment from "moment/moment";
+
+// constants
+import {
+  SUCCESS,
+  FAIL,
+  FETCH,
+  CREATE,
+  UPDATE,
+  REMOVE
+} from "./commonConstants";
+
+const NEWS = "NEWS";
+const NEWS_ITEM = "NEWS_ITEM";
+
+import { errorHelper } from "./helpers";
+// reducer
 
 const initialState = {
   loaded: false,
-  entities: []
+  ids: [],
+  entities: {}
 };
-
-
 
 export default (news = initialState, { type, data }) => {
   let newItem, itemIndex, id;
   switch (type) {
-    case FETCH_NEWS_SUCCESS:
+    case FETCH + NEWS + SUCCESS:
+      const { ids, entities } = mapper(data.entities);
       return {
         ...news,
         loaded: true,
         meta: data.meta,
-        entities: mapper(data.entities)
+        ids: [...news.ids, ...ids],
+        entities: { ...news.entities, ...entities }
       };
-    case REMOVE_NEWS_SUCCESS:
+    case FETCH + NEWS_ITEM + SUCCESS:
       return {
         ...news,
-        entities: news.entities.filter(el => el.id !== data)
+        entity: convertNews(data.entity)
       };
-    case CREATE_NEWS_SUCCESS:
-      newItem = convertNews(data.data)
+    case REMOVE + NEWS + SUCCESS:
       return {
         ...news,
-        entities: prepend(newItem, news.entities)
+        ids: news.ids.filter(id => id !== data),
+        news: dissoc(data, news.entities)
       };
-    case UPDATE_NEWS_SUCCESS:
-      newItem = convertNews(data.data)
-      itemIndex = news.entities.findIndex(item => item.id === newItem.id)
+    case CREATE + NEWS + SUCCESS:
+      newItem = convertNews(data.data);
       return {
         ...news,
-        entities: update(itemIndex, newItem, news.entities)
+        ids: [newItem.id, ...news.ids],
+        entities: { [newItem.id]: newItem, ...news.entities }
       };
-    case FETCH_NEWS_FAIL:
+    case UPDATE + NEWS + SUCCESS:
+      newItem = convertNews(data.data);
+      return {
+        ...news,
+        entities: { ...news.entities, [newItem.id]: newItem }
+      };
+    case FETCH + NEWS + FAIL:
       return initialState;
   }
 
   return news;
 };
 
-const mapper = (entities) => entities.reverse().map(convertNews)
+const mapper = data => {
+  const convertedArr = data.reverse().map(convertNews);
 
-const convertNews = (item) => {
-  let text = path(["attributes", "text"], item)
+  const ids = [];
+  const entities = {};
+  convertedArr.forEach(el => {
+    ids.push(el.id);
+    entities[el.id] = el;
+  });
 
-  return({
+  return { ids, entities };
+};
+
+const convertNews = item => {
+  let text = path(["attributes", "text"], item);
+
+  return {
     ...item.attributes,
     text,
     id: item.id
-  })
-}
+  };
+};
 
+// action creators
 
 export const fetchNews = () => async dispatch => {
-  try{
-    const {meta, data: entities} = await api.news.get()
-    return dispatch({type: FETCH_NEWS_SUCCESS, data: {meta, entities}})
+  try {
+    const { meta, data: entities } = await api.news.get({
+      page: { limit: 20, offset: 0 }
+    });
+
+    return dispatch({ type: FETCH + NEWS + SUCCESS, data: { meta, entities } });
+  } catch (error) {
+    errorHelper(FETCH + NEWS, error, dispatch);
+  }
+};
+
+export const fetchNewsItem = id => async dispatch => {
+  try {
+    const { meta, data: entity } = await api.news.show(id);
+    return dispatch({
+      type: FETCH + NEWS_ITEM + SUCCESS,
+      data: { meta, entity }
+    });
+  } catch (error) {
+    errorHelper(FETCH + NEWS_ITEM, error, dispatch);
+  }
+};
+
+export const removeNews = id => async dispatch => {
+  try {
+    await api.news.delete(id);
+    return dispatch({ type: REMOVE + NEWS + SUCCESS, data: id });
   } catch (error) {
     const dataError = path(["response", "data"], error) || error;
-    return dispatch({type: FETCH_NEWS_FAIL, data: dataError})
+    return dispatch({ type: REMOVE + NEWS + FAIL, data: { id, dataError } });
   }
-}
+};
 
-export const removeNews = (id) => async dispatch => {
-  try{
-    await api.news.delete(id)
-    return dispatch({type: REMOVE_NEWS_SUCCESS, data: id})
-  } catch (error) {
-    const dataError = path(["response", "data"], error) || error;
-    return dispatch({type: REMOVE_NEWS_FAIL, data: {id, dataError}})
-  }
-}
-
-export const createNews = (publish, publishAt, title, file, summary, draft, text) => async dispatch => {
-  try{
+export const createNews = (
+  publish,
+  publishAt,
+  title,
+  file,
+  summary,
+  draft,
+  text
+) => async dispatch => {
+  try {
     let image;
-    const attributes = {publish, publishAt, title, file, summary, draft, text}
+    const attributes = {
+      publish,
+      publishAt,
+      title,
+      file,
+      summary,
+      draft,
+      text
+    };
     if (file) {
-      image = await api.cloudinary.upload(file)
-      attributes.image = image
+      image = await api.cloudinary.upload(file);
+      attributes.image = image;
     }
-    const res = await api.news.post(attributes)
-    return dispatch({type: CREATE_NEWS_SUCCESS, data: res})
+    const res = await api.news.post(attributes);
+    return dispatch({ type: CREATE + NEWS + SUCCESS, data: res });
   } catch (error) {
-    const dataError = path(["response", "data"], error) || error;
-    return dispatch({type: CREATE_NEWS_FAIL, data: dataError})
+    errorHelper(CREATE + NEWS, error, dispatch);
   }
-}
+};
 
-export const updateNews = (id, publish, publishAt, title, file, summary, draft, text) => async dispatch => {
+export const updateNews = (
+  id,
+  publish,
+  publishAt,
+  title,
+  file,
+  summary,
+  draft,
+  text
+) => async dispatch => {
 
-  try{
+  try {
     let image;
-    const attributes = {publish, publishAt, title, file, summary, draft, text}
+    const attributes = {
+      publish,
+      publishAt,
+      title,
+      file,
+      summary,
+      draft,
+      text
+    };
     if (file) {
-      image = await api.cloudinary.upload(file)
-      attributes.image = image
+      image = await api.cloudinary.upload(file);
+      attributes.image = image;
     }
-    const res = await api.news.put(id, attributes)
-    return dispatch({type: UPDATE_NEWS_SUCCESS, data: res})
+    const res = await api.news.put(id, attributes);
+    return dispatch({ type: UPDATE + NEWS + SUCCESS, data: res });
   } catch (error) {
     const dataError = path(["response", "data"], error) || error;
-    return dispatch({type: UPDATE_NEWS_FAIL, data: dataError})
+    return dispatch({ type: UPDATE + NEWS + FAIL, data: { dataError, id } });
+  }
+};
+
+// loaders
+export async function loadNews(reduxStore) {
+  const { news: { loaded } } = reduxStore.getState();
+  if (!loaded) {
+    await reduxStore.dispatch(fetchNews());
   }
 }
 
-export async function loadNews(reduxStore){
-  const {news: {loaded}} = reduxStore.getState()
-  if(!loaded){
-    await reduxStore.dispatch(fetchNews())
+export async function loadNewsItem(reduxStore, query) {
+  const { news: { entities } } = reduxStore.getState();
+
+  const { id } = query;
+  let entity = entities[id];
+  if (entity === undefined) {
+    await reduxStore.dispatch(fetchNewsItem(id));
+    entity = reduxStore.getState().news.entity;
   }
+
+  return entity;
 }
 
+// selectors
+
+export function selectorNews(state) {
+  const {entities, ids} = state.news;
+
+  const today = moment(),
+    yesterday = moment().subtract(1, "day");
+
+  let result = {
+    todayIds: [],
+    yesterdayIds: [],
+    othersIds: [],
+    entities
+  };
+
+  ids.forEach(id => {
+    const { publish, publishAt, createdAt, title } = entities[id]
+    if (publish) {
+      const releaseDate = publishAt ? moment(publishAt) : moment(createdAt);
+
+      if (releaseDate.isSame(today, "day")) {
+        result.todayIds.push(id);
+      } else if (releaseDate.isSame(yesterday, "day")) {
+        result.yesterdayIds.push(id);
+      } else {
+        result.othersIds.push(id);
+      }
+    }
+  });
+
+  return result;
+}

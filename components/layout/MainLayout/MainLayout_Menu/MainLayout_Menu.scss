@@ -1,4 +1,5 @@
 .main-layout-menu {
+
   &__nav{
     padding: 0 2rem;
     display: flex;
@@ -6,11 +7,15 @@
     &_theme{
       &_main{
         background-color: $color-yellow-dark;
+        @include media ($mobile) {
+          display: none;
+        }
       }
       &_admin{
         background-color: $color-green-light;
       }
     }
+
   }
 
   &__register-btn {

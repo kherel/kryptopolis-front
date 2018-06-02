@@ -55,7 +55,7 @@ class MainLayout_Menu extends Component {
       renderedLoginBlock = this.getLoginBlock(loggedIn, email);
 
     return (
-      <div>
+      <div >
         <nav className={cn("nav", { theme: "main" })}>
           {renderedNavigation}
           {renderedLoginBlock}

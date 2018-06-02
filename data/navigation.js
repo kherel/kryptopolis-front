@@ -13,10 +13,6 @@ export const adminNavigation = [
     text: 'artykuły',
     href: `${adminPath}/articles`
   },
-  {
-    text: 'wydarzenia',
-    href: `/events`
-  },
 ];
 
 export const mainNavigation = [

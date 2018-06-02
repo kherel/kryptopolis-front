@@ -15,8 +15,7 @@ class T_Admin_News extends Component {
   state = {};
 
   render() {
-    const { loaded, entities, removeNews } = this.props;
-    //   const {} = this.state
+    const { loaded, entities, removeNews, ids } = this.props;
 
     return (
       <A_Container mix={cn()} padding="wide">
@@ -40,9 +39,9 @@ class T_Admin_News extends Component {
         </div>
 
         <ul className={cn("items-list")}>
-          {entities.map(({ id, publishAt, title }) => (
+          {ids.map(id => (
             <O_AdminNewsItem
-              {...{ id, publishAt, title, removeNews: () => removeNews(id), mix: "item", key: id }}
+              {...{id, ...entities[id], removeNews: () => removeNews(id), mix: "item", key: id }}
             />
           ))}
         </ul>

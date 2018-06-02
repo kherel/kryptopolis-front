@@ -1,30 +1,34 @@
 import { Component } from "react";
 import T_AdminNewsItem from "templates/T_AdminNewsItem/T_AdminNewsItem";
 import authorizationHOC from "HOC/authorizationHOC";
-import { loadNews, createNews, updateNews } from "redux-store/ducks/news";
+import { createNews, updateNews, loadNewsItem } from "redux-store/ducks/news";
+import { isEmpty } from "ramda";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { withRouter } from "next/router";
+import {bindActionCreators} from "redux";
 
 class AdminNewsItem extends Component {
-  static async getInitialProps({ reduxStore }, ...props) {
-    await loadNews(reduxStore);
-    return { props };
+  static async getInitialProps({ reduxStore, query }) {
+    const { id } = query;
+    let type = "create";
+
+    if (!id) {
+      return { type };
+    }
+
+    const newsItem = await loadNewsItem(reduxStore, query);
+    if (!isEmpty(newsItem)) {
+      type = "update";
+    }
+
+    return { ...newsItem, type, id };
   }
 
   render() {
-    return <T_AdminNewsItem {...this.props} />;
-  }
-}
+    const {createNews, updateNews, type, id, ...props} = this.props
+    const handleSubmit = type === 'update' ? (...arg) => updateNews(id, ...arg) : createNews
 
-function mapToState(state, { router }) {
-  const { id } = router.query;
-  let type
-  if (!id) return {type: "create"};
-  const { entities } = state.news;
-  const entity = entities.find(el => el.id === id);
-  type = "update";
-  return { ...entity, type };
+    return <T_AdminNewsItem {...{...props, handleSubmit, type}} />;
+  }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -32,19 +36,7 @@ function mapDispatchToProps(dispatch) {
   return { ...actions };
 }
 
-function mergeProps(stateProps, { createNews, updateNews }) {
-  const { id, type } = stateProps;
-  let handleSubmit;
-  if (type === "update") {
-    handleSubmit = (...attributes) => updateNews(id, ...attributes);
-  } else {
-    handleSubmit = createNews;
-  }
-  return { ...stateProps, handleSubmit };
-}
 export default authorizationHOC(
-  withRouter(
-    connect(mapToState, mapDispatchToProps, mergeProps)(AdminNewsItem)
-  ),
+  connect(null, mapDispatchToProps)(AdminNewsItem),
   ["admin", "superAdmin"]
 );

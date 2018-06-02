@@ -18,8 +18,8 @@ class AdminIndex extends Component {
 }
 
 function mapToState(state) {
-  const {loaded, entities} = state.news
-  return {loaded, entities}
+  const {loaded, entities, ids} = state.news
+  return {loaded, entities, ids}
 }
 
 function mapDispatchToProps(dispatch) {

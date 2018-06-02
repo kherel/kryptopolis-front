@@ -10,6 +10,7 @@ const cn = cssClassName('MainLayout_Header')
 import {mainNavigation} from 'data/navigation'
 import A_NavBtn from "widgets/A_NavBtn/A_NavBtn";
 import MainLayoutTicker from "./MainLayoutTicker/MainLayoutTicker";
+import Link from 'next/link'
 
 class MainLayout_Header extends Component {
 
@@ -97,8 +98,12 @@ class MainLayout_Header extends Component {
 
     return (
       <A_Container mix={cn([mix])}>
-        <A_Svg name={'logo'} className={cn('flag')} />
-        <A_Svg name={'name'} className={cn('name')} />
+        <Link href={'/'}>
+          <A_Svg name={'logo'} className={cn('flag')} />
+        </Link>
+        <Link href={'/'}>
+          <A_Svg name={'name'} className={cn('name')} />
+        </Link>
         <div className={cn('slogan')}>AKTUALNE WIADOMOŚCI <br/>O ŚWIECIE KRYPTOWALUTY</div>
         <MainLayoutTicker mix={cn('ticker')} />
         <div className={cn('currencies')}>currencies</div>
