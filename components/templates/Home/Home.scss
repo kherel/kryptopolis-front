@@ -4,7 +4,8 @@
   }
   display: grid;
   grid-template-columns: 36% 20% 25% 15%;
-  grid-gap: 1%;
+
+  grid-gap: .7rem;// я уменьшил потом, что увеличил марджин и падинги у новостей, потому что тень съедалась, поотому что сделал overflow hidden, для того чтобы скрывать личшние блоки.
   grid-template-areas:
           "hot vid nws sig"
           "art vid nws sig"
@@ -63,7 +64,25 @@
   }
   &__news {
     grid-area: nws;
-    //background-color: transparentize(orange,.5);
+    display: flex;
+    flex-direction: column;
+    &-inner{
+      height: 96.4rem;
+      @include media ($desktop-sm) {
+        height: 84.1rem;
+      }
+      @include media ($tablet) {
+        height: 83.9rem;
+      }
+      @include media ($mobile) {
+        height: 30rem;
+      }
+    }
+    border-bottom: 1px solid $color-yellow-light;
+
+    &-btn{
+      margin: 0 auto 1.5rem;
+    }
   }
   &__signals {
     //height: 31.5rem;
@@ -71,7 +90,6 @@
     background-color: transparentize(violet,.5);
   }
   &__tweets {
-    height: 500px;
     grid-area: twt;
     background-color: transparentize(maroon,.5);
   }

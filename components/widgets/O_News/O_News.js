@@ -9,7 +9,6 @@ import "./O_News.scss";
 const cn = cssClassName("O_News");
 
 class O_News extends Component {
-
   _renderNewsItems = (ids, labelTitle) => {
     const label = (
       <A_LabelTitle mix={cn("label")} size="sm">
@@ -17,22 +16,18 @@ class O_News extends Component {
       </A_LabelTitle>
     );
     const getItem = (id, text, key) => (
-      <div key={key}>
-        <A_Link mix={cn("item")} href={`/news-item?id=${id}`}>
-          {text}
-        </A_Link>
-      </div>
+      <A_Link mix={cn("item")} href={`/news-item?id=${id}`} key={key}>
+        {text}
+      </A_Link>
     );
 
     return ids.map((id, i) => {
-      const {title} = this.props.news.entities[id]
+      const { title } = this.props.news.entities[id];
       if (i) {
-        return (
-          getItem(id, title, id)
-        );
+        return getItem(id, title, id);
       } else {
         return (
-          <div key={id}>
+          <div key={id} className={cn('item-wrapper')}>
             {label}
             {getItem(id, title)}
           </div>
@@ -42,7 +37,11 @@ class O_News extends Component {
   };
 
   render() {
-    const { mix, news: { todayIds, yesterdayIds, othersIds } } = this.props;
+    const {
+      mix,
+      news: { todayIds, yesterdayIds, othersIds },
+    } = this.props;
+
     return (
       <div className={cn([mix])}>
         <A_H mix={cn("title")} type="section">
@@ -50,7 +49,7 @@ class O_News extends Component {
         </A_H>
         {this._renderNewsItems(todayIds, "DZISIAJ")}
         {this._renderNewsItems(yesterdayIds, "WCZORAJ")}
-        {this._renderNewsItems(othersIds, 'WCZESNE')}
+        {this._renderNewsItems(othersIds, "WCZESNE")}
       </div>
     );
   }

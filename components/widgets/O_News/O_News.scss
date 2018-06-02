@@ -1,9 +1,19 @@
 .o-news {
-  &__title, &__label, &__item {
-    margin-bottom: 1rem;
-  }
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow: hidden;
+  justify-content: space-around;
+  padding-bottom: 10px;
+  //&__title, &__label, &__item {
+    //margin-bottom: 1rem;
+  //}
 
   &__item {
+    &, &-wrapper{
+      width: 97%;
+    }
+    margin: 0 3px;
     padding: .5rem 1.5rem;
     display: block;
     position: relative;
@@ -24,8 +34,15 @@
       text-decoration: none;
       border-radius: 5px;
       background-color: $color-white;
-      box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+      box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.25);
     }
-
   }
+
+  &__label{
+    margin: 10px 3px;
+    @include media ($mobile) {
+      display: none;
+    }
+  }
+
 }

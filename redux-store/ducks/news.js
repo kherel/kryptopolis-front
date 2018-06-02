@@ -95,7 +95,7 @@ const convertNews = item => {
 export const fetchNews = () => async dispatch => {
   try {
     const { meta, data: entities } = await api.news.get({
-      page: { limit: 20, offset: 0 }
+      page: { limit: 30, offset: 0 }
     });
 
     return dispatch({ type: FETCH + NEWS + SUCCESS, data: { meta, entities } });

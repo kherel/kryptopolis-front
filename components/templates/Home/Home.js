@@ -9,6 +9,7 @@ import O_Signals from 'widgets/O_Signals/O_Signals'
 import O_Tweets from 'widgets/O_Tweets/O_Tweets'
 import {cssClassName} from 'utils'
 import './Home.scss'
+import A_Btn from "widgets/A_Btn/A_Btn";
 
 const cn = cssClassName('Home')
 
@@ -23,7 +24,21 @@ class Home extends Component {
         <O_Articles mix={cn('articles')} />
         <O_Video mix={cn('video')} />
         <O_HotIco mix={cn('hot-ico')} />
-        <O_News mix={cn('news')} news={news}/>
+        <div className={cn('news')}>
+          <O_News  news={news} mix={cn('news-inner')}/>
+          <A_Btn
+            {...{
+              type: "link",
+              href: "/news",
+              theme: "filled",
+              color: "yellow",
+              size: 'md',
+              mix: cn('news-btn')
+            }}
+          >
+            WCZESNE
+          </A_Btn>
+        </div>
         <O_Signals mix={cn('signals')} />
         <O_Tweets mix={cn('tweets')} />
       </A_Container>
