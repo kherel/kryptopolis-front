@@ -3,6 +3,7 @@ import {safeDA} from "utils";
 
 const AUTH_API = `/v1/auth/token`;
 const NEWS_API = `/v1/news`;
+const ARTICLES_API = `/v1/news`;
 const CLOUDINARY_CLOUD = process.env.CLOUDINARY_CLOUD
 const UPLOAD_PRESET = 'unsigned_img'
 
@@ -56,6 +57,11 @@ export default {
     post: (attributes) => apiCall('post', NEWS_API, { data: { attributes } }),
     put: (id, attributes) => apiCall('put', `${NEWS_API}/${id}`, { data: { attributes } }),
     delete: (id) => apiCall('delete', `${NEWS_API}/${id}`)
-
+  },
+  articles:{
+    get: () => apiCall('get', ARTICLES_API),
+    post: (attributes) => apiCall('post', ARTICLES_API, { data: { attributes } }),
+    put: (id, attributes) => apiCall('put', `${ARTICLES_API}/${id}`, { data: { attributes } }),
+    delete: (id) => apiCall('delete', `${ARTICLES_API}/${id}`)
   }
 };

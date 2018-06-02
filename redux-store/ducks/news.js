@@ -14,8 +14,6 @@ const initialState = {
   entities: []
 };
 
-
-
 export default (news = initialState, { type, data }) => {
   let newItem, itemIndex, id;
   switch (type) {
