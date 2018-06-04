@@ -1,5 +1,5 @@
 import { Component } from "react";
-import T_AdminNewsItem from "templates/T_AdminNewsItem/T_AdminNewsItem";
+import T_AdminArticleNews from "templates/T_AdminArticleNews/T_AdminArticleNews";
 import authorizationHOC from "HOC/authorizationHOC";
 import { createNews, updateNews, loadNewsItem } from "redux-store/ducks/news";
 import { isEmpty } from "ramda";
@@ -27,7 +27,7 @@ class AdminNewsItem extends Component {
     const {createNews, updateNews, type, id, ...props} = this.props
     const handleSubmit = type === 'update' ? (...arg) => updateNews(id, ...arg) : createNews
 
-    return <T_AdminNewsItem {...{...props, handleSubmit, type}} />;
+    return <T_AdminArticleNews {...{...props, handleSubmit, type, reducerType: 'news'}} />;
   }
 }
 

@@ -10,12 +10,12 @@ const cn = cssClassName('O_Articles')
 class O_Articles extends Component {
 
   render() {
-    const { mix, articles } = this.props
+    const { mix, articles:{ids, entities} } = this.props
     return (
       <div className={cn([mix])}>
         <A_H type='section'>ARTYKUŁY</A_H>
         <div className={cn('items-grid')}>
-          {articles.map((article) => <M_Articles_Item key={article.id} mix={cn('item')} {...article}/>)}
+          {ids.map(id => <M_Articles_Item key={id} mix={cn('item')} {...entities[id]}/>)}
         </div>
       </div>
     );

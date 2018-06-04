@@ -68,7 +68,7 @@ export default (news = initialState, { type, data }) => {
 };
 
 const mapper = data => {
-  const convertedArr = data.reverse().map(convertNews);
+  const convertedArr = data.map(convertNews);
 
   const ids = [];
   const entities = {};
@@ -81,11 +81,14 @@ const mapper = data => {
 };
 
 const convertNews = item => {
-  let text = path(["attributes", "text"], item);
+  const { publishAt, createdAt, updatedAt, ...other } = item.attributes;
+  const releaseDate = publishAt ? publishAt : publishAt;
+  const showDate = moment.utc(releaseDate).format("D MMM");
 
   return {
-    ...item.attributes,
-    text,
+    ...other,
+    releaseDate,
+    showDate,
     id: item.id
   };
 };
@@ -167,7 +170,6 @@ export const updateNews = (
   draft,
   text
 ) => async dispatch => {
-
   try {
     let image;
     const attributes = {
@@ -215,7 +217,7 @@ export async function loadNewsItem(reduxStore, query) {
 // selectors
 
 export function selectorNews(state) {
-  const {entities, ids} = state.news;
+  const { entities, ids } = state.news;
 
   const today = moment(),
     yesterday = moment().subtract(1, "day");
@@ -228,17 +230,14 @@ export function selectorNews(state) {
   };
 
   ids.forEach(id => {
-    const { publish, publishAt, createdAt, title } = entities[id]
-    if (publish) {
-      const releaseDate = publishAt ? moment(publishAt) : moment(createdAt);
-
-      if (releaseDate.isSame(today, "day")) {
-        result.todayIds.push(id);
-      } else if (releaseDate.isSame(yesterday, "day")) {
-        result.yesterdayIds.push(id);
-      } else {
-        result.othersIds.push(id);
-      }
+    const {publish, releaseDate} = entities[id];
+    const momentDate = moment.utc(releaseDate)
+    if (momentDate.isSame(today, "day")) {
+      result.todayIds.push(id);
+    } else if (momentDate.isSame(yesterday, "day")) {
+      result.yesterdayIds.push(id);
+    } else {
+      result.othersIds.push(id);
     }
   });
 

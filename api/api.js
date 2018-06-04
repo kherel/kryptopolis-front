@@ -4,7 +4,7 @@ import {paginator} from 'utils'
 
 const AUTH_API = `/v1/auth/token`;
 const NEWS_API = `/v1/news`;
-const ARTICLES_API = `/v1/news`;
+const ARTICLES_API = `/v1/articles`;
 const CLOUDINARY_CLOUD = process.env.CLOUDINARY_CLOUD
 const UPLOAD_PRESET = 'unsigned_img'
 
@@ -64,6 +64,7 @@ export default {
     get: () => apiCall('get', ARTICLES_API),
     post: (attributes) => apiCall('post', ARTICLES_API, { data: { attributes } }),
     put: (id, attributes) => apiCall('put', `${ARTICLES_API}/${id}`, { data: { attributes } }),
-    delete: (id) => apiCall('delete', `${ARTICLES_API}/${id}`)
+    delete: (id) => apiCall('delete', `${ARTICLES_API}/${id}`),
+    show: id => apiCall('get', `${ARTICLES_API}/${id}`),
   }
 };

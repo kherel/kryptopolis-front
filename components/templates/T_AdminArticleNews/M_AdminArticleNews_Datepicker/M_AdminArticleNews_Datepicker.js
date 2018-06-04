@@ -2,10 +2,10 @@ import React, {Component} from 'react'
 import * as T from 'prop-types'
 import A_Btn from "widgets/A_Btn/A_Btn";
 import {cssClassName} from 'utils'
-import './M_AdminNewsItem_Datepicker.scss'
-const cn = cssClassName('M_AdminNewsItem_Datepicker')
+import './M_AdminArticleNews_Datepicker.scss'
+const cn = cssClassName('M_AdminArticleNews_Datepicker')
 
-class M_AdminNewsItem_Datepicker extends Component {
+class M_AdminArticleNews_Datepicker extends Component {
 
   render(){
     const {value, onClick} = this.props
@@ -26,13 +26,13 @@ class M_AdminNewsItem_Datepicker extends Component {
   }
 }
 
-M_AdminNewsItem_Datepicker.propTypes = {
+M_AdminArticleNews_Datepicker.propTypes = {
   onClick: T.func,
   value: T.string
 }
 
-M_AdminNewsItem_Datepicker.defaultProps = {
+M_AdminArticleNews_Datepicker.defaultProps = {
 
 }
 
-export default M_AdminNewsItem_Datepicker
+export default M_AdminArticleNews_Datepicker

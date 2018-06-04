@@ -1,5 +1,5 @@
 import { Component } from "react";
-import T_AdminNews from "templates/T_AdminNews/T_AdminNews";
+import T_AdminList from "templates/T_AdminList/T_AdminList";
 import authorizationHOC from "HOC/authorizationHOC";
 import {loadNews, removeNews} from "redux-store/ducks/news";
 import {connect} from "react-redux";
@@ -13,7 +13,7 @@ class AdminIndex extends Component {
   }
 
   render() {
-    return <T_AdminNews {...this.props}/>;
+    return <T_AdminList {...this.props} reducerType = 'news'/>;
   }
 }
 
@@ -23,7 +23,7 @@ function mapToState(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  const actions = bindActionCreators({ removeNews }, dispatch)
+  const actions = bindActionCreators({ removeItem: removeNews }, dispatch)
   return { ...actions }
 }
 

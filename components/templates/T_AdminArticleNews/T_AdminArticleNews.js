@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import "./react-datepicker.scss";
 
-import M_AdminNewsItem_Datepicker from "./M_AdminNewsItem_Datepicker/M_AdminNewsItem_Datepicker";
+import M_AdminArticleNews_Datepicker from "./M_AdminArticleNews_Datepicker/M_AdminArticleNews_Datepicker";
 
 import A_Container from "widgets/A_Container/A_Container";
 import A_H from "widgets/A_H/A_H";
@@ -16,10 +16,10 @@ import M_FileInput from "widgets/M_FileInput/M_FileInput";
 import O_TextEditor from "widgets/O_TextEditor/O_TextEditor";
 
 import { cssClassName } from "utils";
-import "./T_AdminNewsItem.scss";
+import "./T_AdminArticleNews.scss";
 import { required } from "../../../utils/validateHelpers";
 import A_TextArea from "widgets/A_TextArea/A_TextArea";
-const cn = cssClassName("T_AdminNewsItem");
+const cn = cssClassName("T_AdminArticleNews");
 
 const customFileValidation = (file, props) => {
   if (file || props.image) {
@@ -29,7 +29,7 @@ const customFileValidation = (file, props) => {
   }
 };
 
-class T_AdminNewsItem extends Component {
+class T_AdminArticleNews extends Component {
   state = {
     form: {
       title: this.props.title || "",
@@ -88,22 +88,27 @@ class T_AdminNewsItem extends Component {
     const draft = this.textEditorNode.getStringRaw();
     const text = this.textEditorNode.getStringHtml();
 
+    const { reducerType } = this.props;
+    const redirectPage = `/admin${reducerType === 'article' ? '/articles' : ''}`
+
     this.validateFields(form, () => {
       if (this.state.formValid) {
         this.props
           .handleSubmit(publish, publishAt, form.title, form.file, form.summary, draft, text)
-          .then(Router.push("/admin"));
+          .then(Router.push(redirectPage));
       }
     });
   };
 
   render() {
     const { publish, form: { title, summary }, errors } = this.state,
-      { type } = this.props;
+      { type, reducerType } = this.props;
+
+    const formTitle = reducerType === 'article' ? 'ARTYKUŁY' : 'WIADOMOŚCI'
     return (
       <A_Container mix={cn()} padding="wide">
         <A_H mix={cn("title")} type="section">
-          WIADOMOŚCI
+          {formTitle}
         </A_H>
         <p className={cn("subtitle")}>
           {type === "create" ? "create" : "update"}
@@ -125,7 +130,7 @@ class T_AdminNewsItem extends Component {
         <div className={cn("row")}>
           <p className={cn("row-label")}>Date:</p>
           <DatePicker
-            customInput={<M_AdminNewsItem_Datepicker />}
+            customInput={<M_AdminArticleNews_Datepicker />}
             selected={this.state.publishAt}
             onChange={publishAt => this.setState({ publishAt })}
             showTimeSelect
@@ -193,12 +198,12 @@ class T_AdminNewsItem extends Component {
   }
 }
 
-T_AdminNewsItem.propTypes = {
+T_AdminArticleNews.propTypes = {
   entity: T.object.isRequired
 };
 
-T_AdminNewsItem.defaultProps = {
+T_AdminArticleNews.defaultProps = {
   entity: {}
 };
 
-export default T_AdminNewsItem;
+export default T_AdminArticleNews;

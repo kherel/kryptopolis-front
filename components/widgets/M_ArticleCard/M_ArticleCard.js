@@ -9,7 +9,7 @@ const cn = cssClassName('M_ArticleCard')
 const M_ArticleCard = (
   {
     mix,
-    article:{title, summary, image},
+    article:{title, summary, image, user:{name}, showDate},
     articleLink,
     hasBorder
   }) =>(
@@ -28,7 +28,7 @@ const M_ArticleCard = (
       >
         PRZECZYTAJ WIĘCEJ
       </A_Btn>
-      <span className={cn('credentials')}>13 godz. ago | Krzysztof Gonciarz</span>
+      <span className={cn('credentials')}>{showDate} | {name}</span>
     </div>
   </div>
 )

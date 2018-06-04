@@ -6,12 +6,12 @@ import A_Container from 'widgets/A_Container/A_Container'
 import './T_NewsItem.scss'
 import {cssClassName} from 'utils'
 const cn = cssClassName('T_NewsItem')
-
+import moment from 'moment'
 class T_NewsItem extends Component {
 
   render() {
 
-    const {title, text, image} = this.props.newsItem
+    const {title, text, image, user, showDate} = this.props.newsItem
 
     return (
       <A_Container mix={cn()} padding='wide'>
@@ -20,8 +20,8 @@ class T_NewsItem extends Component {
           <div className={cn('head')}>
             <A_LabelTitle size='lg' mix={cn('label')}>WIADOMOŚCI</A_LabelTitle>
             <div className={cn('credentials')}>
-              <span className={cn('author')}>Marek Marecki</span>
-              <span className={cn('date')}>13 godz. ago</span>
+              <span className={cn('author')}>{user.name}</span>
+              <span className={cn('date')}>{showDate}</span>
             </div>
           </div>
           <img className={cn('image')} src={image} />

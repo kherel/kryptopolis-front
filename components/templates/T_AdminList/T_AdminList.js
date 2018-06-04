@@ -3,28 +3,35 @@ import A_Container from "widgets/A_Container/A_Container";
 import A_H from "widgets/A_H/A_H";
 import A_Btn from "widgets/A_Btn/A_Btn";
 import A_InputText from "widgets/A_InputText/A_InputText";
-import O_AdminNewsItem from "./O_AdminNewsItem/O_AdminNewsItem";
+import O_AdminListCard from "./O_AdminListCard/O_AdminListCard";
 // import * as T from "prop-types";
-import "./T_AdminNews.scss";
+import "./T_AdminList.scss";
 import { cssClassName } from "utils";
-import { removeNews } from "redux-store/ducks/news";
 import * as T from "prop-types";
-const cn = cssClassName("T_AdminNews");
+const cn = cssClassName("T_AdminList");
 
 class T_Admin_News extends Component {
   state = {};
 
   render() {
-    const { loaded, entities, removeNews, ids } = this.props;
+    const { loaded, entities, removeItem, ids, reducerType } = this.props;
+    let title, urlPath;
 
+    if(reducerType === 'articles'){
+      urlPath = '/admin/article'
+      title= 'ARTYKUŁY'
+    } else {
+      urlPath =  '/admin/news-item'
+      title= 'WIADOMOŚCI'
+    }
     return (
       <A_Container mix={cn()} padding="wide">
         <A_H mix={cn("title")} type="article">
-          WIADOMOŚCI
+          {title}
         </A_H>
 
         <div className={cn("controls")}>
-          <A_Btn size="md" theme="filled" color="yellow" type='link' href={'/admin/news-item'}>
+          <A_Btn size="md" theme="filled" color="yellow" type='link' href={urlPath}>
             CREAT NEW
           </A_Btn>
           <div className={cn("search")}>
@@ -40,8 +47,8 @@ class T_Admin_News extends Component {
 
         <ul className={cn("items-list")}>
           {ids.map(id => (
-            <O_AdminNewsItem
-              {...{id, ...entities[id], removeNews: () => removeNews(id), mix: "item", key: id }}
+            <O_AdminListCard
+              {...{id, ...entities[id], href:`${urlPath}?id=${id}`, removeItem: () => removeItem(id), mix: "item", key: id }}
             />
           ))}
         </ul>
@@ -52,7 +59,7 @@ class T_Admin_News extends Component {
 }
 
 T_Admin_News.propTypes = {
-  removeNews: T.func.isRequired
+  removeItem: T.func.isRequired
 
 };
 
