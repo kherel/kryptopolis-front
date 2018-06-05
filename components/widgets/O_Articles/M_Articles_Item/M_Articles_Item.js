@@ -7,15 +7,14 @@ import './M_Articles_Item.scss'
 
 const cn = cssClassName('M_Articles_Item')
 
-const M_Articles_Item = ({mix, id, image, title, user, date, views}) => (
+const M_Articles_Item = ({mix, id, image, title, user, showDate}) => (
   <div className={cn([mix])}>
     <img className={cn('image')} src={image}/>
     <Link href={`/article?id=${id}`}>
       <div className={cn('card')}>
         <A_H type='widget-sm'>{title}</A_H>
         <p className={cn('info')}>
-          Konstantin Kinstantinov<br />
-          13 godz. ago | 18005
+          {user.name} | {showDate}
         </p>
       </div>
     </Link>

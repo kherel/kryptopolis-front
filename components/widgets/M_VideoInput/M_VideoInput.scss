@@ -1,0 +1,18 @@
+.m-video-input {
+  &__input {
+    display: inline-flex;
+    align-items: center;
+    justify-items: center;
+  }
+
+  &__btn{
+    margin-left: 2rem;
+  }
+  &__video{
+    margin: 2rem 0;
+    position: relative;
+    width: 30rem;
+    height: 16.9rem;
+
+  }
+}

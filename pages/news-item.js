@@ -8,7 +8,7 @@ import * as T from "prop-types";
 class NewsItem extends Component {
   static async getInitialProps({ reduxStore, query }) {
     const newsItem = await loadNewsItem(reduxStore, query);
-    return {newsItem}
+    return {...newsItem}
   }
 
   render() {

@@ -11,6 +11,7 @@ import {
   UPDATE,
   REMOVE
 } from "./commonConstants";
+const cloudinaryTag = 'news'
 
 const NEWS = "NEWS";
 const NEWS_ITEM = "NEWS_ITEM";
@@ -150,7 +151,7 @@ export const createNews = (
       text
     };
     if (file) {
-      image = await api.cloudinary.upload(file);
+      image = await api.cloudinary.upload(file, cloudinaryTag);
       attributes.image = image;
     }
     const res = await api.news.post(attributes);
@@ -182,7 +183,7 @@ export const updateNews = (
       text
     };
     if (file) {
-      image = await api.cloudinary.upload(file);
+      image = await api.cloudinary.upload(file, cloudinaryTag);
       attributes.image = image;
     }
     const res = await api.news.put(id, attributes);

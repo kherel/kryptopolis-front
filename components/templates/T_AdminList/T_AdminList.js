@@ -17,13 +17,20 @@ class T_Admin_News extends Component {
     const { loaded, entities, removeItem, ids, reducerType } = this.props;
     let title, urlPath;
 
-    if(reducerType === 'articles'){
-      urlPath = '/admin/article'
-      title= 'ARTYKUŁY'
-    } else {
-      urlPath =  '/admin/news-item'
-      title= 'WIADOMOŚCI'
+    switch (reducerType){
+      case 'articles':
+        urlPath = '/admin/article'
+        title= 'ARTYKUŁY'
+        break;
+      case 'news':
+        urlPath = '/admin/article'
+        title= 'ARTYKUŁY'
+        break;
+      case 'videos':
+        urlPath =  '/admin/video'
+        title= 'WIDEO'
     }
+
     return (
       <A_Container mix={cn()} padding="wide">
         <A_H mix={cn("title")} type="article">

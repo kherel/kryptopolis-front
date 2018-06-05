@@ -11,6 +11,7 @@ import {
   UPDATE,
   REMOVE
 } from "./commonConstants";
+const cloudinaryTag = 'articles'
 
 const ARTICLES = "ARTICLES";
 const ARTICLE = "ARTICLE";
@@ -81,13 +82,17 @@ const mapper = data => {
 };
 
 const convertArticle = item => {
-  let text = path(["attributes", "text"], item);
+  const { publishAt, createdAt, updatedAt, ...other } = item.attributes;
+  const releaseDate = publishAt ? publishAt : publishAt;
+  const showDate = moment.utc(releaseDate).format("D MMM");
 
   return {
-    ...item.attributes,
-    text,
+    ...other,
+    releaseDate,
+    showDate,
     id: item.id
   };
+
 };
 
 // action creators
@@ -147,7 +152,7 @@ export const createArticle = (
       text
     };
     if (file) {
-      image = await api.cloudinary.upload(file);
+      image = await api.cloudinary.upload(file, cloudinaryTag);
       attributes.image = image;
     }
     const res = await api.articles.post(attributes);
@@ -180,7 +185,7 @@ export const updateArticle = (
       text
     };
     if (file) {
-      image = await api.cloudinary.upload(file);
+      image = await api.cloudinary.upload(file, cloudinaryTag);
       attributes.image = image;
     }
     const res = await api.articles.put(id, attributes);
@@ -227,13 +232,13 @@ export function selectorArticles(state) {
   };
 
   ids.forEach(id => {
-    const { publish, publishAt, createdAt, title } = entities[id]
-    if (publish) {
-      const releaseDate = publishAt ? moment(publishAt) : moment(createdAt);
+    const {publish, releaseDate} = entities[id];
+    const momentDate = moment.utc(releaseDate)
 
-      if (releaseDate.isSame(today, "day")) {
+    if (publish) {
+      if (momentDate.isSame(today, "day")) {
         result.todayIds.push(id);
-      } else if (releaseDate.isSame(yesterday, "day")) {
+      } else if (momentDate.isSame(yesterday, "day")) {
         result.yesterdayIds.push(id);
       } else {
         result.othersIds.push(id);

@@ -3,15 +3,16 @@ import { Component } from 'react'
 import A_H from 'widgets/A_H/A_H'
 import A_LabelTitle from 'widgets/A_LabelTitle/A_LabelTitle'
 import A_Container from 'widgets/A_Container/A_Container'
-import './T_NewsItem.scss'
+import './T_Video.scss'
 import {cssClassName} from 'utils'
-const cn = cssClassName('T_NewsItem')
-import moment from 'moment'
-class T_NewsItem extends Component {
+const cn = cssClassName('T_Video')
+import YouTubePlayer from 'react-player/lib/players/YouTube'
+
+class T_Video extends Component {
 
   render() {
 
-    const {title, text, image, user, showDate} = this.props
+    const {title, text, video, user, showDate} = this.props
 
     return (
       <A_Container mix={cn()} padding='wide'>
@@ -24,8 +25,17 @@ class T_NewsItem extends Component {
               <span className={cn('date')}>{showDate}</span>
             </div>
           </div>
-          <img className={cn('image')} src={image} />
-          <div className={cn('article')} dangerouslySetInnerHTML={{__html: text}} />
+          <div className={cn('video')}>
+            <YouTubePlayer
+              className={cn('video-player')}
+              height='100%'
+              width='100%'
+              playing
+              url={`https://www.youtube.com/watch?v=${this.props.video}`}
+            />
+          </div>
+          <p>{text}</p>
+          {/*<img className={cn('image')} src={image} />*/}
           <div className={cn('share')}>Share:</div>
           <A_LabelTitle size='md' mix={cn('label')} hasBorder>WIĘCEJ</A_LabelTitle>
         </section>
@@ -37,10 +47,10 @@ class T_NewsItem extends Component {
   }
 }
 
-T_NewsItem.propTypes = {
+T_Video.propTypes = {
 }
 
-T_NewsItem.defaultProps = {
+T_Video.defaultProps = {
 }
 
-export default T_NewsItem
+export default T_Video

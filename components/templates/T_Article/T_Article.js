@@ -3,11 +3,11 @@ import { Component } from 'react'
 import A_H from 'widgets/A_H/A_H'
 import A_LabelTitle from 'widgets/A_LabelTitle/A_LabelTitle'
 import A_Container from 'widgets/A_Container/A_Container'
-import './T_NewsItem.scss'
+import './T_Article.scss'
 import {cssClassName} from 'utils'
-const cn = cssClassName('T_NewsItem')
+const cn = cssClassName('T_Article')
 import moment from 'moment'
-class T_NewsItem extends Component {
+class T_Article extends Component {
 
   render() {
 
@@ -37,10 +37,10 @@ class T_NewsItem extends Component {
   }
 }
 
-T_NewsItem.propTypes = {
+T_Article.propTypes = {
 }
 
-T_NewsItem.defaultProps = {
+T_Article.defaultProps = {
 }
 
-export default T_NewsItem
+export default T_Article

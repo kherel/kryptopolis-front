@@ -3,8 +3,6 @@ import Router from "next/router";
 import * as T from "prop-types";
 import DatePicker from "react-datepicker";
 import moment from "moment";
-import "./react-datepicker.scss";
-
 import M_AdminDatepicker from "widgets/M_AdminDatepicker/M_AdminDatepicker";
 
 import A_Container from "widgets/A_Container/A_Container";
@@ -12,36 +10,26 @@ import A_H from "widgets/A_H/A_H";
 import A_Btn from "widgets/A_Btn/A_Btn";
 import A_InputText from "widgets/A_InputText/A_InputText";
 import A_Switch from "widgets/A_Switch/A_Switch";
-import M_FileInput from "widgets/M_FileInput/M_FileInput";
-import O_TextEditor from "widgets/O_TextEditor/O_TextEditor";
 
 import { cssClassName } from "utils";
-import "./T_AdminArticleNews.scss";
-import { required } from "../../../utils/validateHelpers";
-import A_TextArea from "widgets/A_TextArea/A_TextArea";
-const cn = cssClassName("T_AdminArticleNews");
+import "./T_AdminVideo.scss";
+import { required } from "utils/validateHelpers";
+import M_VideoInput from "widgets/M_VideoInput/M_VideoInput";
+const cn = cssClassName("T_AdminVideo");
 
-const customFileValidation = (file, props) => {
-  if (file || props.image) {
-    return null;
-  } else if (!file && !props.image) {
-    return "Photo required";
-  }
-};
-
-class T_AdminArticleNews extends Component {
+class T_AdminVideo extends Component {
   state = {
     form: {
       title: this.props.title || "",
-      summary: this.props.summary || "",
-      file: undefined
+      text: this.props.text || "",
+      video: this.props.video || "",
     },
     publishAt: this.props.publishAt ? moment(this.props.publishAt) : undefined,
     publish: this.props.publish || true,
     validations: {
       title: [required],
-      summary: [required],
-      file: [customFileValidation]
+      text: [required],
+      video: [required],
     },
     formValid: false,
     errors: {}
@@ -83,32 +71,26 @@ class T_AdminArticleNews extends Component {
   };
 
   onSubmit = () => {
-    const { publish, form } = this.state;
+    const { publish, form, video } = this.state;
     let { publishAt } = this.state;
-    const draft = this.textEditorNode.getStringRaw();
-    const text = this.textEditorNode.getStringHtml();
-
-    const { reducerType } = this.props;
-    const redirectPage = `/admin${reducerType === 'article' ? '/articles' : ''}`
 
     this.validateFields(form, () => {
       if (this.state.formValid) {
         this.props
-          .handleSubmit(publish, publishAt, form.title, form.file, form.summary, draft, text)
-          .then(Router.push(redirectPage));
+          .handleSubmit(publish, publishAt, form.title, form.text, form.video)
+          .then(Router.push('/admin/videos'));
       }
     });
   };
 
   render() {
-    const { publish, form: { title, summary }, errors } = this.state,
-      { type, reducerType } = this.props;
+    const { publish, form: { title, text, video }, errors } = this.state,
+      { type } = this.props;
 
-    const formTitle = reducerType === 'article' ? 'ARTYKUŁY' : 'WIADOMOŚCI'
     return (
       <A_Container mix={cn()} padding="wide">
         <A_H mix={cn("title")} type="section">
-          {formTitle}
+          WIDEO
         </A_H>
         <p className={cn("subtitle")}>
           {type === "create" ? "create" : "update"}
@@ -151,27 +133,20 @@ class T_AdminArticleNews extends Component {
           error={errors.title}
         />
 
-        <A_TextArea
+        <A_InputText
           mix={cn("title-input")}
           theme="admin"
-          value={summary}
-          handleChange={value => this.handleChange(value, "summary")}
-          placeholder="Enter summary here"
-          max = {250}
-          error={errors.summary}
+          value={text}
+          handleChange={value => this.handleChange(value, "text")}
+          placeholder="Enter description here"
+          error={errors.text}
         />
 
-        <O_TextEditor
-          mix={cn("text-editor")}
-          initValue={this.props.draft}
-          ref={node => (this.textEditorNode = node)}
-        />
-
-        <M_FileInput
-          mix={cn("photo-input")}
-          handleChange={value => this.handleChange(value, "file")}
-          url={this.props.image}
-          error={errors.file}
+        <M_VideoInput
+          mix={cn("video-input")}
+          handleSubmit={value => this.handleChange(value, "video")}
+          video={video}
+          error={errors.video}
         />
 
         <A_Btn
@@ -198,12 +173,12 @@ class T_AdminArticleNews extends Component {
   }
 }
 
-T_AdminArticleNews.propTypes = {
+T_AdminVideo.propTypes = {
   entity: T.object.isRequired
 };
 
-T_AdminArticleNews.defaultProps = {
+T_AdminVideo.defaultProps = {
   entity: {}
 };
 
-export default T_AdminArticleNews;
+export default T_AdminVideo;

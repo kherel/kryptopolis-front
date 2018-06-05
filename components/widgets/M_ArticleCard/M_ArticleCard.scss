@@ -15,8 +15,8 @@
     flex-shrink: 0;
     margin-right: 3rem;
     width: 35rem;
-    height: 20rem;
-    object-fit: cover;
+    //height: 20rem;
+    //object-fit: cover;
     @include media ($desktop-sm) {
       margin-right: 0;
       margin-bottom: 1rem;

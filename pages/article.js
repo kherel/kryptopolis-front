@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import { withRouter } from "next/router";
-import {connect} from "react-redux";
 import T_Article from "templates/T_Article/T_Article";
-import {loadArticles} from "../redux-store/ducks/articles";
+import {loadArticle} from "../redux-store/ducks/articles";
 
 class Article extends Component {
-  static async getInitialProps({ reduxStore }, ...props) {
-    await loadArticles(reduxStore);
-    return { props };
+  static async getInitialProps({ reduxStore, query }) {
+    const article = await loadArticle(reduxStore, query);
+    return {...article}
   }
 
   render() {
@@ -15,13 +13,4 @@ class Article extends Component {
   }
 }
 
-function mapToState(state, { router }) {
-  const { id } = router.query;
-  const { entities } = state.articles;
-  const entity = entities.find(el => el.id === id);
-  return { article: {...entity} };
-}
-
-export default  withRouter(
-  connect(mapToState)(Article)
-);
+export default Article

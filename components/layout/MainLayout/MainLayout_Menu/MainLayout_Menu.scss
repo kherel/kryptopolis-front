@@ -15,7 +15,6 @@
         background-color: $color-green-light;
       }
     }
-
   }
 
   &__register-btn {
@@ -24,6 +23,7 @@
 
   &__login{
     display: flex;
+    margin-left: auto;
     justify-content: center;
 
     &-profile{

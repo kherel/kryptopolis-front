@@ -1,4 +1,4 @@
-.t-news-item {
+.t-article {
   display: flex;
   @include media ($mobile) {
     padding-left: 0;
@@ -17,7 +17,7 @@
   }
 
   &__sidebar {
-    flex: 0 0 30rem;
+    flex: 0 0 28rem;
     background-color: transparentize(red, .5);
     @include media ($desktop-sm) {
       flex: 0 0 26rem;

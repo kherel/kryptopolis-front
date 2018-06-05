@@ -3,35 +3,38 @@ import * as T from 'prop-types'
 import A_H from 'widgets/A_H/A_H'
 import {cssClassName} from 'utils/index'
 import './O_Video.scss'
+import Link from 'next/link'
 
 const cn = cssClassName('O_Video')
 
 class O_Video extends Component {
 
   render() {
-    const { mix } = this.props
+    const { mix, ids, entities } = this.props
     return (
       <div className={cn([mix])}>
         <A_H mix={cn('title')} type='section'>Video</A_H>
 
         <div className={cn('items-grid')}>
-          <div className={cn('item')}>
-            <div className={cn('item-img')}>
-              <img src="/static/img/hot.jpg" />
-            </div>
-            <A_H mix={cn('item-title')} type='widget-sm'>
-              PRANIE BITCOINÓW MNIEJ NIŻ JEDEN PROCENT WSZYSTKICH TRANSAKCJI
-            </A_H>
-          </div>
+          {
+            ids.slice(0, 2).map(id => {
+              const {video, title} = entities[id];
+              return(
+                <Link href={`/video?id=${id}`}>
+                  <div className={cn('item')} key={id}>
+                    <div className={cn('item-img')}>
+                      <img src={`https://img.youtube.com/vi/${entities[id].video}/sddefault.jpg`} />
+                    </div>
 
-          <div className={cn('item')}>
-            <div className={cn('item-img')}>
-              <img src="/static/img/hot.jpg" />
-            </div>
-            <A_H mix={cn('item-title')} type='widget-sm'>
-              MEDIA KONTYNUUJE SZYBKĄ BITCOINĘ, W JAKI SPOSÓB RYNEK OTWARTYCH RYNKÓW
-            </A_H>
-          </div>
+                      <A_H mix={cn('item-title')} type='widget-sm'>
+                        {title}
+                      </A_H>
+                  </div>
+                </Link>
+
+              )
+            })
+          }
         </div>
 
       </div>

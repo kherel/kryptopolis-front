@@ -12,7 +12,20 @@ module.exports = withSass({
     }, {});
 
     config.plugins.push(new webpack.DefinePlugin(env));
-
+    config.module.rules.push(
+      {
+        test: /\.svg/,
+        rules: [
+          {
+            issuer: /\.js/,
+            use: 'svg-sprite-loader',
+          },
+          {
+            issuer: /\.scss/,
+            use: 'svg-url-loader',
+          }]
+      }
+    )
     return config;
   }
 })

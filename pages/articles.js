@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { loadArticles } from "redux-store/ducks/articles";
 import { connect } from "react-redux";
+import { selectorArticles } from "redux-store/ducks/articles";
 import T_Articles from "templates/T_Articles/T_Articles";
 
 class Articles extends Component {
@@ -15,7 +16,7 @@ class Articles extends Component {
 }
 
 function mapStateToProps(state) {
-  const {entities:articles} = state.articles
+  const articles = selectorArticles(state);
   return { articles };
 }
 
