@@ -3,8 +3,6 @@ import Router from "next/router";
 import * as T from "prop-types";
 import DatePicker from "react-datepicker";
 import moment from "moment";
-import "./react-datepicker.scss";
-
 import M_AdminDatepicker from "widgets/M_AdminDatepicker/M_AdminDatepicker";
 
 import A_Container from "widgets/A_Container/A_Container";
@@ -17,7 +15,7 @@ import O_TextEditor from "widgets/O_TextEditor/O_TextEditor";
 
 import { cssClassName } from "utils";
 import "./T_AdminArticleNews.scss";
-import { required } from "../../../utils/validateHelpers";
+import { required } from "utils/validateHelpers";
 import A_TextArea from "widgets/A_TextArea/A_TextArea";
 const cn = cssClassName("T_AdminArticleNews");
 
