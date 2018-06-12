@@ -21,7 +21,7 @@ class MainLayoutCurrencyItem extends Component {
         className={cn([mix])}
         onClick={() => this._toggleDropdown()}
       >
-        <A_H type='widget' mix={cn('currency')}>{currency}</A_H>
+        <A_H type='widget'>{currency}</A_H>
         <div className={cn('price')}>${price}</div>
         <div className={cn('diff',{growth: diff > 0})}>{diff}%</div>
       </div>

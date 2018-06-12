@@ -1,14 +1,20 @@
 .main-layout-currency-item {
   cursor: pointer;
-  &__currency {
-
+  padding-left: 2.5rem;
+  @include media ($mobile) {
+    padding-left: 2rem;
   }
-
   &__price {
     position: relative;
     margin-bottom: .5rem;
     font-size: 2.4rem;
     color: $color-blue-dark;
+    @include media ($tablet) {
+      font-size: 1.4rem;
+    }
+    @include media ($mobile) {
+      font-size: 1.2rem;
+    }
     &::before {
       content: '';
       position: absolute;
@@ -19,6 +25,9 @@
       transform: translateY(-50%);
       background-color: $color-blue-dark;
       border-radius: 50%;
+      @include media ($mobile) {
+        left: -2rem;
+      }
     }
   }
 
@@ -30,6 +39,10 @@
     font-weight: 500;
     font-size: 1.4rem;
     color: $color-white;
+    @include media ($tablet) {
+      padding: .5rem 1rem .5rem 2.5rem;
+      font-size: 1.2rem;
+    }
     &::after {
       content: '';
       position: absolute;

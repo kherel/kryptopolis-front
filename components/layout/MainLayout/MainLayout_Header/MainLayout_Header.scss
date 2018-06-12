@@ -100,12 +100,18 @@
     grid-area: tkr;
     width: 100%;
     justify-self: right;
+    @include media ($mobile) {
+      margin-bottom: 1rem;
+    }
   }
 
   &__currencies{
     grid-area: crs;
     align-self: start;
     justify-self: end;
+    @include media ($mobile) {
+      justify-self: center;
+    }
   }
 
   &__btn{

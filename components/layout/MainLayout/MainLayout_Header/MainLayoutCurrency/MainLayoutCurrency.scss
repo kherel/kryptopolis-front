@@ -2,15 +2,24 @@
   display: flex;
   &__item {
     &:nth-child(1) {
-      margin-right: 5rem;
+      padding-right: 2.5rem;
+      @include media ($mobile) {
+        padding-right: .5rem;
+      }
     }
     &:nth-child(2) {
       padding: 0 5rem;
       border: solid #feed00;
       border-width: 0 .2rem;
+      @include media ($mobile) {
+        padding: 0 1rem 0 3rem;
+      }
     }
     &:nth-child(3) {
-      margin-left: 5rem;
+      padding-left: 5rem;
+      @include media ($mobile) {
+        padding-left: 2.5rem;
+      }
     }
   }
 }
