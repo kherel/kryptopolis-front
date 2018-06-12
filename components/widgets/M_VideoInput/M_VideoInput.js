@@ -17,7 +17,7 @@ class VideoInput extends Component {
   }
 
   state = {
-    id: '',
+    id: this.props.video || '',
   }
 
   handleSubmit(){

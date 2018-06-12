@@ -20,8 +20,8 @@ class O_Video extends Component {
             ids.slice(0, 2).map(id => {
               const {video, title} = entities[id];
               return(
-                <Link href={`/video?id=${id}`}>
-                  <div className={cn('item')} key={id}>
+                <Link href={`/video?id=${id}`} key={id}>
+                  <div className={cn('item')}>
                     <div className={cn('item-img')}>
                       <img src={`https://img.youtube.com/vi/${entities[id].video}/sddefault.jpg`} />
                     </div>

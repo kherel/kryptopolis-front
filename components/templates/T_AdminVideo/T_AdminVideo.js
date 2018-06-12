@@ -164,7 +164,7 @@ class T_AdminVideo extends Component {
           color={"red"}
           size={"md"}
           type={"link"}
-          href={"/admin"}
+          href={"/admin/videos"}
         >
           Cancel
         </A_Btn>
