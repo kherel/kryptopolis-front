@@ -24,9 +24,17 @@
     &-img {
       position: relative;
       margin-bottom: 1rem;
-      min-height: 1.2rem;
+      height: 12rem;
       width: 100%;
-
+      @include media ($desktop-sm) {
+        height: 17rem;
+      }
+      @include media ($tablet) {
+        height: 12rem;
+      }
+      @include media ($mobile) {
+        height: 15rem;
+      }
       img {
         width: inherit;
         height: inherit;
@@ -37,12 +45,11 @@
         content: ' ';
         background-image: url('/static/img/play.svg');
         position: absolute;
-        width: 8rem;
-        height: 8rem;
+        width: 4rem;
+        height: 4rem;
         top: 50%;
         left: 50%;
-        margin-top: -4rem;
-        margin-left: -4rem;
+        transform: translate(-50%, -50%);
       }
     }
     &-title {
