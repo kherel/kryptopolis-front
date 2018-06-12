@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import * as T from 'prop-types'
+import {mainNavigation} from 'data/navigation'
+import Link from 'next/link'
+import A_Btn from "widgets/A_Btn/A_Btn";
 import A_Container from 'widgets/A_Container/A_Container'
+import A_Link from "widgets/A_Link/A_Link";
+import A_NavBtn from "widgets/A_NavBtn/A_NavBtn";
+import A_Svg from "widgets/A_Svg/Svg";
+import MainLayoutTicker from "./MainLayoutTicker/MainLayoutTicker";
+import MainLayoutCurrency from "./MainLayoutCurrency/MainLayoutCurrency";
 import {cssClassName} from 'utils/index'
 import './MainLayout_Header.scss'
-import A_Svg from "widgets/A_Svg/Svg";
-import A_Link from "widgets/A_Link/A_Link";
-import A_Btn from "widgets/A_Btn/A_Btn";
+
 const cn = cssClassName('MainLayout_Header')
-import {mainNavigation} from 'data/navigation'
-import A_NavBtn from "widgets/A_NavBtn/A_NavBtn";
-import MainLayoutTicker from "./MainLayoutTicker/MainLayoutTicker";
-import Link from 'next/link'
 
 class MainLayout_Header extends Component {
 
@@ -106,7 +108,7 @@ class MainLayout_Header extends Component {
         </Link>
         <div className={cn('slogan')}>AKTUALNE WIADOMOŚCI <br/>O ŚWIECIE KRYPTOWALUTY</div>
         <MainLayoutTicker mix={cn('ticker')} />
-        <div className={cn('currencies')}>currencies</div>
+        <MainLayoutCurrency mix={cn('currencies')} />
         <A_Svg name={'burger'} className={cn('btn')} onClick={() => this.setState({ open: true })} />
         {open && this.getMobileMenu()}
 

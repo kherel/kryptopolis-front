@@ -101,10 +101,11 @@
     width: 100%;
     justify-self: right;
   }
+
   &__currencies{
     grid-area: crs;
-    background-color: rgba(green, 0.3);
-    width: 100%;
+    align-self: start;
+    justify-self: end;
   }
 
   &__btn{
