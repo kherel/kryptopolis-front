@@ -109,6 +109,7 @@
     grid-area: crs;
     align-self: start;
     justify-self: end;
+    width: 100%;
     @include media ($mobile) {
       justify-self: center;
     }

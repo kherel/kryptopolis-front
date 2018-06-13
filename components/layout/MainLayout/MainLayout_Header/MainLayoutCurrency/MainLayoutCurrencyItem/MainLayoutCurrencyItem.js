@@ -24,6 +24,7 @@ class MainLayoutCurrencyItem extends Component {
         <A_H type='widget'>{currency}</A_H>
         <div className={cn('price')}>${price}</div>
         <div className={cn('diff',{growth: diff > 0})}>{diff}%</div>
+
       </div>
     )
   }

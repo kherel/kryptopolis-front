@@ -17,7 +17,7 @@ class O_Video extends Component {
 
         <div className={cn('items-grid')}>
           {
-            ids.slice(0, 2).map(id => {
+            ids.slice(0, 3).map(id => {
               const {video, title} = entities[id];
               return(
                 <Link href={`/video?id=${id}`} key={id}>

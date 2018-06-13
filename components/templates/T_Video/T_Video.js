@@ -19,7 +19,7 @@ class T_Video extends Component {
         <section className={cn('content')}>
           <A_H mix={cn('title')} type='article'>{title}</A_H>
           <div className={cn('head')}>
-            <A_LabelTitle size='lg' mix={cn('label')}>WIADOMOŚCI</A_LabelTitle>
+            <A_LabelTitle size='lg' mix={cn('label')}>WIDEO</A_LabelTitle>
             <div className={cn('credentials')}>
               <span className={cn('author')}>{user.name}</span>
               <span className={cn('date')}>{showDate}</span>
