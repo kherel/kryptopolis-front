@@ -218,7 +218,7 @@ export async function loadNewsItem(reduxStore, query) {
 // selectors
 
 export function selectorNews(state) {
-  const { entities, ids } = state.news;
+  const { entities, ids } = selectorPublishedNews(state);
 
   const today = moment(),
     yesterday = moment().subtract(1, "day");
@@ -243,4 +243,13 @@ export function selectorNews(state) {
   });
 
   return result;
+}
+
+
+export function selectorPublishedNews(state) {
+  const {entities, ids: allIds} = state.news;
+
+  const ids = allIds.filter(id => entities[id].publish)
+
+  return {...state.news, ids};
 }

@@ -3,7 +3,7 @@ import { setStatus } from "redux-store/ducks/appStatus";
 import Home from "templates/Home/Home";
 //import * as T from "prop-types";
 import { loadNews, selectorNews } from "redux-store/ducks/news";
-import { loadArticles, selectorArticles } from "redux-store/ducks/articles";
+import { loadArticles, selectorPublishedArticles } from "redux-store/ducks/articles";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { loadVideos } from "redux-store/ducks/videos";
@@ -27,7 +27,9 @@ class Index extends Component {
 function mapStateToProps(state) {
   const { email } = state.auth;
   const news = selectorNews(state);
-  const {articles, videos} = state
+  const articles = selectorPublishedArticles(state);
+
+  const {videos} = state
 
   return { email, news, articles, videos };
 }

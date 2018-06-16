@@ -1,10 +1,16 @@
 {
-  "presets": [
-    "next/babel"
-  ],
+  "presets": ["next/babel"],
   "plugins": [
-    ["module-resolver", {
-      "root": ["./", "./components"]
-    }]
-  ]
+    [
+      "module-resolver",
+      {
+        "root": ["./", "./components"]
+      }
+    ]
+  ],
+  "env": {
+    "test": {
+      "presets": [["next/babel", { "preset-env": { "modules": "commonjs" } }]]
+    }
+  }
 }

@@ -17,6 +17,7 @@ import { cssClassName } from "utils";
 import "./T_AdminArticleNews.scss";
 import { required } from "utils/validateHelpers";
 import A_TextArea from "widgets/A_TextArea/A_TextArea";
+import onePageFormHOC from "HOC/onePageFormHOC";
 const cn = cssClassName("T_AdminArticleNews");
 
 const customFileValidation = (file, props) => {
@@ -27,82 +28,67 @@ const customFileValidation = (file, props) => {
   }
 };
 
-class T_AdminArticleNews extends Component {
-  state = {
-    form: {
+const formConfig = {
+  setValues: function() {
+    return {
       title: this.props.title || "",
       summary: this.props.summary || "",
       file: undefined
-    },
+    };
+  },
+  validations: {
+    title: [required],
+    summary: [required],
+    file: [customFileValidation]
+  }
+};
+
+class T_AdminArticleNews extends Component {
+  state = {
     publishAt: this.props.publishAt ? moment(this.props.publishAt) : undefined,
-    publish: this.props.publish || true,
-    validations: {
-      title: [required],
-      summary: [required],
-      file: [customFileValidation]
-    },
-    formValid: false,
-    errors: {}
+    publish: this.props.publish === undefined || this.props.publish,
   };
 
-  // draftState = this.props.draft || undefined; // это стейт тексткового редактора, так выложил чтобы перередера не было.
-  validateFields = (formValues, onFinish) => {
-    const { validations } = this.state;
-
-    let errors = {};
-
-    Object.keys(formValues).forEach(fieldName => {
-      if (validations[fieldName]) {
-        validations[fieldName].forEach(validation => {
-          if (errors[fieldName]) return;
-          errors[fieldName] = validation(formValues[fieldName], this.props);
-        });
-      }
-    });
-
-    const hasErrors = Object.values(errors).filter(x => !!x).length > 0;
-
-    this.setState({ errors, formValid: !hasErrors }, () => onFinish());
-  };
-
-  handleChange = (fieldValue, fieldName) => {
-    const { form, errors } = this.state;
-
-    this.setState({
-      form: {
-        ...form,
-        [fieldName]: fieldValue
-      },
-      errors: {
-        ...errors,
-        [fieldName]: undefined
-      }
-    });
-  };
 
   onSubmit = () => {
-    const { publish, form } = this.state;
-    let { publishAt } = this.state;
+    const { publish, publishAt } = this.state;
+    const { values } = this.props;
+
     const draft = this.textEditorNode.getStringRaw();
     const text = this.textEditorNode.getStringHtml();
 
     const { reducerType } = this.props;
-    const redirectPage = `/admin${reducerType === 'article' ? '/articles' : ''}`
+    const redirectPage = `/admin${
+      reducerType === "article" ? "/articles" : ""
+    }`;
 
-    this.validateFields(form, () => {
-      if (this.state.formValid) {
-        this.props
-          .handleSubmit(publish, publishAt, form.title, form.file, form.summary, draft, text)
-          .then(Router.push(redirectPage));
-      }
-    });
+    this.props.validateForm(() =>
+      this.props
+        .handleSubmit(
+          publish,
+          publishAt,
+          values.title,
+          values.file,
+          values.summary,
+          draft,
+          text
+        )
+        .then(Router.push(redirectPage))
+    );
   };
 
   render() {
-    const { publish, form: { title, summary }, errors } = this.state,
-      { type, reducerType } = this.props;
+    const { publish, publishAt } = this.state;
+    const {
+      type,
+      reducerType,
+      errors,
+      values: { title, summary, file },
+      formValid,
+      handleChange
+    } = this.props;
 
-    const formTitle = reducerType === 'article' ? 'ARTYKUŁY' : 'WIADOMOŚCI'
+    const formTitle = reducerType === "article" ? "ARTYKUŁY" : "WIADOMOŚCI";
     return (
       <A_Container mix={cn()} padding="wide">
         <A_H mix={cn("title")} type="section">
@@ -129,7 +115,7 @@ class T_AdminArticleNews extends Component {
           <p className={cn("row-label")}>Date:</p>
           <DatePicker
             customInput={<M_AdminDatepicker />}
-            selected={this.state.publishAt}
+            selected={publishAt}
             onChange={publishAt => this.setState({ publishAt })}
             showTimeSelect
             timeFormat="HH:mm"
@@ -144,7 +130,7 @@ class T_AdminArticleNews extends Component {
           mix={cn("title-input")}
           theme="admin"
           value={title}
-          handleChange={value => this.handleChange(value, "title")}
+          handleChange={title => handleChange({title})}
           placeholder="Enter title here"
           error={errors.title}
         />
@@ -153,9 +139,9 @@ class T_AdminArticleNews extends Component {
           mix={cn("title-input")}
           theme="admin"
           value={summary}
-          handleChange={value => this.handleChange(value, "summary")}
+          handleChange={summary => handleChange({summary})}
           placeholder="Enter summary here"
-          max = {250}
+          max={250}
           error={errors.summary}
         />
 
@@ -167,7 +153,7 @@ class T_AdminArticleNews extends Component {
 
         <M_FileInput
           mix={cn("photo-input")}
-          handleChange={value => this.handleChange(value, "file")}
+          handleChange={file => handleChange({file})}
           url={this.props.image}
           error={errors.file}
         />
@@ -197,6 +183,8 @@ class T_AdminArticleNews extends Component {
 }
 
 T_AdminArticleNews.propTypes = {
+  reducerType: T.string.isRequired,
+  type: T.string.isRequired,
   entity: T.object.isRequired
 };
 
@@ -204,4 +192,4 @@ T_AdminArticleNews.defaultProps = {
   entity: {}
 };
 
-export default T_AdminArticleNews;
+export default onePageFormHOC(T_AdminArticleNews, formConfig);
