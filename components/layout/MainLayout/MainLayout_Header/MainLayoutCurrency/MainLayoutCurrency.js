@@ -7,17 +7,32 @@ const cn = cssClassName("MainLayoutCurrency");
 const mockData = [
   {
     currency: 'BTC',
-    price: 11792.98,
+    price: {
+      dollars: '$ 11954.55',
+      euro: '€ 8453.44',
+      yen: '¥ 180834.31',
+      zloty: 'zł 14782.22'
+    },
     diff: 25.45
   },
   {
     currency: 'BHC',
-    price: 1781.70,
+    price: {
+      dollars: '$ 1913.55',
+      euro: '€ 8453.44',
+      yen: '¥ 180834.31',
+      zloty: 'zł 14782.22'
+    },
     diff: -5.32
   },
   {
     currency: 'ETH',
-    price: 1078.96,
+    price: {
+      dollars: '$ 6954.55',
+      euro: '€ 8453.44',
+      yen: '¥ 180834.31',
+      zloty: 'zł 14782.22'
+    },
     diff: 2.35
   }
 ]

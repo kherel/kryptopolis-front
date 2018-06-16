@@ -7,6 +7,7 @@ const cn = cssClassName("MainLayoutCurrencyItem");
 
 class MainLayoutCurrencyItem extends Component {
   state = {
+    fiatCurrency: this.props.price.dollars,
     dropdownActive: false
   }
 
@@ -14,17 +15,47 @@ class MainLayoutCurrencyItem extends Component {
     this.setState({dropdownActive: !this.state.dropdownActive})
   }
 
+  _changeFiatCurrency = (currency) => {
+    this.setState({fiatCurrency: this.props.price[currency]})
+  }
+
   render() {
-    const { mix, currency, price, diff } = this.props
+    const
+      { mix, currency:cryptoCurrency, price, diff } = this.props,
+      { fiatCurrency, dropdownActive } = this.state
+
     return(
       <div
-        className={cn([mix])}
+        className={cn({dropdownActive},[mix])}
         onClick={() => this._toggleDropdown()}
       >
-        <A_H type='widget'>{currency}</A_H>
-        <div className={cn('price')}>${price}</div>
+        <div className={cn('dropdown-toggler')} />
+        <A_H type='widget' mix={cn('title')}>{cryptoCurrency}</A_H>
+        <div className={cn('price')}>{fiatCurrency}</div>
         <div className={cn('diff',{growth: diff > 0})}>{diff}%</div>
 
+        {dropdownActive &&
+          <div className={cn('dropdown')}>
+            <div className={cn('dropdown-content')}>
+              {Object.keys(price).map(currency => {
+                if(price[currency] !== fiatCurrency) {
+                  return (
+                    <div
+                      key={currency}
+                      className={cn('dropdown-item')}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        this._changeFiatCurrency(currency)
+                      }}
+                    >
+                      {price[currency]}
+                    </div>
+                  )
+                }
+              })}
+            </div>
+          </div>
+        }
       </div>
     )
   }
@@ -33,7 +64,7 @@ class MainLayoutCurrencyItem extends Component {
 MainLayoutCurrencyItem.propTypes = {
   mix: T.string,
   currency: T.string.isRequired,
-  price: T.number.isRequired,
+  price: T.object.isRequired,
   diff: T.number.isRequired
 };
 

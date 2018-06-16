@@ -13,20 +13,20 @@
       }
     }
     &:nth-child(2) {
-      padding: 0 3rem 0 5rem;
+      padding: 0 3rem;
       border: solid #feed00;
       border-width: 0 .2rem;
       @include media ($tablet) {
-        padding: 0 2rem 0 4rem;
+        padding: 0 2rem;
       }
       @include media ($mobile) {
         padding: 0;
       }
     }
     &:nth-child(3) {
-      padding-left: 5rem;
+      padding-left: 3rem;
       @include media ($tablet) {
-        padding-left: 4rem;
+        padding-left: 3rem;
       }
       @include media ($mobile) {
         padding-left: 0;
