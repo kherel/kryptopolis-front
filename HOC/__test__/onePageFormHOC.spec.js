@@ -118,7 +118,7 @@ describe("one page form hoc", () => {
       })
 
 
-      it('invokes on submit function if value is valid', () => {
+      it('invokes on submit function on validate form', () => {
         mockSubmit = jest.fn();
         hocInstant.validateForm(mockSubmit)
 
@@ -126,9 +126,9 @@ describe("one page form hoc", () => {
         expect(mockSubmit).toHaveBeenCalled();
 
       })
-      it('makes form valid', () => {
+      it('set state form valid argument on true', () => {
         hocInstant.validateForm(() => {})
-        expect(hocWrapper.state().formValid).toBe(true);
+        expect(hocWrapper.state().formValid).toBeTruthy();
       })
     })
 
@@ -149,22 +149,53 @@ describe("one page form hoc", () => {
         TestingComponent = onePageFormHoc(MockComponent, config);
 
 
-        componentWrapper = shallow(<TestingComponent />)
-        innerForm = mount(componentWrapper.get(0))
+        hocWrapper = shallow(<TestingComponent />)
+        innerForm = mount(hocWrapper.get(0))
         mockSubmit = jest.fn();
-
-        innerForm.props().handleChange({test: 'wrong!'})
-        innerForm.props().validateForm(mockSubmit)
 
       })
 
-      it('doesn\'t invoke on submit', () => {
-        mockSubmit = jest.fn();
+      it('doesn\'t invoke on submit on validate form', () => {
+        innerForm.props().handleChange({test: 'wrong!'})
+        innerForm.props().validateForm(mockSubmit)
 
         expect(mockSubmit).not.toHaveBeenCalled();
 
       })
-    })
 
+      it('set state form valid argument on false', () => {
+        hocWrapper.setState({formValid: true})
+        innerForm = mount(hocWrapper.get(0))
+        expect(hocWrapper.state().formValid).toBeTruthy();
+
+        innerForm.props().handleChange({test: 'wrong!'})
+        innerForm.props().validateForm(() => {})
+        expect(hocWrapper.state().formValid).toBeFalsy();
+      })
+
+      it('set error text', () => {
+        innerForm = mount(hocWrapper.get(0))
+
+        innerForm.props().handleChange({test: 'wrong!'})
+        innerForm.props().validateForm(() => {})
+        expect(hocWrapper.state().errors.test).toBe('not valid');
+      })
+
+      it('remove error text, on change', () => {
+        innerForm = mount(hocWrapper.get(0))
+
+        innerForm.props().handleChange({test: 'wrong!'})
+        innerForm.props().validateForm(() => {})
+        innerForm.props().handleChange({test: 'again'})
+        expect(hocWrapper.state().errors.test).toBeUndefined();
+      })
+
+      it('doen\'t set error before handle change', () => {
+        innerForm = mount(hocWrapper.get(0))
+
+        innerForm.props().handleChange({test: 'wrong!'})
+        expect(hocWrapper.state().errors.test).toBeUndefined();
+      })
+    })
   })
 });
