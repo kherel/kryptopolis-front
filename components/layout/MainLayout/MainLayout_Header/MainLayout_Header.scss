@@ -17,6 +17,14 @@
 
   justify-items: start;
 
+  @include media ($desktop-sm) {
+    grid-template-columns: 120px auto auto auto;
+    grid-template-areas:
+            "flg nme tkr tkr"
+            "slg slg slg crs";
+  }
+
+
   @include media ($tablet) {
     grid-template-columns: 85px auto auto auto;
     grid-template-areas:
