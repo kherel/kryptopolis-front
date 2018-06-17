@@ -15,78 +15,47 @@ import { cssClassName } from "utils";
 import "./T_AdminVideo.scss";
 import { required } from "utils/validateHelpers";
 import M_VideoInput from "widgets/M_VideoInput/M_VideoInput";
+import onePageFormHOC from "HOC/onePageFormHOC";
 const cn = cssClassName("T_AdminVideo");
 
-class T_AdminVideo extends Component {
-  state = {
-    form: {
+const formConfig = {
+  setValues: function(){
+    return{
       title: this.props.title || "",
       text: this.props.text || "",
       video: this.props.video || "",
-    },
+    }
+
+  },
+  validations: {
+    title: [required],
+    text: [required],
+    video: [required],
+  },
+};
+
+class T_AdminVideo extends Component {
+
+  state = {
     publishAt: this.props.publishAt ? moment(this.props.publishAt) : undefined,
-    publish: this.props.publish || true,
-    validations: {
-      title: [required],
-      text: [required],
-      video: [required],
-    },
-    formValid: false,
-    errors: {}
-  };
-
-  // draftState = this.props.draft || undefined; // это стейт тексткового редактора, так выложил чтобы перередера не было.
-  validateFields = (formValues, onFinish) => {
-    const { validations } = this.state;
-
-    let errors = {};
-
-    Object.keys(formValues).forEach(fieldName => {
-      if (validations[fieldName]) {
-        validations[fieldName].forEach(validation => {
-          if (errors[fieldName]) return;
-          errors[fieldName] = validation(formValues[fieldName], this.props);
-        });
-      }
-    });
-
-    const hasErrors = Object.values(errors).filter(x => !!x).length > 0;
-
-    this.setState({ errors, formValid: !hasErrors }, () => onFinish());
-  };
-
-  handleChange = (fieldValue, fieldName) => {
-    const { form, errors } = this.state;
-
-    this.setState({
-      form: {
-        ...form,
-        [fieldName]: fieldValue
-      },
-      errors: {
-        ...errors,
-        [fieldName]: undefined
-      }
-    });
-  };
+    publish: this.props.publish === undefined || this.props.publish,
+  }
 
   onSubmit = () => {
-    const { publish, form, video } = this.state;
-    let { publishAt } = this.state;
+    const {values} = this.props
+    const {publishAt, publish} = this.state
 
-    this.validateFields(form, () => {
-      if (this.state.formValid) {
-        this.props
-          .handleSubmit(publish, publishAt, form.title, form.text, form.video)
-          .then(Router.push('/admin/videos'));
-      }
-    });
+    this.props.validateForm(() => (
+      this.props
+        .handleSubmit(publish, publishAt, values.title, values.text, values.video)
+        .then(Router.push('/admin/videos'))
+    ))
+
   };
 
   render() {
-    const { publish, form: { title, text, video }, errors } = this.state,
-      { type } = this.props;
-
+    const { publish, publishAt} = this.state,
+      { type, values: { title, text, video }, errors, handleChange } = this.props;
     return (
       <A_Container mix={cn()} padding="wide">
         <A_H mix={cn("title")} type="section">
@@ -113,7 +82,7 @@ class T_AdminVideo extends Component {
           <p className={cn("row-label")}>Date:</p>
           <DatePicker
             customInput={<M_AdminDatepicker />}
-            selected={this.state.publishAt}
+            selected={publishAt}
             onChange={publishAt => this.setState({ publishAt })}
             showTimeSelect
             timeFormat="HH:mm"
@@ -128,7 +97,7 @@ class T_AdminVideo extends Component {
           mix={cn("title-input")}
           theme="admin"
           value={title}
-          handleChange={value => this.handleChange(value, "title")}
+          handleChange={title => handleChange({title})}
           placeholder="Enter title here"
           error={errors.title}
         />
@@ -137,14 +106,14 @@ class T_AdminVideo extends Component {
           mix={cn("title-input")}
           theme="admin"
           value={text}
-          handleChange={value => this.handleChange(value, "text")}
+          handleChange={text => handleChange({text})}
           placeholder="Enter description here"
           error={errors.text}
         />
 
         <M_VideoInput
           mix={cn("video-input")}
-          handleSubmit={value => this.handleChange(value, "video")}
+          handleSubmit={video => handleChange({video})}
           video={video}
           error={errors.video}
         />
@@ -181,4 +150,4 @@ T_AdminVideo.defaultProps = {
   entity: {}
 };
 
-export default T_AdminVideo;
+export default onePageFormHOC(T_AdminVideo, formConfig);

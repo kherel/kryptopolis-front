@@ -23,8 +23,8 @@ class T_Admin_News extends Component {
         title= 'ARTYKUŁY'
         break;
       case 'news':
-        urlPath = '/admin/article'
-        title= 'ARTYKUŁY'
+        urlPath = '/admin/news-item'
+        title= 'WIADOMOŚCI'
         break;
       case 'videos':
         urlPath =  '/admin/video'
