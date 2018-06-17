@@ -13,7 +13,7 @@ const UPLOAD_PRESET = 'unsigned_img'
 const sendData = res => res.data.attributes || res.data;
 
 const logServerError = err => {
-  if (err.response.status === 500) {
+  if (err.response && err.response.status === 500) {
     const dataError = safeDA(err, ["response", "data"], {})
     console.log(dataError.error || dataError.message) //eslint-disable-line
     throw err;
