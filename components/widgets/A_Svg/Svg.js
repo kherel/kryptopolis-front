@@ -5,6 +5,7 @@ import './logo.svg'
 import './name.svg'
 import './burger.svg'
 import './close.svg'
+import './arrow_short.svg'
 
 const A_Svg = ({ name, ...props }) => (
   <svg {...props}>
