@@ -1,6 +1,7 @@
 import api from "api/api";
 import { path, prepend, update, dissoc } from "ramda";
 import moment from "moment/moment";
+import { errorHelper } from "./helpers";
 
 // constants
 import {
@@ -16,7 +17,6 @@ const cloudinaryTag = 'news'
 const NEWS = "NEWS";
 const NEWS_ITEM = "NEWS_ITEM";
 
-import { errorHelper } from "./helpers";
 // reducer
 
 const initialState = {
