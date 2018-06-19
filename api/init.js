@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { stringify } from 'qs'
 
-const baseURL = "http://46.101.229.239:4000";
+const baseURL = process.env.NODE_ENV === 'development' ? "http://localhost:4000" : "http://46.101.229.239:4000";
 
 export const initApi = () => {
   axios.defaults.baseURL = baseURL
