@@ -1,6 +1,8 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%;
+  font-family: OpenSans, sans-serif;
+
   @media screen and (min-width: 1280px) {
     font-size: 0.781vw;
   }
@@ -11,7 +13,6 @@ html {
 
 body {
   font-size: 1.4rem;
-  font-family: OpenSans, sans-serif;
   line-height: 1;
   overflow: auto;
 }
