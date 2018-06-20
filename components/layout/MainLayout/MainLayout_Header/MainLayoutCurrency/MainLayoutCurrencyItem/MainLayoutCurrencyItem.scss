@@ -13,34 +13,36 @@
   @include media ($mobile) {
     justify-content: center;
   }
-  &:hover {
-     #{$this}__dropdown-toggler {
-       background-image: url('/static/img/currencyArrowActive.svg');
-     }
-  }
+  //&:hover {
+  //   #{$this}__dropdown-toggler {
+  //     background-image: url('/static/img/currencyArrowActive.svg');
+  //   }
+  //}
 
-  &_dropdown-active_true {
-    #{$this}__dropdown-toggler {
-      background-image: url('/static/img/currencyArrowActive.svg');
-      transform: rotate(180deg);
-    }
-  }
+  //&_dropdown-active_true {
+  //  #{$this}__dropdown-toggler {
+  //    background-image: url('/static/img/currencyArrowActive.svg');
+  //    transform: rotate(180deg);
+  //  }
+  //}
 
-  &__dropdown-toggler {
-    grid-area: tgl;
-    align-self: center;
-    width: 1.5rem;
-    height: 1.5rem;
-    background-image: url('/static/img/currencyArrow.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    @include media ($mobile) {
-      justify-self: end;
-    }
-  }
+  //&__dropdown-toggler {
+  //  grid-area: tgl;
+  //  align-self: center;
+  //  width: 1.5rem;
+  //  height: 1.5rem;
+  //  background-image: url('/static/img/currencyArrow.svg');
+  //  background-repeat: no-repeat;
+  //  background-size: contain;
+  //  @include media ($mobile) {
+  //    justify-self: end;
+  //  }
+  //}
 
   &__title {
     grid-area: ttl;
+    font-weight: bold;
+
   }
 
   &__price {
@@ -50,6 +52,8 @@
     font-size: 2.4rem;
     color: $color-blue-dark;
     white-space: nowrap;
+    font-weight: 500;
+
     @include media ($tablet) {
       font-size: 1.4rem;
     }
@@ -146,7 +150,7 @@
       font-size: 1.8rem;
       font-weight: 500;
       color: $color-blue-dark;
-      cursor: pointer;
+      //cursor: pointer;
       border-radius: 1rem;
       white-space: nowrap;
       @include media ($tablet) {

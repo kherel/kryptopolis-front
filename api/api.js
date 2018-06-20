@@ -6,6 +6,7 @@ const AUTH_API = `/v1/auth/token`;
 const NEWS_API = `/v1/news`;
 const ARTICLES_API = `/v1/articles`;
 const VIDEOS_API = `/v1/videos`;
+const WIDGET_API = `/v1/tickers/special`;
 
 const CLOUDINARY_CLOUD = process.env.CLOUDINARY_CLOUD
 const UPLOAD_PRESET = 'unsigned_img'
@@ -75,5 +76,8 @@ export default {
     put: (id, attributes) => apiCall('put', `${VIDEOS_API}/${id}`, { data: { attributes } }),
     delete: (id) => apiCall('delete', `${VIDEOS_API}/${id}`),
     show: id => apiCall('get', `${VIDEOS_API}/${id}`),
+  },
+  tickers:{
+    widget: () => apiCall('get', WIDGET_API),
   }
 };

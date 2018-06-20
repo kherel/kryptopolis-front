@@ -91,6 +91,11 @@
     color: $color-blue-dark;
     font-weight: 300;
 
+    @include media ($desktop-sm) {
+      font-size: 28px;
+
+    }
+
     @include media ($tablet) {
       padding-left: 31px;
 
