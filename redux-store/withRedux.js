@@ -4,6 +4,7 @@ import jsHttpCookie from 'cookie';
 import {cookiesLogin} from "redux-store/ducks/auth";
 import {initApi, setToken} from "api/init";
 import {path} from 'ramda'
+import {loadHeaderTickers} from "redux-store/ducks/tickers";
 
 const isServer = typeof window === 'undefined'
 const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__'
@@ -26,6 +27,11 @@ export default (App) => {
     static async getInitialProps(appContext) {
 
       const reduxStore = getOrCreateStore()
+
+      //fetch data for header
+      await loadHeaderTickers(reduxStore)
+
+      //set user data for ssr
 
       const { req } = appContext.ctx
 

@@ -10,8 +10,12 @@ import { handleUserLogout } from "redux-store/ducks/auth";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "next/router";
+import {loadVideos} from "redux-store/ducks/videos";
+import {loadArticles} from "redux-store/ducks/articles";
+import {loadNews} from "redux-store/ducks/news";
 
 const cn = cssClassName("MainLayout");
+import { loadHeaderTickers } from "redux-store/ducks/tickers";
 
 class MainLayout extends Component {
   static contextTypes = {
@@ -19,11 +23,11 @@ class MainLayout extends Component {
   };
 
   render() {
-    const { children, router, email, role, loggedIn, handleUserLogout } = this.props;
+    const { children, router, email, role, loggedIn, handleUserLogout, tickers } = this.props;
 
     return (
       <main>
-        <MainLayout_Header />
+        <MainLayout_Header {...{tickers}}/>
         {router.pathname === "/" && <MainLayout_HeroBanner />}
         <MainLayout_Menu {...{ email, role, loggedIn, handleUserLogout }} />
         <div>{children}</div>
@@ -39,9 +43,9 @@ MainLayout.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const { email, role, loggedIn } = state.auth;
+  const { auth:{email, role, loggedIn}, tickers } = state;
 
-  return { email, role, loggedIn };
+  return { email, role, loggedIn, tickers };
 }
 
 function mapDispatchToProps(dispatch) {

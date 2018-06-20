@@ -30,31 +30,33 @@ const mockData = {
 class MainLayoutTicker extends Component {
   state = {};
 
-  getLine(direction) {
-    const getItem = prefix => item => (
-      <div className={cn(`line-item`, { direction })} key={prefix + item[0]}>
-        <span className={cn("line-item-currency")}>{item[0]}</span>
-        <span className={cn("line-item-percentage")}>{item[1]}%</span>
+  getLine(direction, ids, entities) {
+    const getItem = prefix => id => (
+      <div className={cn(`line-item`, { direction })} key={prefix + id}>
+        <span className={cn("line-item-currency")}>{entities[id].symbol}</span>
+        <span className={cn("line-item-percentage")}>{entities[id].percentChange24h}%</span>
       </div>
     );
     return (
-      <div className={cn('line-item-container')}>
+      <div className={cn("line-item-container")}>
         {[
-          ...mockData[direction].map(getItem("frst")),
-          ...mockData[direction].map(getItem("scnd"))
+          ...ids.map(getItem("frst")),
+          ...ids.map(getItem("scnd"))
         ]}
       </div>
     );
   }
   render() {
-    const { mix } = this.props;
+    const { mix, up, down, entities } = this.props;
 
     return (
       <div className={cn([mix])}>
         <div className={cn("label")}>UP</div>
-        <div className={cn("line-up")}>{this.getLine("up")}</div>
+        <div className={cn("line-up")}>{this.getLine("up", up, entities)}</div>
         <div className={cn("label")}>DOWN</div>
-        <div className={cn("line-down")}>{this.getLine("down")}</div>
+        <div className={cn("line-down")}>
+          {this.getLine("down", down, entities)}
+        </div>
       </div>
     );
   }
@@ -62,6 +64,10 @@ class MainLayoutTicker extends Component {
 
 MainLayoutTicker.propTypes = {};
 
-MainLayoutTicker.defaultProps = {};
+MainLayoutTicker.defaultProps = {
+  up: [],
+  down: [],
+  entities: {}
+};
 
 export default MainLayoutTicker;

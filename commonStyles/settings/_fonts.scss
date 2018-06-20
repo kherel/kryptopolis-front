@@ -1,6 +1,6 @@
 @import "utils";
 
-@include font-face('OpenSans', '/static/fonts/OpenSans/OpenSans-Light', 300);
-@include font-face('OpenSans', '/static/fonts/OpenSans/OpenSans-Regular', 400);
-@include font-face('OpenSans', '/static/fonts/OpenSans/OpenSans-SemiBold', 500);
-@include font-face('OpenSans', '/static/fonts/OpenSans/OpenSans-Bold', 600);
+@include font-face('SFUIText', '/static/fonts/SFUIText/SFUIText-Light', 300);
+@include font-face('SFUIText', '/static/fonts/SFUIText/SFUIText-Regular');
+@include font-face('SFUIText', '/static/fonts/SFUIText/SFUIText-Medium', 500);
+@include font-face('SFUIText', '/static/fonts/SFUIText/SFUIText-Bold', bold);
